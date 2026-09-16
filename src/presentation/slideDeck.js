@@ -53,6 +53,14 @@ export class SlideDeck {
           </div>
         </header>
 
+        <!-- Mobile Section Jump Chips (Visible only on mobile/tablet) -->
+        <nav class="mobile-section-nav" aria-label="Quick jump to section">
+          <button type="button" class="mobile-nav-chip" data-target="col-craft-preview">📸 Photo</button>
+          <button type="button" class="mobile-nav-chip" data-target="col-setup-guide">🛠️ Setup (${game.setupSteps.length})</button>
+          <button type="button" class="mobile-nav-chip" data-target="rules-card">🎯 Rules (${game.rules.length})</button>
+          <button type="button" class="mobile-nav-chip" data-target="materials-card">📦 Items</button>
+        </nav>
+
         <!-- Main 3-Column Content Layout -->
         <div class="slide-columns-grid">
           
@@ -155,6 +163,7 @@ export class SlideDeck {
   initSlideEvents() {
     const zoomButtons = document.querySelectorAll('.btn-lightbox-trigger');
     const photoFrames = document.querySelectorAll('.craft-photo-frame');
+    const mobileChips = document.querySelectorAll('.mobile-nav-chip');
 
     const handleOpen = (src, caption) => {
       this.openLightbox(src, caption);
@@ -174,6 +183,22 @@ export class SlideDeck {
         const src = frame.dataset.imgSrc;
         const cap = frame.dataset.caption;
         if (src) handleOpen(src, cap);
+      });
+    });
+
+    mobileChips.forEach(chip => {
+      chip.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const targetClass = chip.dataset.target;
+        const slideView = chip.closest('.game-slide-view');
+        if (!slideView) return;
+        const targetEl = slideView.querySelector(`.${targetClass}`);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          sfx.playClick();
+          slideView.querySelectorAll('.mobile-nav-chip').forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+        }
       });
     });
   }

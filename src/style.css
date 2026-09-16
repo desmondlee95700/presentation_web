@@ -45,7 +45,8 @@
 
 html, body {
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   background-color: var(--bg-app);
   color: var(--text-dark);
@@ -61,6 +62,7 @@ html, body {
   position: relative;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   /* Cheerful Summer Camp Background */
   background: 
@@ -99,6 +101,7 @@ html, body {
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   z-index: 2;
   overflow: hidden;
   pointer-events: none;
@@ -115,6 +118,7 @@ html, body {
 .slide-section {
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   flex-shrink: 0;
   display: flex;
   align-items: stretch;
@@ -685,11 +689,13 @@ html, body {
    ========================================================================== */
 .dock-container {
   position: absolute;
-  bottom: 16px;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
   pointer-events: auto;
+  max-width: calc(100vw - 20px);
+  width: max-content;
 }
 
 .dock-inner {
@@ -701,12 +707,15 @@ html, body {
   border: 2.5px solid #e2e8f0;
   border-radius: 9999px;
   box-shadow: var(--shadow-dock);
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .dock-nav-controls {
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
 }
 
 .dock-btn {
@@ -725,6 +734,7 @@ html, body {
   font-weight: 800;
   cursor: pointer;
   transition: all var(--transition-fast);
+  flex-shrink: 0;
 }
 
 .dock-btn:hover:not(:disabled) {
@@ -741,6 +751,7 @@ html, body {
 
 .nav-btn {
   width: 38px;
+  min-width: 38px;
   padding: 0;
 }
 
@@ -756,6 +767,8 @@ html, body {
   color: #0f172a;
   cursor: pointer;
   transition: all var(--transition-fast);
+  min-width: 0;
+  max-width: 280px;
 }
 
 .dock-slide-pill:hover {
@@ -769,6 +782,8 @@ html, body {
   font-size: 12px;
   font-weight: 800;
   color: #ea580c;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .slide-label {
@@ -776,17 +791,22 @@ html, body {
   font-size: 14px;
   font-weight: 800;
   color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .drawer-icon {
   font-size: 12px;
   color: #9a3412;
+  flex-shrink: 0;
 }
 
 .dock-utilities {
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-shrink: 0;
 }
 
 .util-icon {
@@ -825,6 +845,9 @@ html, body {
   z-index: 2;
   width: 90%;
   max-width: 760px;
+  max-height: 85vh;
+  max-height: 85dvh;
+  overflow-y: auto;
   background: #ffffff;
   border: 3px solid #f59e0b;
   border-radius: 20px;
@@ -869,6 +892,7 @@ html, body {
   align-items: center;
   justify-content: center;
   font-weight: 700;
+  flex-shrink: 0;
 }
 
 .btn-close-drawer:hover {
@@ -924,6 +948,11 @@ html, body {
   color: #64748b;
 }
 
+/* Mobile Section Nav (Hidden on Desktop) */
+.mobile-section-nav {
+  display: none;
+}
+
 /* ==========================================================================
    Responsive Adaptations
    ========================================================================== */
@@ -941,18 +970,308 @@ html, body {
 
 @media (max-width: 768px) {
   .slide-section {
-    padding: 18px 14px 60px 14px;
+    padding: 10px 12px calc(68px + env(safe-area-inset-bottom, 0px)) 12px;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
   }
-  .slide-columns-grid {
-    grid-template-columns: 1fr;
-    overflow-y: auto;
-  }
-  .col-rules-materials-stack {
-    grid-column: span 1;
+
+  .slide-content-wrapper {
+    height: 100%;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
   }
+
+  .game-slide-view {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+  }
+
+  .slide-header-block {
+    flex-shrink: 0;
+    padding: 8px 12px;
+    border-radius: 12px;
+    gap: 4px;
+  }
+
   .slide-title-text {
-    font-size: 26px;
+    font-size: 20px;
+  }
+
+  .slide-subtitle-text {
+    font-size: 13px;
+  }
+
+  .tagline-highlight {
+    font-size: 11.5px;
+    padding: 2px 8px;
+  }
+
+  /* Mobile Section Jump Chips */
+  .mobile-section-nav {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 1px 2px 3px 2px;
+    flex-shrink: 0;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobile-section-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-nav-chip {
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 9999px;
+    padding: 4px 11px;
+    font-family: var(--font-heading);
+    font-size: 12px;
+    font-weight: 800;
+    color: #475569;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .mobile-nav-chip:hover,
+  .mobile-nav-chip.active {
+    background: #fff7ed;
+    border-color: #f97316;
+    color: #c2410c;
+  }
+
+  /* Master single-scroll container on mobile with NO nested scroll traps */
+  .slide-columns-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 24px;
+    padding-right: 2px;
+  }
+
+  .slide-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: auto;
+    min-height: auto;
+    flex: none;
+  }
+
+  .camp-card {
+    flex: none;
+    height: auto;
+    min-height: auto;
+    overflow: visible;
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
+
+  .photo-craft-card,
+  .setup-guide-card,
+  .rules-card,
+  .materials-card {
+    flex: none;
+    height: auto;
+    min-height: auto;
+    overflow: visible;
+  }
+
+  .craft-photo-frame {
+    flex: none;
+    height: 200px;
+    min-height: 160px;
+  }
+
+  /* Disable nested scrollboxes completely on mobile */
+  .steps-vertical-stack,
+  .rules-compact-list,
+  .materials-checklist {
+    overflow: visible;
+    flex: none;
+    height: auto;
+    max-height: none;
+    gap: 8px;
+    padding-right: 0;
+  }
+
+  .step-card-row {
+    padding: 8px 11px;
+    gap: 10px;
+  }
+
+  .step-number-circle {
+    width: 26px;
+    height: 26px;
+    font-size: 13px;
+  }
+
+  .step-header-title {
+    font-size: 14px;
+  }
+
+  .step-desc-text {
+    font-size: 12.5px;
+  }
+
+  .rule-compact-item {
+    padding-bottom: 7px;
+  }
+
+  .rule-name {
+    font-size: 13.5px;
+  }
+
+  .rule-desc {
+    font-size: 12.5px;
+  }
+
+  .col-rules-materials-stack {
+    grid-column: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    height: auto;
+    min-height: auto;
+    flex: none;
+  }
+
+  .drawer-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .drawer-panel {
+    padding: 16px;
+    width: 94%;
+  }
+
+  .drawer-header h3 {
+    font-size: 17px;
+  }
+
+  .dock-inner {
+    padding: 5px 12px;
+    gap: 8px;
+  }
+
+  .dock-slide-pill {
+    padding: 0 12px;
+    gap: 8px;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .slide-section {
+    padding: 8px 8px calc(62px + env(safe-area-inset-bottom, 0px)) 8px;
+  }
+
+  .slide-header-block {
+    padding: 6px 10px;
+  }
+
+  .title-and-badge {
+    gap: 8px;
+  }
+
+  .game-num-badge {
+    padding: 3px 8px;
+    font-size: 11.5px;
+  }
+
+  .slide-title-text {
+    font-size: 18px;
+  }
+
+  .header-main-row {
+    gap: 6px;
+  }
+
+  .header-sub-row {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .camp-card {
+    padding: 10px 12px;
+    border-radius: 12px;
+  }
+
+  .craft-photo-frame {
+    height: 175px;
+    min-height: 140px;
+  }
+
+  .step-card-row {
+    padding: 7px 9px;
+    gap: 9px;
+  }
+
+  .step-number-circle {
+    width: 22px;
+    height: 22px;
+    font-size: 11.5px;
+  }
+
+  .step-header-title {
+    font-size: 13px;
+  }
+
+  .step-desc-text {
+    font-size: 12px;
+  }
+
+  .dock-inner {
+    padding: 4px 8px;
+    gap: 6px;
+  }
+
+  .dock-btn {
+    height: 34px;
+    font-size: 12px;
+  }
+
+  .nav-btn {
+    width: 34px;
+    min-width: 34px;
+  }
+
+  .dock-slide-pill {
+    height: 34px;
+    padding: 0 10px;
+    gap: 6px;
+    max-width: 140px;
+  }
+
+  .slide-num {
+    font-size: 11px;
+  }
+
+  .slide-label {
+    display: none;
+  }
+
+  .lightbox-content-box {
+    padding: 10px;
+    border-radius: 14px;
+  }
+
+  .lightbox-img {
+    max-width: 88vw;
+    max-height: 65dvh;
   }
 }
