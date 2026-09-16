@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Kids Camp Activities — Game Presentation Deck</title>
+  <meta name="description" content="Visual, easy-to-follow presentation deck for camp leaders, counselors, and volunteers to run fun kids camp games.">
+
+  <!-- Google Fonts: Outfit & Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+  <div id="app-root">
+    <!-- Top Slide Progress Bar -->
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" id="progress-bar-fill"></div>
+    </div>
+
+    <!-- Horizontal Slides Stage -->
+    <main class="presentation-viewport">
+      <div class="slides-track" id="slides-track">
+        <!-- Rendered dynamically by slideDeck.js -->
+      </div>
+    </main>
+
+    <!-- Floating Bottom Navigation Dock -->
+    <nav class="dock-container" id="controls-dock" aria-label="Presentation Navigation">
+      <!-- Rendered dynamically by controlsDock.js -->
+    </nav>
+
+    <!-- Slide Overview Drawer Modal -->
+    <div class="drawer-modal" id="slide-drawer-modal" aria-hidden="true">
+      <!-- Rendered dynamically by controlsDock.js -->
+    </div>
+
+  </div>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
