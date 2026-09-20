@@ -88,9 +88,10 @@ export class ControlsDock {
       }
     });
 
-    this.container.addEventListener('click', (e) => {
-      const drawerBtn = e.target.closest('#btn-open-drawer');
-      if (drawerBtn) {
+    // Toggle drawer via any drawer triggers (floating dock button or header menu button)
+    document.addEventListener('click', (e) => {
+      const trigger = e.target.closest('#btn-open-drawer, [data-action="open-drawer"]');
+      if (trigger) {
         this.toggleDrawer();
       }
     });

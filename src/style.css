@@ -184,6 +184,22 @@ html, body {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
+.badge-short {
+  display: none;
+}
+
+.badge-full {
+  display: inline;
+}
+
+.craft-tagline-callout {
+  display: none;
+}
+
+.mobile-section-tabs {
+  display: none;
+}
+
 .slide-title-text {
   font-family: var(--font-heading);
   font-size: 32px;
@@ -205,6 +221,12 @@ html, body {
   font-weight: 700;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .tagline-highlight {
   color: #c2410c;
   background: #fff7ed;
@@ -213,6 +235,30 @@ html, body {
   border-radius: 9999px;
   font-weight: 700;
   font-size: 13.5px;
+}
+
+.btn-header-overview {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #fff7ed;
+  border: 1.5px solid #fed7aa;
+  border-radius: 9999px;
+  padding: 3px 11px;
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #c2410c;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.btn-header-overview:hover {
+  background: #ffedd5;
+  border-color: #f97316;
+  color: #9a3412;
+  transform: translateY(-1px);
 }
 
 /* Main 3-Column Content Layout */
@@ -719,8 +765,8 @@ html, body {
   bottom: calc(14px + env(safe-area-inset-bottom, 0px));
   left: 50%;
   transform: translateX(-50%);
-  z-index: 20;
-  pointer-events: auto;
+  z-index: 50;
+  pointer-events: none;
 }
 
 .dock-swipe-indicator {
@@ -740,6 +786,7 @@ html, body {
   transition: all var(--transition-fast);
   animation: floatSwipeBadge 3s ease-in-out infinite;
   outline: none;
+  pointer-events: auto;
 }
 
 .dock-swipe-indicator:hover {
@@ -951,7 +998,7 @@ html, body {
 
 @media (max-width: 768px) {
   .slide-section {
-    padding: 10px 12px calc(68px + env(safe-area-inset-bottom, 0px)) 12px;
+    padding: 10px 12px calc(62px + env(safe-area-inset-bottom, 0px)) 12px;
     height: 100vh;
     height: 100dvh;
     overflow: hidden;
@@ -972,164 +1019,370 @@ html, body {
     overflow: hidden;
   }
 
+  /* 1. Clean Airy Mobile Header */
   .slide-header-block {
     flex-shrink: 0;
     padding: 8px 12px;
-    border-radius: 12px;
-    gap: 4px;
+    border-radius: 14px;
+    background: #ffffff;
+    border: 2px solid var(--border-light);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
   }
 
-  .slide-title-text {
-    font-size: 20px;
-  }
-
-  .slide-subtitle-text {
-    font-size: 13px;
-  }
-
-  .tagline-highlight {
-    font-size: 11.5px;
-    padding: 2px 8px;
-  }
-
-  /* Mobile Section Jump Chips */
-  .mobile-section-nav {
+  .header-main-row {
     display: flex;
     align-items: center;
-    gap: 6px;
-    overflow-x: auto;
-    padding: 1px 2px 3px 2px;
-    flex-shrink: 0;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 8px;
   }
 
-  .mobile-section-nav::-webkit-scrollbar {
+  .title-and-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .badge-short {
+    display: inline;
+  }
+
+  .badge-full {
     display: none;
   }
 
-  .mobile-nav-chip {
-    background: #ffffff;
-    border: 1.5px solid #e2e8f0;
+  .game-num-badge {
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 900;
+    white-space: nowrap;
+    flex-shrink: 0;
+    letter-spacing: 0.02em;
     border-radius: 9999px;
-    padding: 4px 11px;
+  }
+
+  .slide-title-text {
+    font-size: 18px;
+    font-weight: 900;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #0f172a;
+    line-height: 1.2;
+  }
+
+  .header-actions {
+    flex-shrink: 0;
+  }
+
+  .header-actions .tagline-highlight {
+    display: none; /* Hide bulky quote bubble from mobile header */
+  }
+
+  .btn-header-overview {
+    padding: 4px 10px;
+    font-size: 11.5px;
+    gap: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .header-sub-row {
+    margin: 0;
+  }
+
+  .slide-subtitle-text {
+    font-size: 11.5px;
+    color: #64748b;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* 2. Tactile Segmented Mobile Tab Bar */
+  .mobile-section-tabs {
+    display: flex;
+    align-items: center;
+    background: #f1f5f9;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 3px;
+    gap: 3px;
+    flex-shrink: 0;
+  }
+
+  .mobile-tab-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 7px 4px;
+    border: none;
+    background: transparent;
+    border-radius: 9px;
     font-family: var(--font-heading);
     font-size: 12px;
     font-weight: 800;
-    color: #475569;
-    white-space: nowrap;
+    color: #64748b;
     cursor: pointer;
     transition: all var(--transition-fast);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    white-space: nowrap;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .mobile-nav-chip:hover,
-  .mobile-nav-chip.active {
-    background: #fff7ed;
-    border-color: #f97316;
-    color: #c2410c;
+  .mobile-tab-btn:hover {
+    color: #0f172a;
   }
 
-  /* Master single-scroll container on mobile with NO nested scroll traps */
+  .mobile-tab-btn.active {
+    background: #ffffff;
+    color: #0f172a;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+
+  .tab-counter {
+    font-size: 11px;
+    font-weight: 700;
+    color: #94a3b8;
+  }
+
+  .mobile-tab-btn.active .tab-counter {
+    color: var(--accent-theme, #ea580c);
+  }
+
+  /* 3. Tabbed Card Area (Spacious single active card) */
   .slide-columns-grid {
     display: flex;
     flex-direction: column;
-    gap: 12px;
     flex: 1;
     min-height: 0;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 24px;
-    padding-right: 2px;
+    height: 100%;
+    overflow: hidden;
+    padding: 0;
+    gap: 0;
   }
 
   .slide-column {
+    display: none; /* Controlled by active tab */
+    flex: 1;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  /* Display only active tab */
+  .slide-columns-grid[data-active-tab="tab-craft"] .col-craft-preview {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    height: auto;
-    min-height: auto;
-    flex: none;
+    height: 100%;
   }
 
+  .slide-columns-grid[data-active-tab="tab-setup"] .col-setup-guide {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .slide-columns-grid[data-active-tab="tab-rules"] .col-rules-materials-stack {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .slide-columns-grid[data-active-tab="tab-rules"] .rules-card {
+    display: flex;
+    flex: 1;
+    height: 100%;
+  }
+  .slide-columns-grid[data-active-tab="tab-rules"] .materials-card {
+    display: none;
+  }
+
+  .slide-columns-grid[data-active-tab="tab-materials"] .col-rules-materials-stack {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .slide-columns-grid[data-active-tab="tab-materials"] .rules-card {
+    display: none;
+  }
+  .slide-columns-grid[data-active-tab="tab-materials"] .materials-card {
+    display: flex;
+    flex: 1;
+    height: 100%;
+  }
+
+  /* Active Card Base */
   .camp-card {
-    flex: none;
-    height: auto;
-    min-height: auto;
-    overflow: visible;
+    flex: 1;
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
     padding: 12px 14px;
-    border-radius: 14px;
+    border-radius: 16px;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
   }
 
-  .photo-craft-card,
-  .setup-guide-card,
-  .rules-card,
-  .materials-card {
-    flex: none;
-    height: auto;
-    min-height: auto;
-    overflow: visible;
+  /* Tab 1: Photo craft frame & mission callout */
+  .photo-craft-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
   }
 
   .craft-photo-frame {
-    flex: none;
-    height: 200px;
-    min-height: 160px;
+    flex: 1;
+    min-height: 200px;
+    max-height: 48dvh;
+    border-radius: 12px;
   }
 
-  /* Disable nested scrollboxes completely on mobile */
-  .steps-vertical-stack,
-  .rules-compact-list,
-  .materials-checklist {
-    overflow: visible;
-    flex: none;
-    height: auto;
-    max-height: none;
+  .craft-caption-box {
+    margin: 0;
+  }
+
+  .craft-tagline-callout {
+    display: flex;
+    align-items: flex-start;
     gap: 8px;
-    padding-right: 0;
+    background: #fff7ed;
+    border: 1.5px solid #fed7aa;
+    border-radius: 12px;
+    padding: 9px 12px;
+    flex-shrink: 0;
+  }
+
+  .craft-tagline-callout .tagline-icon {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #ea580c;
+  }
+
+  .craft-tagline-callout .tagline-text {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #c2410c;
+    line-height: 1.35;
+  }
+
+  /* Tab 2: Setup guide steps */
+  .setup-guide-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .steps-vertical-stack {
+    flex: 1;
+    overflow-y: auto;
+    gap: 8px;
+    padding-right: 2px;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
   }
 
   .step-card-row {
-    padding: 8px 11px;
+    padding: 9px 12px;
     gap: 10px;
+    border-radius: 12px;
   }
 
   .step-number-circle {
     width: 26px;
     height: 26px;
     font-size: 13px;
+    flex-shrink: 0;
   }
 
   .step-header-title {
     font-size: 14px;
+    font-weight: 800;
   }
 
   .step-desc-text {
     font-size: 12.5px;
+    color: #334155;
+    line-height: 1.4;
+  }
+
+  /* Tab 3: Rules list */
+  .rules-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .rules-compact-list {
+    flex: 1;
+    overflow-y: auto;
+    gap: 10px;
+    padding-right: 2px;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
   }
 
   .rule-compact-item {
-    padding-bottom: 7px;
+    padding-bottom: 8px;
+    gap: 10px;
+  }
+
+  .rule-tag-pill {
+    padding: 2px 7px;
+    font-size: 10.5px;
   }
 
   .rule-name {
-    font-size: 13.5px;
+    font-size: 14px;
+    font-weight: 800;
   }
 
   .rule-desc {
-    font-size: 12.5px;
+    font-size: 13px;
+    color: #334155;
+    line-height: 1.4;
   }
 
-  .col-rules-materials-stack {
-    grid-column: auto;
+  /* Tab 4: Materials checklist */
+  .materials-card {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    height: auto;
-    min-height: auto;
-    flex: none;
+    gap: 6px;
   }
 
+  .materials-checklist {
+    flex: 1;
+    overflow-y: auto;
+    gap: 8px;
+    padding-right: 2px;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .material-row-item {
+    padding: 8px 10px;
+    gap: 10px;
+    border-radius: 10px;
+  }
+
+  .material-main-name {
+    font-size: 13px;
+  }
+
+  .material-sub-note {
+    font-size: 11.5px;
+  }
+
+  /* Modals */
   .drawer-grid {
     grid-template-columns: 1fr;
     gap: 8px;
@@ -1144,20 +1397,6 @@ html, body {
     font-size: 17px;
   }
 
-  .dock-swipe-indicator {
-    padding: 5px 15px;
-    gap: 9px;
-  }
-
-  .swipe-word {
-    font-size: 14.5px;
-  }
-
-  .swipe-arrow-icon svg {
-    width: 17px;
-    height: 17px;
-  }
-
   .lightbox-content-box {
     padding: 10px;
     border-radius: 14px;
@@ -1166,5 +1405,45 @@ html, body {
   .lightbox-img {
     max-width: 88vw;
     max-height: 65dvh;
+  }
+
+  /* Bottom Controls Dock on Mobile */
+  .dock-container {
+    position: fixed;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    z-index: 50;
+    background: transparent;
+    pointer-events: none;
+  }
+
+  .dock-swipe-indicator {
+    padding: 6px 16px;
+    gap: 9px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 2px solid #fed7aa;
+    box-shadow: 0 8px 24px -2px rgba(15, 23, 42, 0.16), 0 2px 8px rgba(249, 115, 22, 0.2);
+    pointer-events: auto;
+  }
+
+  .dock-swipe-indicator:hover,
+  .dock-swipe-indicator:active {
+    background: #ffffff;
+    border-color: #f97316;
+  }
+
+  .swipe-word {
+    font-size: 14.5px;
+    color: #0f172a;
+  }
+
+  .swipe-arrow-icon {
+    filter: none;
+  }
+
+  .swipe-arrow-icon svg {
+    width: 17px;
+    height: 17px;
   }
 }

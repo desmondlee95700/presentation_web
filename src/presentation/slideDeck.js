@@ -43,29 +43,50 @@ export class SlideDeck {
         <header class="slide-header-block">
           <div class="header-main-row">
             <div class="title-and-badge">
-              <span class="game-num-badge" style="background: ${game.themeColor};">${game.badge}</span>
+              <span class="game-num-badge" style="background: ${game.themeColor};">
+                <span class="badge-short">Game 0${idx + 1}</span>
+                <span class="badge-full">${game.badge}</span>
+              </span>
               <h1 class="slide-title-text">${game.title}</h1>
             </div>
-            <span class="tagline-highlight">“${game.tagline}”</span>
+            <div class="header-actions">
+              <span class="tagline-highlight">“${game.tagline}”</span>
+              <button type="button" class="btn-header-overview" data-action="open-drawer" title="Open Activity Deck Overview" aria-label="Open Games Menu">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                <span>Deck</span>
+              </button>
+            </div>
           </div>
           <div class="header-sub-row">
             <p class="slide-subtitle-text">${game.subtitle}</p>
           </div>
         </header>
 
-        <!-- Mobile Section Jump Chips (Visible only on mobile/tablet) -->
-        <nav class="mobile-section-nav" aria-label="Quick jump to section">
-          <button type="button" class="mobile-nav-chip" data-target="col-craft-preview">📸 Photo</button>
-          <button type="button" class="mobile-nav-chip" data-target="col-setup-guide">🛠️ Setup (${game.setupSteps.length})</button>
-          <button type="button" class="mobile-nav-chip" data-target="rules-card">🎯 Rules (${game.rules.length})</button>
-          <button type="button" class="mobile-nav-chip" data-target="materials-card">📦 Items</button>
+        <!-- Mobile Segmented Tabs (Visible only on mobile/tablet) -->
+        <nav class="mobile-section-tabs" role="tablist" aria-label="Game sections">
+          <button type="button" class="mobile-tab-btn active" data-tab="tab-craft" role="tab" aria-selected="true">
+            <span class="tab-emoji">📸</span>
+            <span class="tab-title">Photo</span>
+          </button>
+          <button type="button" class="mobile-tab-btn" data-tab="tab-setup" role="tab" aria-selected="false">
+            <span class="tab-emoji">🛠️</span>
+            <span class="tab-title">Setup <span class="tab-counter">(${game.setupSteps.length})</span></span>
+          </button>
+          <button type="button" class="mobile-tab-btn" data-tab="tab-rules" role="tab" aria-selected="false">
+            <span class="tab-emoji">🎯</span>
+            <span class="tab-title">Rules <span class="tab-counter">(${game.rules.length})</span></span>
+          </button>
+          <button type="button" class="mobile-tab-btn" data-tab="tab-materials" role="tab" aria-selected="false">
+            <span class="tab-emoji">📦</span>
+            <span class="tab-title">Items <span class="tab-counter">(${game.materials.length})</span></span>
+          </button>
         </nav>
 
-        <!-- Main 3-Column Content Layout -->
-        <div class="slide-columns-grid">
+        <!-- Main 3-Column Content Layout (On mobile: tabbed card view) -->
+        <div class="slide-columns-grid" data-active-tab="tab-craft">
           
           <!-- Column 1: Real-Life Photo Reference -->
-          <div class="slide-column col-craft-preview">
+          <div class="slide-column col-craft-preview" data-tab-pane="tab-craft">
             <div class="camp-card photo-craft-card">
               <div class="card-top-bar">
                 <span class="card-label-badge" style="color: ${game.themeColor}; background: ${game.themeColor}18;">📸 ${game.referenceTitle}</span>
@@ -91,6 +112,11 @@ export class SlideDeck {
                   <p class="diagram-main-text">${game.referenceCaption}</p>
                 </div>
               `}
+
+              <div class="craft-tagline-callout">
+                <span class="tagline-icon">⚡</span>
+                <p class="tagline-text">“${game.tagline}”</p>
+              </div>
             </div>
           </div>
 
@@ -186,19 +212,25 @@ export class SlideDeck {
       });
     });
 
-    mobileChips.forEach(chip => {
-      chip.addEventListener('click', (e) => {
+    const mobileTabs = document.querySelectorAll('.mobile-tab-btn');
+    mobileTabs.forEach(tabBtn => {
+      tabBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        const targetClass = chip.dataset.target;
-        const slideView = chip.closest('.game-slide-view');
+        const tabKey = tabBtn.dataset.tab;
+        const slideView = tabBtn.closest('.game-slide-view');
         if (!slideView) return;
-        const targetEl = slideView.querySelector(`.${targetClass}`);
-        if (targetEl) {
-          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          sfx.playClick();
-          slideView.querySelectorAll('.mobile-nav-chip').forEach(c => c.classList.remove('active'));
-          chip.classList.add('active');
+
+        slideView.querySelectorAll('.mobile-tab-btn').forEach(btn => {
+          const isActive = btn === tabBtn;
+          btn.classList.toggle('active', isActive);
+          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        const grid = slideView.querySelector('.slide-columns-grid');
+        if (grid) {
+          grid.dataset.activeTab = tabKey;
         }
+        sfx.playClick();
       });
     });
   }
