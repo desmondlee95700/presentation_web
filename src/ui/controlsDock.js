@@ -15,36 +15,24 @@ export class ControlsDock {
   render() {
     if (!this.container) return;
 
-    const game = this.deck.activeGame;
-    const currentIdx = this.deck.currentSlideIndex;
-    const totalGames = this.deck.games.length;
-
     this.container.innerHTML = `
-      <div class="dock-inner">
-        <!-- Slide Navigation Controls -->
-        <div class="dock-nav-controls">
-          <button type="button" class="dock-btn nav-btn" id="dock-btn-prev" title="Previous Game (Left Arrow)" ${currentIdx === 0 ? 'disabled' : ''}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-          </button>
-
-          <button type="button" class="dock-slide-pill" id="btn-open-drawer" title="Open Activity Deck Overview">
-            <span class="slide-num">Game ${currentIdx + 1} of ${totalGames}</span>
-            <span class="slide-label">${game.title}</span>
-            <span class="drawer-icon">▤</span>
-          </button>
-
-          <button type="button" class="dock-btn nav-btn" id="dock-btn-next" title="Next Game (Right Arrow or Space)" ${currentIdx === totalGames - 1 ? 'disabled' : ''}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </button>
-        </div>
-
-        <!-- Utility Toggles -->
-        <div class="dock-utilities">
-          <button type="button" class="dock-btn" id="dock-btn-fullscreen" title="Toggle Fullscreen">
-            <span class="util-icon">⛶</span>
-          </button>
-        </div>
-      </div>
+      <button type="button" class="dock-swipe-indicator" id="btn-open-drawer" title="Swipe on Mobile / Arrow Keys on Desktop (Click for Slide Menu)" aria-label="Swipe to navigate">
+        <span class="swipe-arrow-icon swipe-arrow-left" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </span>
+        <span class="swipe-bubble-text">
+          <span class="swipe-word">Swipe</span>
+        </span>
+        <span class="swipe-arrow-icon swipe-arrow-right" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </span>
+      </button>
     `;
 
     this.renderDrawer();
@@ -94,20 +82,16 @@ export class ControlsDock {
   }
 
   initEvents() {
-    this.container.addEventListener('click', (e) => {
-      const prevBtn = e.target.closest('#dock-btn-prev');
-      const nextBtn = e.target.closest('#dock-btn-next');
-      const drawerBtn = e.target.closest('#btn-open-drawer');
-      const fullscreenBtn = e.target.closest('#dock-btn-fullscreen');
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && this.isDrawerOpen) {
+        this.closeDrawer();
+      }
+    });
 
-      if (prevBtn) {
-        this.deck.prevSlide();
-      } else if (nextBtn) {
-        this.deck.nextSlide();
-      } else if (drawerBtn) {
+    this.container.addEventListener('click', (e) => {
+      const drawerBtn = e.target.closest('#btn-open-drawer');
+      if (drawerBtn) {
         this.toggleDrawer();
-      } else if (fullscreenBtn) {
-        this.toggleFullscreen();
       }
     });
   }
@@ -128,16 +112,8 @@ export class ControlsDock {
     }
   }
 
-  toggleFullscreen() {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch(() => {});
-    } else {
-      if (document.exitFullscreen) document.exitFullscreen();
-    }
-    sfx.playClick();
-  }
-
   update() {
     this.render();
   }
 }
+

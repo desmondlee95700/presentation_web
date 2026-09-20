@@ -685,8 +685,35 @@ html, body {
 }
 
 /* ==========================================================================
-   Floating Controls Dock (Bottom Bar)
+   Playful Kid-Friendly Floating Swipe Indicator (Bottom)
    ========================================================================== */
+@keyframes floatSwipeBadge {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes bounceArrowLeft {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-4px);
+  }
+}
+
+@keyframes bounceArrowRight {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
 .dock-container {
   position: absolute;
   bottom: calc(14px + env(safe-area-inset-bottom, 0px));
@@ -694,123 +721,77 @@ html, body {
   transform: translateX(-50%);
   z-index: 20;
   pointer-events: auto;
-  max-width: calc(100vw - 20px);
-  width: max-content;
 }
 
-.dock-inner {
-  display: flex;
+.dock-swipe-indicator {
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
-  padding: 6px 16px;
-  background: #ffffff;
-  border: 2.5px solid #e2e8f0;
+  padding: 7px 20px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid #fed7aa;
   border-radius: 9999px;
-  box-shadow: var(--shadow-dock);
-  max-width: 100%;
-  box-sizing: border-box;
+  box-shadow: 0 6px 18px -2px rgba(249, 115, 22, 0.18), 0 2px 6px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--transition-fast);
+  animation: floatSwipeBadge 3s ease-in-out infinite;
+  outline: none;
 }
 
-.dock-nav-controls {
+.dock-swipe-indicator:hover {
+  background: #ffffff;
+  border-color: #f97316;
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 10px 24px -2px rgba(249, 115, 22, 0.28), 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.dock-swipe-indicator:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+.swipe-bubble-text {
   display: flex;
   align-items: center;
-  gap: 8px;
-  min-width: 0;
 }
 
-.dock-btn {
+.swipe-word {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  color: #0f172a;
+}
+
+.swipe-arrow-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 6px 14px;
-  height: 38px;
-  background: #f8fafc;
-  border: 2px solid #e2e8f0;
-  border-radius: 9999px;
-  color: #0f172a;
-  font-family: var(--font-heading);
-  font-size: 13.5px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  flex-shrink: 0;
-}
-
-.dock-btn:hover:not(:disabled) {
-  background: #fff7ed;
-  border-color: #f97316;
-  color: #c2410c;
-  transform: translateY(-2px);
-}
-
-.dock-btn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-}
-
-.nav-btn {
-  width: 38px;
-  min-width: 38px;
-  padding: 0;
-}
-
-.dock-slide-pill {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  height: 38px;
-  padding: 0 16px;
-  background: #fff7ed;
-  border: 2px solid #fed7aa;
-  border-radius: 9999px;
-  color: #0f172a;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  min-width: 0;
-  max-width: 280px;
-}
-
-.dock-slide-pill:hover {
-  background: #ffedd5;
-  border-color: #fb923c;
-  transform: translateY(-2px);
-}
-
-.slide-num {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 800;
   color: #ea580c;
-  white-space: nowrap;
-  flex-shrink: 0;
+  transition: all var(--transition-fast);
 }
 
-.slide-label {
-  font-family: var(--font-heading);
-  font-size: 14px;
-  font-weight: 800;
-  color: #0f172a;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.swipe-arrow-left {
+  animation: bounceArrowLeft 1.3s ease-in-out infinite;
 }
 
-.drawer-icon {
-  font-size: 12px;
-  color: #9a3412;
-  flex-shrink: 0;
+.swipe-arrow-right {
+  animation: bounceArrowRight 1.3s ease-in-out infinite;
 }
 
-.dock-utilities {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-shrink: 0;
+.dock-swipe-indicator:hover .swipe-arrow-icon {
+  color: #c2410c;
 }
 
-.util-icon {
-  font-size: 15px;
+.dock-swipe-indicator:hover .swipe-arrow-left {
+  transform: translateX(-4px) scale(1.1);
+}
+
+.dock-swipe-indicator:hover .swipe-arrow-right {
+  transform: translateX(4px) scale(1.1);
 }
 
 /* ==========================================================================
@@ -1163,106 +1144,18 @@ html, body {
     font-size: 17px;
   }
 
-  .dock-inner {
-    padding: 5px 12px;
-    gap: 8px;
-  }
-
-  .dock-slide-pill {
-    padding: 0 12px;
-    gap: 8px;
-    max-width: 200px;
-  }
-}
-
-@media (max-width: 480px) {
-  .slide-section {
-    padding: 8px 8px calc(62px + env(safe-area-inset-bottom, 0px)) 8px;
-  }
-
-  .slide-header-block {
-    padding: 6px 10px;
-  }
-
-  .title-and-badge {
-    gap: 8px;
-  }
-
-  .game-num-badge {
-    padding: 3px 8px;
-    font-size: 11.5px;
-  }
-
-  .slide-title-text {
-    font-size: 18px;
-  }
-
-  .header-main-row {
-    gap: 6px;
-  }
-
-  .header-sub-row {
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-
-  .camp-card {
-    padding: 10px 12px;
-    border-radius: 12px;
-  }
-
-  .craft-photo-frame {
-    height: 175px;
-    min-height: 140px;
-  }
-
-  .step-card-row {
-    padding: 7px 9px;
+  .dock-swipe-indicator {
+    padding: 5px 15px;
     gap: 9px;
   }
 
-  .step-number-circle {
-    width: 22px;
-    height: 22px;
-    font-size: 11.5px;
+  .swipe-word {
+    font-size: 14.5px;
   }
 
-  .step-header-title {
-    font-size: 13px;
-  }
-
-  .step-desc-text {
-    font-size: 12px;
-  }
-
-  .dock-inner {
-    padding: 4px 8px;
-    gap: 6px;
-  }
-
-  .dock-btn {
-    height: 34px;
-    font-size: 12px;
-  }
-
-  .nav-btn {
-    width: 34px;
-    min-width: 34px;
-  }
-
-  .dock-slide-pill {
-    height: 34px;
-    padding: 0 10px;
-    gap: 6px;
-    max-width: 140px;
-  }
-
-  .slide-num {
-    font-size: 11px;
-  }
-
-  .slide-label {
-    display: none;
+  .swipe-arrow-icon svg {
+    width: 17px;
+    height: 17px;
   }
 
   .lightbox-content-box {

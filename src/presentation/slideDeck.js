@@ -292,49 +292,118 @@ export class SlideDeck {
   }
 
   initGlobalNavigation() {
-    // Keyboard navigation: Arrow Right / Arrow Left / Space
+    // 1. Keyboard navigation (Desktop): Arrow Keys, Space, PageUp/Down, Home/End
     window.addEventListener('keydown', (e) => {
-      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      // Don't intercept if user is typing in form controls
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName) || e.target.isContentEditable) return;
 
-      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
-        e.preventDefault();
-        this.nextSlide();
-      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
-        e.preventDefault();
-        this.prevSlide();
+      switch (e.key) {
+        case 'ArrowRight':
+        case 'ArrowDown':
+        case 'PageDown':
+        case ' ':
+        case 'n':
+        case 'N':
+        case 'l':
+        case 'L':
+          e.preventDefault();
+          this.nextSlide();
+          break;
+
+        case 'ArrowLeft':
+        case 'ArrowUp':
+        case 'PageUp':
+        case 'p':
+        case 'P':
+        case 'h':
+        case 'H':
+          e.preventDefault();
+          this.prevSlide();
+          break;
+
+        case 'Home':
+          e.preventDefault();
+          this.goToSlide(0);
+          break;
+
+        case 'End':
+          e.preventDefault();
+          this.goToSlide(this.games.length - 1);
+          break;
       }
     });
 
-    // Touch Swipe
+    // 2. Mobile Touch Swipe Navigation
     let touchStartX = 0;
     let touchStartY = 0;
+    let touchStartTime = 0;
 
     window.addEventListener('touchstart', (e) => {
+      if (e.touches.length > 1) return; // Ignore multi-touch gestures
       touchStartX = e.changedTouches[0].screenX;
       touchStartY = e.changedTouches[0].screenY;
+      touchStartTime = Date.now();
     }, { passive: true });
 
     window.addEventListener('touchend', (e) => {
+      if (!touchStartTime) return;
       const touchEndX = e.changedTouches[0].screenX;
       const touchEndY = e.changedTouches[0].screenY;
       const deltaX = touchEndX - touchStartX;
       const deltaY = touchEndY - touchStartY;
+      const deltaTime = Date.now() - touchStartTime;
 
-      if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY) * 1.4) {
+      // Check for horizontal swipe gesture (distance > 35px, horizontal dominance, under 850ms)
+      if (Math.abs(deltaX) > 35 && Math.abs(deltaX) > Math.abs(deltaY) * 1.15 && deltaTime < 850) {
         if (deltaX < 0) {
           this.nextSlide();
         } else {
           this.prevSlide();
         }
       }
+      touchStartTime = 0;
     }, { passive: true });
 
-    // Trackpad horizontal scroll debounce
+    // 3. Desktop Mouse Drag Swipe (Allow click & drag to swipe on desktop)
+    let isMouseDown = false;
+    let mouseStartX = 0;
+    let mouseStartY = 0;
+    let mouseStartTime = 0;
+
+    window.addEventListener('mousedown', (e) => {
+      // Ignore clicks on buttons, links, or interactive elements
+      if (e.target.closest('button, a, input, select, textarea, .dock-container, .drawer-modal, .lightbox-modal')) return;
+      if (e.button !== 0) return; // Only primary mouse button
+
+      isMouseDown = true;
+      mouseStartX = e.clientX;
+      mouseStartY = e.clientY;
+      mouseStartTime = Date.now();
+    });
+
+    window.addEventListener('mouseup', (e) => {
+      if (!isMouseDown) return;
+      isMouseDown = false;
+
+      const deltaX = e.clientX - mouseStartX;
+      const deltaY = e.clientY - mouseStartY;
+      const deltaTime = Date.now() - mouseStartTime;
+
+      if (Math.abs(deltaX) > 60 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2 && deltaTime < 700) {
+        if (deltaX < 0) {
+          this.nextSlide();
+        } else {
+          this.prevSlide();
+        }
+      }
+    });
+
+    // 4. Trackpad horizontal scroll debounce
     let lastWheelTime = 0;
     window.addEventListener('wheel', (e) => {
       if (Math.abs(e.deltaX) > 40) {
         const now = Date.now();
-        if (now - lastWheelTime > 400) {
+        if (now - lastWheelTime > 450) {
           lastWheelTime = now;
           if (e.deltaX > 0) {
             this.nextSlide();
