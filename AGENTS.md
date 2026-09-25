@@ -16,7 +16,9 @@ All future style updates, UI additions, and components MUST adhere strictly to t
 - **Game Accent Colors**:
   - Game 1 (*Goliath SlingShot*): Warm Amber (`#f59e0b`) & Coral Red (`#ef4444`).
   - Game 2 (*Feed Goliath Game*): Emerald Green (`#059669`) & Mint (`#10b981`).
-  - Game 3 (*Fortress Siege*): Royal Blue (`#2563eb`) & Sky Blue (`#3b82f6`).
+  - Game 3 (*Reaction Ball & Cup Game*): Royal Blue (`#2563eb`) & Sky Blue (`#3b82f6`).
+  - Game 4 (*David & Goliath Sliding Game*): Royal Violet (`#7c3aed`) & Purple Glow (`#a855f7`).
+  - Game 5 (*Brook of Elah: River Crossing*): River Cyan (`#0891b2`) & Aqua Splash (`#06b6d4`).
 
 ---
 
@@ -30,7 +32,6 @@ Use Google Fonts (`Outfit`, `Plus Jakarta Sans`, and `JetBrains Mono`):
 | **Slide Title** | `Outfit` | `32px` | `900` | `#0f172a` (bouncy, bold, line-height: `1.1`) |
 | **Game Number Badge** | `Outfit` | `13px` | `900` | `#ffffff` on theme color (pill) |
 | **Subtitle** | `Plus Jakarta Sans` | `15px` | `700` | `#475569` |
-| **Tagline Quote** | `Plus Jakarta Sans` | `13.5px` | `700` | `#c2410c` on `#fff7ed` pill |
 | **Card Header Labels** | `Outfit` | `13.5px` | `800` | Uppercase, letter-spacing: `0.03em` |
 | **Step Title** | `Outfit` | `14.5px` | `800` | `#0f172a` |
 | **Step Description** | `Plus Jakarta Sans` | `13px–13.5px` | `500` | `#334155` (line-height: `1.4`) |
@@ -51,11 +52,11 @@ Use Google Fonts (`Outfit`, `Plus Jakarta Sans`, and `JetBrains Mono`):
 
 2. **3-Column Grid**:
    - `grid-template-columns: 0.95fr 1.15fr 1.05fr; gap: 14px;`
-   - **Column 1 (📸 Real-Life Photo Reference)**:
+   - **Column 1 (📸 DIY Reference)**:
      - Single prominent photo craft card filling the column height.
      - Frame: `flex: 1; min-height: 220px; border: 2px solid #fed7aa; background: #fdfaf6;`
      - Image: `object-fit: contain; width: 100%; height: 100%;` with click-to-enlarge lightbox.
-     - Caption: Bold `14px` headline at bottom. (Avoid cluttered extraneous tip boxes).
+     - Frame fills card height without extraneous caption boxes or tips.
    - **Column 2 (🛠️ Setup Guide)**:
      - Vertical stack of step cards (Steps 1 to 6) with `gap: 8px`.
      - Step cards: `padding: 9px 12px; gap: 12px; border-radius: 12px; background: #f8fafc;`
@@ -87,6 +88,17 @@ Use Google Fonts (`Outfit`, `Plus Jakarta Sans`, and `JetBrains Mono`):
    - 2 strings or brooms guide a rolling ball into cups along a floor tape track.
    - 4-step setup walkthrough and 5 gameplay rules.
    - Reference image: `/images/reaction_ball_cup_reference.png`.
+
+4. **David & Goliath Sliding Game**:
+   - Taped square arena with Goliath bottle cap on center X and 5 colored stones.
+   - 5-step setup walkthrough and 6 gameplay rules.
+   - Reference image: `/images/david_goliath_sliding_game.png`.
+
+5. **Brook of Elah: River Crossing**:
+   - 5 cardboard stepping squares passed hand-to-hand across a 20–30 ft taped river.
+   - 4-step setup walkthrough and 5 gameplay rules.
+   - Reference image: `/images/brook_river_reference.png`.
+   - Setup diagram: `/images/brook_river_setup.png`.
 
 ---
 

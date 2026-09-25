@@ -50,7 +50,6 @@ export class SlideDeck {
               <h1 class="slide-title-text">${game.title}</h1>
             </div>
             <div class="header-actions">
-              <span class="tagline-highlight">“${game.tagline}”</span>
               <button type="button" class="btn-header-overview" data-action="open-drawer" title="Open Activity Deck Overview" aria-label="Open Games Menu">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
                 <span>Deck</span>
@@ -85,13 +84,13 @@ export class SlideDeck {
         <!-- Main 3-Column Content Layout (On mobile: tabbed card view) -->
         <div class="slide-columns-grid" data-active-tab="tab-craft">
           
-          <!-- Column 1: Real-Life Photo Reference -->
+          <!-- Column 1: DIY Reference -->
           <div class="slide-column col-craft-preview" data-tab-pane="tab-craft">
             <div class="camp-card photo-craft-card">
               <div class="card-top-bar">
                 <span class="card-label-badge" style="color: ${game.themeColor}; background: ${game.themeColor}18;">📸 ${game.referenceTitle}</span>
                 ${game.referenceImage ? `
-                  <button type="button" class="btn-lightbox-trigger" data-img-src="${game.referenceImage}" data-caption="${game.referenceCaption}" title="Enlarge Reference Photo">
+                  <button type="button" class="btn-lightbox-trigger" data-img-src="${game.referenceImage}" title="Enlarge Reference Photo">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
                     Enlarge
                   </button>
@@ -99,24 +98,16 @@ export class SlideDeck {
               </div>
 
               ${game.referenceImage ? `
-                <div class="craft-photo-frame" data-img-src="${game.referenceImage}" data-caption="${game.referenceCaption}">
+                <div class="craft-photo-frame" data-img-src="${game.referenceImage}">
                   <img src="${game.referenceImage}" alt="${game.title} craft setup" class="craft-img" loading="eager" />
                   <div class="photo-tap-hint">🔍 Tap to zoom full-screen</div>
-                </div>
-                <div class="craft-caption-box">
-                  <p class="craft-caption-title">${game.referenceCaption}</p>
                 </div>
               ` : `
                 <div class="diagram-preview-card">
                   <div class="diagram-emoji-icon">🏕️</div>
-                  <p class="diagram-main-text">${game.referenceCaption}</p>
+                  <p class="diagram-main-text">${game.title} Setup Reference</p>
                 </div>
               `}
-
-              <div class="craft-tagline-callout">
-                <span class="tagline-icon">⚡</span>
-                <p class="tagline-text">“${game.tagline}”</p>
-              </div>
             </div>
           </div>
 
@@ -138,6 +129,12 @@ export class SlideDeck {
                     </div>
                   </div>
                 `).join('')}
+
+                ${game.setupImage ? `
+                  <div class="setup-image-wrapper" data-img-src="${game.setupImage}" role="button" tabindex="0" title="Click to enlarge">
+                    <img src="${game.setupImage}" alt="${game.title} Setup" class="setup-craft-img" loading="eager" />
+                  </div>
+                ` : ''}
               </div>
             </div>
           </div>
@@ -188,27 +185,32 @@ export class SlideDeck {
 
   initSlideEvents() {
     const zoomButtons = document.querySelectorAll('.btn-lightbox-trigger');
-    const photoFrames = document.querySelectorAll('.craft-photo-frame');
+    const photoFrames = document.querySelectorAll('.craft-photo-frame, .setup-image-wrapper');
     const mobileChips = document.querySelectorAll('.mobile-nav-chip');
 
-    const handleOpen = (src, caption) => {
-      this.openLightbox(src, caption);
+    const handleOpen = (src) => {
+      this.openLightbox(src);
     };
 
     zoomButtons.forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const src = btn.dataset.imgSrc;
-        const cap = btn.dataset.caption;
-        if (src) handleOpen(src, cap);
+        if (src) handleOpen(src);
       });
     });
 
     photoFrames.forEach(frame => {
       frame.addEventListener('click', () => {
         const src = frame.dataset.imgSrc;
-        const cap = frame.dataset.caption;
-        if (src) handleOpen(src, cap);
+        if (src) handleOpen(src);
+      });
+      frame.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const src = frame.dataset.imgSrc;
+          if (src) handleOpen(src);
+        }
       });
     });
 
@@ -247,7 +249,6 @@ export class SlideDeck {
         <div class="lightbox-content-box">
           <button type="button" class="btn-close-lightbox" id="btn-close-lightbox" aria-label="Close Lightbox">✕</button>
           <img src="" alt="Camp Craft Reference" id="lightbox-img" class="lightbox-img" />
-          <div class="lightbox-caption" id="lightbox-caption"></div>
         </div>
       `;
       document.body.appendChild(modal);
@@ -265,14 +266,12 @@ export class SlideDeck {
     }
   }
 
-  openLightbox(src, caption) {
+  openLightbox(src) {
     const modal = document.getElementById('photo-lightbox-modal');
     const img = document.getElementById('lightbox-img');
-    const cap = document.getElementById('lightbox-caption');
 
     if (modal && img) {
       img.src = src;
-      if (cap) cap.textContent = caption || '';
       modal.classList.add('active');
       modal.setAttribute('aria-hidden', 'false');
       sfx.playClick();

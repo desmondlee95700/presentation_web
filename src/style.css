@@ -192,10 +192,6 @@ html, body {
   display: inline;
 }
 
-.craft-tagline-callout {
-  display: none;
-}
-
 .mobile-section-tabs {
   display: none;
 }
@@ -225,16 +221,6 @@ html, body {
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-.tagline-highlight {
-  color: #c2410c;
-  background: #fff7ed;
-  border: 1.5px solid #fed7aa;
-  padding: 3px 12px;
-  border-radius: 9999px;
-  font-weight: 700;
-  font-size: 13.5px;
 }
 
 .btn-header-overview {
@@ -324,7 +310,7 @@ html, body {
 }
 
 /* ==========================================================================
-   Column 1: 📸 Real-Life Photo Reference
+   Column 1: 📸 DIY Reference
    ========================================================================== */
 .photo-craft-card {
   border-color: #f59e0b;
@@ -393,19 +379,6 @@ html, body {
   color: #ffffff;
   background: linear-gradient(to top, rgba(15, 23, 42, 0.85), transparent);
   text-align: center;
-}
-
-.craft-caption-box {
-  margin-top: 10px;
-  font-size: 13px;
-  line-height: 1.4;
-  flex-shrink: 0;
-}
-
-.craft-caption-title {
-  font-weight: 800;
-  color: #0f172a;
-  font-size: 14px;
 }
 
 .diagram-preview-card {
@@ -507,6 +480,33 @@ html, body {
 .step-desc-text {
   color: #334155;
   font-size: 13px;
+}
+
+/* Setup Guide Inline Craft Image */
+.setup-image-wrapper {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: transform var(--transition-fast);
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.setup-image-wrapper:hover {
+  transform: scale(1.02);
+}
+
+.setup-craft-img {
+  width: auto;
+  max-width: 100%;
+  max-height: min(320px, 36vh);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.09));
+  border-radius: 12px;
 }
 
 /* ==========================================================================
@@ -722,14 +722,6 @@ html, body {
   border-radius: 12px;
 }
 
-.lightbox-caption {
-  margin-top: 12px;
-  font-size: 14px;
-  font-weight: 700;
-  color: #0f172a;
-  text-align: center;
-}
-
 /* ==========================================================================
    Playful Kid-Friendly Floating Swipe Indicator (Bottom)
    ========================================================================== */
@@ -872,7 +864,7 @@ html, body {
   position: relative;
   z-index: 2;
   width: 90%;
-  max-width: 760px;
+  max-width: 860px;
   max-height: 85vh;
   max-height: 85dvh;
   overflow-y: auto;
@@ -929,7 +921,7 @@ html, body {
 
 .drawer-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
   gap: 12px;
 }
 
@@ -1078,10 +1070,6 @@ html, body {
 
   .header-actions {
     flex-shrink: 0;
-  }
-
-  .header-actions .tagline-highlight {
-    display: none; /* Hide bulky quote bubble from mobile header */
   }
 
   .btn-header-overview {
@@ -1245,34 +1233,6 @@ html, body {
     min-height: 200px;
     max-height: 48dvh;
     border-radius: 12px;
-  }
-
-  .craft-caption-box {
-    margin: 0;
-  }
-
-  .craft-tagline-callout {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    background: #fff7ed;
-    border: 1.5px solid #fed7aa;
-    border-radius: 12px;
-    padding: 9px 12px;
-    flex-shrink: 0;
-  }
-
-  .craft-tagline-callout .tagline-icon {
-    font-size: 14px;
-    line-height: 1.4;
-    color: #ea580c;
-  }
-
-  .craft-tagline-callout .tagline-text {
-    font-size: 12.5px;
-    font-weight: 700;
-    color: #c2410c;
-    line-height: 1.35;
   }
 
   /* Tab 2: Setup guide steps */
