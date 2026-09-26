@@ -1,24 +1,85 @@
 /**
  * Kids Camp Games Catalog — One Slide per Game Presentation Data
+ * Split into Two Age Categories:
+ * 1. Kids (Age 3–6): Games 1, 2
+ * 2. Older Kids (Age 7+): Games 3, 4, 5
+ * Pastel Editorial Presentation Aesthetic
  */
+
+export const CATEGORIES = {
+  KIDS: {
+    id: 'kids',
+    label: 'Kids (Age 3–6)',
+    shortLabel: 'Kids 3–6',
+    emoji: '🎈',
+    gameIds: ['goliath-slingshot', 'feed-goliath'],
+    description: 'Games 1, 2 • Fun, Gentle & Safe',
+    themeColor: '#ea580c',
+    pillBg: '#ffedd5',
+    pillText: '#9a3412',
+  },
+  OLDER: {
+    id: 'older',
+    label: 'Older Kids (Age 7+)',
+    shortLabel: 'Older 7+',
+    emoji: '🚀',
+    gameIds: ['reaction-ball-cup', 'david-goliath-sliding', 'brook-river-crossing'],
+    description: 'Games 3, 4, 5 • Focus, Accuracy, Speed & Team Strategy',
+    themeColor: '#7c3aed',
+    pillBg: '#f3e8ff',
+    pillText: '#6b21a8',
+  },
+  ALL: {
+    id: 'all',
+    label: 'All Games',
+    shortLabel: 'All 5 Games',
+    emoji: '🌟',
+    gameIds: ['goliath-slingshot', 'feed-goliath', 'reaction-ball-cup', 'david-goliath-sliding', 'brook-river-crossing'],
+    description: 'Complete 5-Game Camp Activity Deck',
+    themeColor: '#0284c7',
+    pillBg: '#e0f2fe',
+    pillText: '#0369a1',
+  }
+};
 
 export const GAMES_CATALOG = [
   {
     id: 'goliath-slingshot',
+    catalogNumber: 1,
     title: 'Goliath SlingShot',
     subtitle: 'Camp Target Knockdown & Aim Challenge',
-    themeColor: '#f59e0b',
-    accentColor: '#ef4444',
-    badge: '🎯 GAME 01 • CAMP KNOCKDOWN',
-    referenceImage: '/images/david_goliath_reference.png',
-    referenceTitle: 'DIY Reference',
+    categories: ['kids'], // Kids (Age 3-6) ONLY
+    badge: 'GAME 01 • CAMP KNOCKDOWN',
+    tabTitle: 'Camp Knockdown',
+    mascotEmoji: '🎯',
+    // Pastel Stationery Theme Colors
+    palette: {
+      bgCanvas: '#f2f8e8',     // Soft Meadow Pistachio
+      bgTab: '#e2efc8',        // Top folder tab
+      tabTextColor: '#365314', // Dark olive charcoal
+      themeColor: '#65a30d',   // Pistachio green accent
+      accentColor: '#f59e0b',  // Warm amber highlight
+      cardBorder: '#d7e8b7',   // Soft border
+      badgeBg: '#fef3c7',      // Warm honey pill
+      badgeText: '#92400e',
+    },
+    kidsGuidance: {
+      tag: '🎈 For Kids (Age 3–6)',
+      tip: 'Stand closer (3–4 ft) • Soft foam balls • Counselor helps hold balloon slingshot or guides toss!'
+    },
+    olderGuidance: {
+      tag: '🚀 For Older Kids (Age 7+)',
+      tip: 'Stand behind 8–10 ft line • Knock Goliath top cup for +50 bonus points • 3 timed quick throws!'
+    },
+    referenceImage: '/images/goliath_slingshot_craft.png',
+    referenceTitle: 'DIY Craft Photo',
     setupImage: '/images/balloon_slingshot_setup.png',
     materials: [
-      { name: '10-12 Plastic Cups', note: '1 big cup for Gian Goliath and 9 smaller cups for the 4-3-2-1 Pyramid' },
-      { name: '1-2 Soft Balls', note: 'Soft balls' },
-      { name: '1 Cardboard Goliath Cutout', note: 'Drawn with helmet, shield, and spear' },
+      { name: '10–12 Plastic Cups', note: '1 big cup for Giant Goliath & 9 smaller cups for 4-3-2-1 Pyramid' },
+      { name: '1–2 Soft Balls', note: 'Foam or soft felt balls' },
+      { name: '1 Cardboard Goliath Cutout', note: 'Drawn with helmet, shield & spear' },
       { name: 'Rope or Masking Tape', note: 'For throwing distance line' },
-      { name: 'Balloon', note: 'For slingshots' },
+      { name: 'Balloon & Cup Slingshot', note: 'Cut balloon tied to bottomless cup' },
     ],
     setupSteps: [
       {
@@ -41,36 +102,54 @@ export const GAMES_CATALOG = [
       {
         badge: 'Rule 1',
         title: '3 Throws per Player',
-        text: 'Each player steps up to the line and takes 3 throws per turn using soft balls'
+        text: 'Each player steps up to the line and takes 3 throws per turn using soft balls or slingshots.'
       },
       {
         badge: 'Rule 2',
         title: 'Stay Behind the Line',
-        text: 'Throws must be released strictly from behind the marked rope.'
+        text: 'Throws must be released strictly from behind the marked rope or tape line.'
       },
       {
         badge: 'Rule 3',
         title: 'Team Turn Rotation',
-        text: 'Teams alternate throwers. Teammates stay behind the ball station and cheer loud!'
+        text: 'Teams alternate throwers. Teammates stay behind the station and cheer loud!'
       }
     ]
   },
   {
     id: 'feed-goliath',
+    catalogNumber: 2,
     title: 'Feed Goliath Game',
     subtitle: 'Cardboard Box Toss & David Aim Challenge',
-    themeColor: '#059669',
-    accentColor: '#10b981',
-    badge: '📦 GAME 02 • DIY TARGET TOSS',
-    referenceImage: '/images/feed_goliath_reference.png',
-    referenceTitle: 'DIY Reference',
+    categories: ['kids'], // Kids (Age 3-6) ONLY
+    badge: 'GAME 02 • TARGET TOSS',
+    tabTitle: 'Feed Goliath',
+    mascotEmoji: '📦',
+    // Pastel Stationery Theme Colors
+    palette: {
+      bgCanvas: '#fff1ec',     // Soft Warm Peach / Blush Coral
+      bgTab: '#fcdfd7',        // Top folder tab
+      tabTextColor: '#9a3412', // Warm terracotta charcoal
+      themeColor: '#ea580c',   // Warm peach / coral accent
+      accentColor: '#f97316',  // Glow highlight
+      cardBorder: '#f8cec4',   // Soft border
+      badgeBg: '#ffedd5',      // Peach pill
+      badgeText: '#9a3412',
+    },
+    kidsGuidance: {
+      tag: '🎈 Exclusive for Kids (Age 3–6)',
+      tip: 'Big open mouth target makes tossing fun and easy! Light crumpled paper balls are 100% safe for little hands.'
+    },
+    referenceImage: '/images/feed_goliath_craft.png',
+    referenceTitle: 'DIY Craft Photo',
+    setupImage: '/images/feed_goliath_setup.png',
     materials: [
-      { name: 'Cardboard Box (or large cardboard sheet)', note: 'Sturdy base to hold Goliath’s head' },
+      { name: 'Cardboard Box (or large sheet)', note: 'Sturdy base to hold Goliath’s head' },
       { name: 'Paper or Cardboard for Face', note: 'For sketching Goliath’s features' },
       { name: 'Markers, Crayons, or Paint', note: 'To color helmet, beard, and teeth' },
       { name: 'Scissors or Craft Knife', note: 'To cut out the large open mouth' },
       { name: 'Tape or Glue', note: 'To secure face to the box' },
-      { name: 'Newspaper, Scrap Paper, or Soft Balls', note: 'Crumpled sheets for ammo' },
+      { name: 'Newspaper or Soft Balls', note: 'Crumpled sheets for ammo' },
     ],
     setupSteps: [
       {
@@ -86,7 +165,7 @@ export const GAMES_CATALOG = [
       {
         step: 3,
         title: 'Decorate Goliath’s Face',
-        desc: 'Decorate with eyes, wild hair, warrior helmet, nose, and sharp teeth.'
+        desc: 'Decorate with eyes, wild hair, warrior helmet, nose, and teeth.'
       },
       {
         step: 4,
@@ -129,15 +208,33 @@ export const GAMES_CATALOG = [
   },
   {
     id: 'reaction-ball-cup',
+    catalogNumber: 3,
     title: 'Reaction Ball & Cup Game',
     subtitle: 'Dual String Balance & Rolling Precision Challenge',
-    themeColor: '#2563eb',
-    accentColor: '#3b82f6',
-    badge: '⚡ GAME 03 • REACTION & BALANCE',
-    referenceImage: '/images/reaction_ball_cup_reference.png',
-    referenceTitle: 'DIY Reference',
+    categories: ['older'], // Older Kids (Age 7+) ONLY
+    badge: 'GAME 03 • REACTION & BALANCE',
+    tabTitle: 'Balance & Roll',
+    mascotEmoji: '⚡',
+    // Pastel Stationery Theme Colors
+    palette: {
+      bgCanvas: '#eaf4fc',     // Soft Powder Sky Blue
+      bgTab: '#d3eaf8',        // Top folder tab
+      tabTextColor: '#075985', // Deep ocean charcoal
+      themeColor: '#0284c7',   // Clear sky blue accent
+      accentColor: '#38bdf8',  // Sky glow highlight
+      cardBorder: '#c3e2f5',   // Soft border
+      badgeBg: '#e0f2fe',      // Sky pill
+      badgeText: '#0369a1',
+    },
+    olderGuidance: {
+      tag: '🚀 Exclusive for Older Kids (Age 7+)',
+      tip: 'Requires fine motor control and steady two-hand coordination! Challenge: guide ball smoothly into all 4 cups sequentially.'
+    },
+    referenceImage: '/images/reaction_ball_craft.png',
+    referenceTitle: 'DIY Craft Photo',
+    setupImage: '/images/reaction_ball_setup.png',
     materials: [
-      { name: '2 Long Strings (or 2 Broom Handles)', note: 'Taut parallel guide rails for the ball' },
+      { name: '2 Long Strings (or Broom Handles)', note: 'Taut parallel guide rails for the ball' },
       { name: 'Balls (Tennis ball, Foam, or FAA balls)', note: 'Smooth rolling balls for the track' },
       { name: '3–5 Cups, Bowls, or Placeholders', note: 'Positioned in a row along the path' },
       { name: 'Painter’s Tape or Floor Line', note: 'Marks straight track on the ground' }
@@ -156,7 +253,7 @@ export const GAMES_CATALOG = [
       {
         step: 3,
         title: 'Anchor Strings at End',
-        desc: 'Fasten the far ends of the two strings or loop them around a sturdy chair or feet.'
+        desc: 'Fasten far ends of the two strings or loop them around a sturdy chair or feet.'
       },
       {
         step: 4,
@@ -194,13 +291,34 @@ export const GAMES_CATALOG = [
   },
   {
     id: 'david-goliath-sliding',
+    catalogNumber: 4,
     title: 'David & Goliath Sliding Game',
     subtitle: 'Bottle Cap Precision Slide & Goliath Knockout',
-    themeColor: '#7c3aed',
-    accentColor: '#a855f7',
-    badge: '🪨 GAME 04 • BOTTLE CAP SLIDE',
-    referenceImage: '/images/david_goliath_sliding_game.png',
-    referenceTitle: 'DIY Reference',
+    categories: ['older'], // Older Kids (Age 7+) ONLY
+    badge: 'GAME 04 • BOTTLE CAP SLIDE',
+    tabTitle: 'Bottle Cap Slide',
+    mascotEmoji: '🪨',
+    // Pastel Stationery Theme Colors
+    palette: {
+      bgCanvas: '#f2ecfc',     // Soft Dreamy Lilac / Lavender
+      bgTab: '#dfd4f8',        // Top folder tab
+      tabTextColor: '#5b21b6', // Deep royal violet
+      themeColor: '#7c3aed',   // Violet accent
+      accentColor: '#a855f7',  // Glow highlight
+      cardBorder: '#d5c6f6',   // Soft border
+      badgeBg: '#f3e8ff',      // Lilac pill
+      badgeText: '#6b21a8',
+    },
+    kidsGuidance: {
+      tag: '🎈 For Kids (Age 3–6)',
+      tip: 'Compact 4-ft taped ring • Gentle floor slide • Practice 1 slide before aiming at Goliath!'
+    },
+    olderGuidance: {
+      tag: '🚀 For Older Kids (Age 7+)',
+      tip: 'Standard 6-ft taped boundary • Knock Goliath completely out of bounds • Tactical stone bank shots!'
+    },
+    referenceImage: '/images/sliding_game_craft.png',
+    referenceTitle: 'DIY Craft Photo',
     setupImage: '/images/david_goliath_sliding_setup.png',
     materials: [
       { name: '5 Colored Bottle Caps', note: 'David’s 5 stones (Red, Yellow, Green, Blue, Purple)' },
@@ -271,13 +389,34 @@ export const GAMES_CATALOG = [
   },
   {
     id: 'brook-river-crossing',
+    catalogNumber: 5,
     title: 'Brook of Elah: River Crossing',
     subtitle: '5 Cardboard Stepping Squares & River Crossing Relay',
-    themeColor: '#0891b2',
-    accentColor: '#06b6d4',
-    badge: '🌊 GAME 05 • RIVER CROSSING',
+    categories: ['older'], // Older Kids (Age 7+) ONLY
+    badge: 'GAME 05 • RIVER CROSSING',
+    tabTitle: 'River Crossing',
+    mascotEmoji: '🌊',
+    // Pastel Stationery Theme Colors
+    palette: {
+      bgCanvas: '#eaf7f5',     // Soft Lagoon Aqua / River Mint
+      bgTab: '#cff0ec',        // Top folder tab
+      tabTextColor: '#155e75', // Deep teal charcoal
+      themeColor: '#0891b2',   // River cyan accent
+      accentColor: '#06b6d4',  // Aqua splash highlight
+      cardBorder: '#bee8e2',   // Soft border
+      badgeBg: '#ccfbf1',      // Mint pill
+      badgeText: '#115e59',
+    },
+    kidsGuidance: {
+      tag: '🎈 For Kids (Age 3–6)',
+      tip: '12–15 ft river width • Counselor assists passing cardboard steps • Focus on fun balance and safe stepping!'
+    },
+    olderGuidance: {
+      tag: '🚀 For Older Kids (Age 7+)',
+      tip: 'Full 25–30 ft river • Strict floor touch penalty: foot in water washes board back! • Speed relay race against the clock!'
+    },
     referenceImage: '/images/brook_river_reference.png',
-    referenceTitle: 'DIY Reference',
+    referenceTitle: 'DIY Reference Photo',
     setupImage: '/images/brook_river_setup.png',
     materials: [
       { name: '5 Cardboard Squares', note: 'Cut from cardboard delivery boxes, numbered 1–5' },
@@ -336,3 +475,17 @@ export const GAMES_CATALOG = [
     ]
   }
 ];
+
+/**
+ * Returns games matching a specific category:
+ * - 'kids'  -> Game 1, 2, 4, 5 (Kids age 3-6)
+ * - 'older' -> Game 1, 3, 4, 5 (Older kids age 7+)
+ * - 'all'   -> Game 1, 2, 3, 4, 5
+ */
+export function getGamesByCategoryId(categoryId = 'kids') {
+  const norm = (categoryId || 'kids').toLowerCase();
+  const cat = CATEGORIES[norm.toUpperCase()] || CATEGORIES.KIDS;
+  return cat.gameIds
+    .map(id => GAMES_CATALOG.find(g => g.id === id))
+    .filter(Boolean);
+}

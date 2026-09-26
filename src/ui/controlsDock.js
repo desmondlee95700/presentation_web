@@ -1,4 +1,4 @@
-import { sfx } from '../utils/sfx.js';
+import { CATEGORIES, getGamesByCategoryId } from '../presentation/gamesData.js';
 
 export class ControlsDock {
   constructor(slideDeck) {
@@ -15,25 +15,73 @@ export class ControlsDock {
   render() {
     if (!this.container) return;
 
+    const currentIdx = this.deck.currentSlideIndex;
+    const total = this.deck.totalSlides;
+
     this.container.innerHTML = `
-      <button type="button" class="dock-swipe-indicator" id="btn-open-drawer" title="Swipe on Mobile / Arrow Keys on Desktop (Click for Slide Menu)" aria-label="Swipe to navigate">
-        <span class="swipe-arrow-icon swipe-arrow-left" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="19" y1="12" x2="5" y2="12"></line>
-            <polyline points="12 19 5 12 12 5"></polyline>
+      <div class="dock-inner-pill">
+        <!-- Previous Slide Button -->
+        <button type="button" 
+                class="btn-dock-nav btn-dock-prev" 
+                id="btn-dock-prev" 
+                title="Previous Slide (← / P)" 
+                aria-label="Previous Slide"
+                ${currentIdx === 0 ? 'disabled' : ''}>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
-        </span>
-        <span class="swipe-bubble-text">
-          <span class="swipe-word">Swipe</span>
-        </span>
-        <span class="swipe-arrow-icon swipe-arrow-right" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
+          <span class="dock-btn-label">Prev</span>
+        </button>
+
+        <!-- Game Rules Quick Button -->
+        <button type="button" 
+                class="btn-dock-rules" 
+                id="btn-dock-rules" 
+                title="View Full Rules Modal (Press R)" 
+                aria-label="View Game Rules">
+          <span class="dock-rules-icon">🎯</span>
+          <span class="dock-rules-text">Rules Sheet</span>
+        </button>
+
+        <!-- Next Slide Button -->
+        <button type="button" 
+                class="btn-dock-nav btn-dock-next" 
+                id="btn-dock-next" 
+                title="Next Slide (→ / Space / N)" 
+                aria-label="Next Slide"
+                ${currentIdx >= total - 1 ? 'disabled' : ''}>
+          <span class="dock-btn-label">Next</span>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
-        </span>
-      </button>
+        </button>
+      </div>
     `;
+
+    const prevBtn = this.container.querySelector('#btn-dock-prev');
+    const nextBtn = this.container.querySelector('#btn-dock-next');
+    const rulesBtn = this.container.querySelector('#btn-dock-rules');
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.deck.prevSlide();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.deck.nextSlide();
+      });
+    }
+
+    if (rulesBtn) {
+      rulesBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.deck.openRulesModal();
+      });
+    }
 
     this.renderDrawer();
   }
@@ -41,27 +89,96 @@ export class ControlsDock {
   renderDrawer() {
     if (!this.drawerModal) return;
 
-    const currentIdx = this.deck.currentSlideIndex;
+    const currentCatKey = this.deck.currentCategory;
+    const currentActiveGameId = this.deck.activeGame ? this.deck.activeGame.id : null;
+    const activeGames = getGamesByCategoryId(currentCatKey);
+    const catConfig = CATEGORIES[currentCatKey.toUpperCase()] || CATEGORIES.KIDS;
 
     this.drawerModal.innerHTML = `
       <div class="drawer-overlay" id="drawer-overlay-backdrop"></div>
       <div class="drawer-panel">
-        <div class="drawer-header">
-          <div>
-            <h3>Camp Activity Presentation Deck</h3>
-            <p>Select any game to jump directly to its slide</p>
-          </div>
-          <button type="button" class="btn-close-drawer" id="btn-close-drawer" aria-label="Close">✕</button>
-        </div>
-        <div class="drawer-grid">
-          ${this.deck.games.map((g, idx) => `
-            <div class="drawer-card ${idx === currentIdx ? 'active' : ''}" data-slide-index="${idx}">
-              <div class="drawer-card-num">Game ${String(idx + 1).padStart(2, '0')}</div>
-              <div class="drawer-card-title">${g.title}</div>
-              <div class="drawer-card-type">${g.subtitle}</div>
+        
+        <!-- Header -->
+        <header class="drawer-header">
+          <div class="drawer-header-title-box">
+            <div class="drawer-title-row">
+              <span class="drawer-star">✦</span>
+              <h3>Slide Deck Catalog</h3>
             </div>
-          `).join('')}
+            <p>Click any slide to jump directly to it, or switch age groups</p>
+          </div>
+          <button type="button" class="btn-close-drawer" id="btn-close-drawer" aria-label="Close Drawer">✕</button>
+        </header>
+
+        <!-- Category Selector (Clean Segmented Pill Track matching Slide Header) -->
+        <div class="drawer-category-bar">
+          <div class="drawer-pill-track" role="tablist" aria-label="Select Age Group">
+            <button type="button" 
+                    class="drawer-pill-btn ${currentCatKey === 'kids' ? 'active' : ''}" 
+                    data-drawer-cat="kids">
+              <span class="d-pill-emoji">🎈</span>
+              <span class="d-pill-label">Kids <span class="d-pill-sub">(Age 3–6)</span></span>
+              <span class="d-pill-count">2</span>
+            </button>
+            <button type="button" 
+                    class="drawer-pill-btn ${currentCatKey === 'older' ? 'active' : ''}" 
+                    data-drawer-cat="older">
+              <span class="d-pill-emoji">🚀</span>
+              <span class="d-pill-label">Older <span class="d-pill-sub">(7+)</span></span>
+              <span class="d-pill-count">3</span>
+            </button>
+            <button type="button" 
+                    class="drawer-pill-btn ${currentCatKey === 'all' ? 'active' : ''}" 
+                    data-drawer-cat="all">
+              <span class="d-pill-emoji">🌟</span>
+              <span class="d-pill-label">All <span class="d-pill-sub">Games</span></span>
+              <span class="d-pill-count">5</span>
+            </button>
+          </div>
         </div>
+
+        <!-- Slide Cards Grid (Clean, visual presentation thumbnails) -->
+        <div class="drawer-body-scroll">
+          <div class="drawer-grid-header">
+            <span class="drawer-group-name">${catConfig.emoji} ${catConfig.label}</span>
+            <span class="drawer-group-desc">${catConfig.description}</span>
+          </div>
+
+          <div class="drawer-visual-grid">
+            ${activeGames.map((g, idx) => {
+              const isActive = g.id === currentActiveGameId;
+              const slideNum = String(idx + 1).padStart(2, '0');
+              return `
+                <div class="drawer-slide-card ${isActive ? 'is-active' : ''}" 
+                     data-category-target="${currentCatKey}" 
+                     data-game-id="${g.id}"
+                     role="button"
+                     tabindex="0"
+                     title="Jump to Slide ${slideNum}: ${g.title}">
+                  
+                  <div class="drawer-card-thumb">
+                    <img src="${g.referenceImage}" alt="${g.title}" class="drawer-thumb-img" loading="lazy" />
+                    <span class="drawer-thumb-badge">Slide ${slideNum}</span>
+                    ${isActive ? `<span class="drawer-thumb-active-tag">● Presenting</span>` : ''}
+                  </div>
+
+                  <div class="drawer-card-info">
+                    <div class="drawer-card-tags-row">
+                      <span class="drawer-card-cat-pill" style="--cat-bg: ${g.palette.badgeBg}; --cat-color: ${g.palette.badgeText};">
+                        ${g.tabTitle || g.title}
+                      </span>
+                      <span class="drawer-card-supplies-tag">📦 ${g.materials.length} Items</span>
+                    </div>
+                    <h4 class="drawer-card-title">${g.title}</h4>
+                    <p class="drawer-card-desc">${g.subtitle}</p>
+                  </div>
+
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+
       </div>
     `;
 
@@ -70,13 +187,32 @@ export class ControlsDock {
     if (closeBtn) closeBtn.addEventListener('click', () => this.closeDrawer());
     if (backdrop) backdrop.addEventListener('click', () => this.closeDrawer());
 
-    const cards = this.drawerModal.querySelectorAll('.drawer-card');
+    this.drawerModal.querySelectorAll('.drawer-pill-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const cat = btn.dataset.drawerCat;
+        if (cat) {
+          this.deck.setCategory(cat);
+          this.renderDrawer();
+        }
+      });
+    });
+
+    const cards = this.drawerModal.querySelectorAll('.drawer-slide-card');
     cards.forEach(card => {
-      card.addEventListener('click', () => {
-        const idx = parseInt(card.dataset.slideIndex, 10);
-        this.deck.goToSlide(idx);
+      const clickHandler = () => {
+        const catTarget = card.dataset.categoryTarget;
+        const gameId = card.dataset.gameId;
+        this.deck.setCategory(catTarget, gameId);
         this.closeDrawer();
-        sfx.playClick();
+      };
+
+      card.addEventListener('click', clickHandler);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          clickHandler();
+        }
       });
     });
   }
@@ -88,7 +224,6 @@ export class ControlsDock {
       }
     });
 
-    // Toggle drawer via any drawer triggers (floating dock button or header menu button)
     document.addEventListener('click', (e) => {
       const trigger = e.target.closest('#btn-open-drawer, [data-action="open-drawer"]');
       if (trigger) {
@@ -103,7 +238,6 @@ export class ControlsDock {
       this.drawerModal.classList.toggle('open', this.isDrawerOpen);
     }
     if (this.isDrawerOpen) this.renderDrawer();
-    sfx.playClick();
   }
 
   closeDrawer() {
@@ -117,4 +251,3 @@ export class ControlsDock {
     this.render();
   }
 }
-

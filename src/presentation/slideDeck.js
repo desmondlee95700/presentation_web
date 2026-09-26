@@ -1,10 +1,19 @@
-import { GAMES_CATALOG } from './gamesData.js';
-import { sfx } from '../utils/sfx.js';
+import { CATEGORIES, getGamesByCategoryId } from './gamesData.js';
 
 export class SlideDeck {
   constructor() {
-    this.games = GAMES_CATALOG;
-    this.currentSlideIndex = 0;
+    // Default to 'kids' group (Age 3-6) or URL params
+    const urlParams = new URLSearchParams(window.location.search);
+    const catParam = urlParams.get('cat') || urlParams.get('category');
+    this.currentCategory = (catParam && ['kids', 'older', 'all'].includes(catParam.toLowerCase())) 
+      ? catParam.toLowerCase() 
+      : 'kids';
+    this.games = getGamesByCategoryId(this.currentCategory);
+
+    const slideParam = parseInt(urlParams.get('slide'), 10);
+    this.currentSlideIndex = (!isNaN(slideParam) && slideParam >= 1 && slideParam <= this.games.length) 
+      ? slideParam - 1 
+      : 0;
 
     this.trackContainer = document.getElementById('slides-track');
     this.progressBar = document.getElementById('progress-bar-fill');
@@ -13,20 +22,54 @@ export class SlideDeck {
     this.renderSlides();
     this.initGlobalNavigation();
     this.initLightbox();
+    this.initRulesModal();
   }
 
   get activeGame() {
-    return this.games[this.currentSlideIndex];
+    return this.games[this.currentSlideIndex] || this.games[0];
+  }
+
+  get totalSlides() {
+    return this.games.length;
+  }
+
+  setCategory(categoryKey, targetGameId = null) {
+    const key = (categoryKey || 'kids').toLowerCase();
+    this.currentCategory = key;
+    this.games = getGamesByCategoryId(key);
+
+    if (targetGameId) {
+      const targetIdx = this.games.findIndex(g => g.id === targetGameId);
+      this.currentSlideIndex = targetIdx >= 0 ? targetIdx : 0;
+    } else {
+      this.currentSlideIndex = 0;
+    }
+
+    this.renderSlides();
+    this.updateTransform();
+    this.updateUrlParams();
+
+    if (this.onSlideChange) this.onSlideChange();
+  }
+
+  updateUrlParams() {
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set('cat', this.currentCategory);
+      url.searchParams.set('slide', this.currentSlideIndex + 1);
+      window.history.replaceState({}, '', url.toString());
+    } catch (_) {}
   }
 
   renderSlides() {
     if (!this.trackContainer) return;
 
+    const total = this.totalSlides;
     this.trackContainer.innerHTML = this.games.map((game, idx) => {
       return `
         <section class="slide-section" data-game-id="${game.id}" data-slide-index="${idx}">
           <div class="slide-content-wrapper">
-            ${this.getGameSlideMarkup(game, idx)}
+            ${this.getGameSlideMarkup(game, idx, total)}
           </div>
         </section>
       `;
@@ -36,205 +79,376 @@ export class SlideDeck {
     this.updateTransform();
   }
 
-  getGameSlideMarkup(game, idx) {
+  getGameSlideMarkup(game, idx, totalSlides) {
+    const pal = game.palette;
+    const cat = CATEGORIES[this.currentCategory.toUpperCase()] || CATEGORIES.KIDS;
+    const currentSlideNum = String(idx + 1).padStart(2, '0');
+
+    // Coaching advice
+    let coachTip = '';
+    if (this.currentCategory === 'kids') {
+      coachTip = game.kidsGuidance ? game.kidsGuidance.tip : 'Counselor guides and assists little campers!';
+    } else if (this.currentCategory === 'older') {
+      coachTip = game.olderGuidance ? game.olderGuidance.tip : 'Focus on precision aiming, distance, and speed!';
+    } else {
+      coachTip = game.kidsGuidance ? game.kidsGuidance.tip : '';
+    }
+
+    const col1 = this.getColumn1Data(game);
+    const col2 = this.getColumn2Data(game);
+    const slideRules = this.getSlideRules(game);
+
     return `
-      <div class="game-slide-view" style="--accent-theme: ${game.themeColor}; --accent-glow: ${game.accentColor};">
-        <!-- Top Game Header -->
-        <header class="slide-header-block">
-          <div class="header-main-row">
-            <div class="title-and-badge">
-              <span class="game-num-badge" style="background: ${game.themeColor};">
-                <span class="badge-short">Game 0${idx + 1}</span>
-                <span class="badge-full">${game.badge}</span>
-              </span>
-              <h1 class="slide-title-text">${game.title}</h1>
-            </div>
-            <div class="header-actions">
-              <button type="button" class="btn-header-overview" data-action="open-drawer" title="Open Activity Deck Overview" aria-label="Open Games Menu">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-                <span>Deck</span>
-              </button>
-            </div>
+      <div class="slide-outer-wrapper" style="
+        --canvas-bg: ${pal.bgCanvas};
+        --tab-bg: ${pal.bgTab};
+        --tab-color: ${pal.tabTextColor};
+        --theme-color: ${pal.themeColor};
+        --accent-color: ${pal.accentColor};
+        --card-border: ${pal.cardBorder};
+      ">
+        <!-- Top Pill Header Bar (Floats ABOVE canvas for max space) -->
+        <header class="slide-pill-header">
+          <div class="pill-category-group" role="tablist" aria-label="Select Age Group">
+            <button type="button" 
+                    class="pill-cat-btn ${this.currentCategory === 'kids' ? 'active' : ''}" 
+                    data-category="kids" 
+                    role="tab"
+                    aria-selected="${this.currentCategory === 'kids'}"
+                    title="Kids (Age 3–6): Games 1, 2">
+              <span class="cat-pill-emoji">🎈</span>
+              <span class="cat-pill-text">Kids <span class="cat-pill-sub">(3–6)</span></span>
+            </button>
+
+            <button type="button" 
+                    class="pill-cat-btn ${this.currentCategory === 'older' ? 'active' : ''}" 
+                    data-category="older" 
+                    role="tab"
+                    aria-selected="${this.currentCategory === 'older'}"
+                    title="Older Kids (Age 7+): Games 3, 4, 5">
+              <span class="cat-pill-emoji">🚀</span>
+              <span class="cat-pill-text">Older <span class="cat-pill-sub">(7+)</span></span>
+            </button>
+
+            <button type="button" 
+                    class="pill-cat-btn ${this.currentCategory === 'all' ? 'active' : ''}" 
+                    data-category="all" 
+                    role="tab"
+                    aria-selected="${this.currentCategory === 'all'}"
+                    title="All 5 Games">
+              <span class="cat-pill-emoji">🌟</span>
+              <span class="cat-pill-text">All <span class="cat-pill-sub">Games</span></span>
+            </button>
           </div>
-          <div class="header-sub-row">
-            <p class="slide-subtitle-text">${game.subtitle}</p>
+
+          <div class="pill-center-num">
+            <span class="pill-num-curr">${currentSlideNum}</span>
+            <span class="pill-num-slash">/</span>
+            <span class="pill-num-total">${String(totalSlides).padStart(2, '0')}</span>
+          </div>
+
+          <div class="pill-right-group">
+            <span class="pill-camp-label">2026 KIDS CAMP</span>
+            <button type="button" class="pill-btn-deck" data-action="open-drawer" title="Open Slide Catalog Menu">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+              <span>Deck</span>
+            </button>
           </div>
         </header>
 
-        <!-- Mobile Segmented Tabs (Visible only on mobile/tablet) -->
-        <nav class="mobile-section-tabs" role="tablist" aria-label="Game sections">
-          <button type="button" class="mobile-tab-btn active" data-tab="tab-craft" role="tab" aria-selected="true">
-            <span class="tab-emoji">📸</span>
-            <span class="tab-title">Photo</span>
-          </button>
-          <button type="button" class="mobile-tab-btn" data-tab="tab-setup" role="tab" aria-selected="false">
-            <span class="tab-emoji">🛠️</span>
-            <span class="tab-title">Setup <span class="tab-counter">(${game.setupSteps.length})</span></span>
-          </button>
-          <button type="button" class="mobile-tab-btn" data-tab="tab-rules" role="tab" aria-selected="false">
-            <span class="tab-emoji">🎯</span>
-            <span class="tab-title">Rules <span class="tab-counter">(${game.rules.length})</span></span>
-          </button>
-          <button type="button" class="mobile-tab-btn" data-tab="tab-materials" role="tab" aria-selected="false">
-            <span class="tab-emoji">📦</span>
-            <span class="tab-title">Items <span class="tab-counter">(${game.materials.length})</span></span>
-          </button>
-        </nav>
+        <!-- Slide Canvas Card (Now Bigger without embedded header) -->
+        <div class="game-slide-canvas">
 
-        <!-- Main 3-Column Content Layout (On mobile: tabbed card view) -->
-        <div class="slide-columns-grid" data-active-tab="tab-craft">
-          
-          <!-- Column 1: DIY Reference -->
-          <div class="slide-column col-craft-preview" data-tab-pane="tab-craft">
-            <div class="camp-card photo-craft-card">
-              <div class="card-top-bar">
-                <span class="card-label-badge" style="color: ${game.themeColor}; background: ${game.themeColor}18;">📸 ${game.referenceTitle}</span>
-                ${game.referenceImage ? `
-                  <button type="button" class="btn-lightbox-trigger" data-img-src="${game.referenceImage}" title="Enlarge Reference Photo">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-                    Enlarge
-                  </button>
-                ` : ''}
-              </div>
-
-              ${game.referenceImage ? `
-                <div class="craft-photo-frame" data-img-src="${game.referenceImage}">
-                  <img src="${game.referenceImage}" alt="${game.title} craft setup" class="craft-img" loading="eager" />
-                  <div class="photo-tap-hint">🔍 Tap to zoom full-screen</div>
-                </div>
-              ` : `
-                <div class="diagram-preview-card">
-                  <div class="diagram-emoji-icon">🏕️</div>
-                  <p class="diagram-main-text">${game.title} Setup Reference</p>
-                </div>
-              `}
-            </div>
+          <!-- Slide Title & Star Block (Clean, Centered, Spacious) -->
+          <div class="slide-center-title-block">
+            <div class="slide-star-icon">✦</div>
+            <h1 class="slide-title-text">${game.title}</h1>
+            <p class="slide-subtitle-text">${game.subtitle}</p>
           </div>
 
-          <!-- Column 2: Step-by-Step Setup Guide -->
-          <div class="slide-column col-setup-guide">
-            <div class="camp-card setup-guide-card">
-              <div class="card-top-bar">
-                <span class="card-label-badge" style="color: #ea580c; background: #ffedd5;">🛠️ Setup Guide (${game.setupSteps.length} Steps)</span>
-                <span class="prep-pill-badge">⚡ Easy Prep</span>
-              </div>
-
-              <div class="steps-vertical-stack">
-                ${game.setupSteps.map(s => `
-                  <div class="step-card-row">
-                    <div class="step-number-circle step-${s.step}">${s.step}</div>
-                    <div class="step-text-col">
-                      <strong class="step-header-title">${s.title}</strong>
-                      <p class="step-desc-text">${s.desc}</p>
-                    </div>
-                  </div>
-                `).join('')}
-
+          <!-- 3-Pillar Unified Presentation Columns -->
+          <div class="slide-three-columns">
+            
+            <!-- Pillar 1: Visual Showcase (Photo + Diagram) -->
+            <div class="slide-pillar pillar-visual">
+              <div class="pillar-header">
                 ${game.setupImage ? `
-                  <div class="setup-image-wrapper" data-img-src="${game.setupImage}" role="button" tabindex="0" title="Click to enlarge">
-                    <img src="${game.setupImage}" alt="${game.title} Setup" class="setup-craft-img" loading="eager" />
+                  <div class="pillar-img-toggle">
+                    <button type="button" class="img-toggle-tab active" data-view="craft">📸 Craft Photo</button>
+                    <button type="button" class="img-toggle-tab" data-view="setup">🛠️ Setup Diagram</button>
                   </div>
-                ` : ''}
+                ` : `
+                  <div class="pillar-single-tag">
+                    <span>📸 DIY Craft Setup</span>
+                  </div>
+                `}
+              </div>
+              <div class="pillar-visual-frame" data-img-src="${game.referenceImage}" data-setup-src="${game.setupImage || ''}" role="button" tabindex="0" title="Click to enlarge photo">
+                <img src="${game.referenceImage}" alt="${game.title} craft setup" class="pillar-img" loading="eager" />
+                <span class="pillar-zoom-badge">🔍 Click to Enlarge</span>
+              </div>
+              <div class="pillar-footer setup-footer">
+                <span class="footer-icon">🛠️</span>
+                <div class="footer-text-wrap">
+                  <span class="footer-title">Setup Guide</span>
+                  <p class="footer-desc">${col1.caption}</p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Column 3: Rules & Materials Checklist & Scoring -->
-          <div class="slide-column col-rules-materials-stack">
-            <!-- How to Play Card -->
-            <div class="camp-card rules-card">
-              <div class="card-top-bar">
-                <span class="card-label-badge" style="color: #0284c7; background: #e0f2fe;">🎯 How to Play (${game.rules.length} Rules)</span>
+            <!-- Pillar 2: 🎯 Official Game Rules -->
+            <div class="slide-pillar pillar-rules">
+              <div class="pillar-header">
+                <div class="header-badge-row">
+                  <span class="header-icon">🎯</span>
+                  <span class="header-title rules-title-color">How to Play</span>
+                </div>
+                <button type="button" class="btn-enlarge-rules" data-action="open-rules" title="Open Full Rules Sheet (Press R)">
+                  <span>🔍 Full Sheet</span>
+                </button>
               </div>
-              <div class="rules-compact-list">
-                ${game.rules.map(r => `
-                  <div class="rule-compact-item">
-                    <span class="rule-tag-pill">${r.badge}</span>
-                    <div class="rule-content-col">
-                      <strong class="rule-name">${r.title}</strong>
-                      <p class="rule-desc">${r.text}</p>
+              <div class="pillar-rules-body" data-action="open-rules" role="button" tabindex="0" title="Click to view full rules sheet">
+                ${slideRules.map(r => `
+                  <div class="slide-rule-card">
+                    <span class="slide-rule-num">${r.num}</span>
+                    <div class="slide-rule-info">
+                      <strong class="slide-rule-heading">${r.title}</strong>
+                      <p class="slide-rule-detail">${r.text}</p>
                     </div>
                   </div>
                 `).join('')}
               </div>
-            </div>
-
-            <!-- What You Need (Materials) Card -->
-            <div class="camp-card materials-card">
-              <div class="card-top-bar">
-                <span class="card-label-badge" style="color: #15803d; background: #dcfce7;">📦 What You Need</span>
+              <div class="pillar-footer win-footer">
+                <span class="footer-icon">🏆</span>
+                <div class="footer-text-wrap">
+                  <span class="footer-title">Winning Goal</span>
+                  <p class="footer-desc">${col2.caption}</p>
+                </div>
               </div>
-              <ul class="materials-checklist">
-                ${game.materials.map(m => `
-                  <li class="material-row-item">
-                    <span class="check-icon">✓</span>
-                    <div class="material-names-group">
-                      <span class="material-main-name">${m.name}</span>
-                      ${m.note ? `<span class="material-sub-note">${m.note}</span>` : ''}
-                    </div>
-                  </li>
-                `).join('')}
-              </ul>
             </div>
-          </div>
 
+            <!-- Pillar 3: 📦 Supplies & Coach Guidance -->
+            <div class="slide-pillar pillar-supplies">
+              <div class="pillar-header">
+                <div class="header-badge-row">
+                  <span class="header-icon">📦</span>
+                  <span class="header-title supplies-title-color">What You Need</span>
+                </div>
+                <span class="header-counter-pill">${game.materials.length} Items</span>
+              </div>
+              <div class="pillar-supplies-body">
+                <ul class="slide-supplies-list">
+                  ${game.materials.slice(0, 5).map(m => `
+                    <li class="slide-supply-row">
+                      <span class="supply-check-bullet">✓</span>
+                      <div class="supply-names">
+                        <span class="supply-name-bold">${m.name}</span>
+                        ${m.note ? `<span class="supply-note-dim">${m.note}</span>` : ''}
+                      </div>
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>
+              <div class="pillar-footer tip-footer">
+                <span class="footer-icon">💡</span>
+                <div class="footer-text-wrap">
+                  <span class="footer-title">${cat.shortLabel} Tip</span>
+                  <p class="footer-desc">${coachTip}</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     `;
   }
 
-  initSlideEvents() {
-    const zoomButtons = document.querySelectorAll('.btn-lightbox-trigger');
-    const photoFrames = document.querySelectorAll('.craft-photo-frame, .setup-image-wrapper');
-    const mobileChips = document.querySelectorAll('.mobile-nav-chip');
+  getSlideRules(game) {
+    if (game.id === 'goliath-slingshot') {
+      return [
+        { num: '1', title: '3 Throws per Player', text: 'Step up and take 3 throws per turn using soft balls or balloon slingshots.' },
+        { num: '2', title: 'Stay Behind the Line', text: 'All shots must be released strictly from behind the marked floor line.' },
+        { num: '3', title: 'Team Turn Rotation', text: 'Teams alternate throwers while teammates cheer from behind the station!' }
+      ];
+    }
+    if (game.id === 'feed-goliath') {
+      return [
+        { num: '1', title: 'Step Up as David', text: 'Campers take turns holding crumpled paper balls ready to defeat Goliath.' },
+        { num: '2', title: 'Stay Behind the Line', text: 'Release all throws strictly from behind the 4-ft marked throwing line.' },
+        { num: '3', title: 'Aim for the Mouth', text: 'Toss paper balls directly into Goliath’s wide open mouth to score!' }
+      ];
+    }
+    if (game.id === 'reaction-ball-cup') {
+      return [
+        { num: '1', title: 'Hold Strings at Start', text: 'Hold both guide strings taut at the player starting line position.' },
+        { num: '2', title: 'Guide Ball Smoothly', text: 'Gently spread, lift, and tilt strings to roll the ball along the track.' },
+        { num: '3', title: 'Drop in Every Cup', text: 'Control string tension to drop the ball cleanly into cups 1 through 4!' }
+      ];
+    }
+    if (game.id === 'david-goliath-sliding') {
+      return [
+        { num: '1', title: 'Slide, Do Not Throw!', text: 'Smoothly slide one David bottle cap at a time flat along the floor.' },
+        { num: '2', title: 'Aim for Goliath', text: 'Target the giant Goliath bottle cap resting directly on the center “X”.' },
+        { num: '3', title: 'Knock Out of Bounds', text: 'Strike Goliath completely outside the taped square arena boundary!' }
+      ];
+    }
+    // brook-river-crossing
+    return [
+      { num: '1', title: 'Cannot Touch Floor!', text: 'Balance strictly on cardboard steps — the floor is river water!' },
+      { num: '2', title: 'Pass Steps Forward', text: 'Pick up the rear cardboard square and pass hand-to-hand forward.' },
+      { num: '3', title: 'All Across to Win', text: 'Cooperate as a team until every camper safely reaches the Finish Bank!' }
+    ];
+  }
 
-    const handleOpen = (src) => {
-      this.openLightbox(src);
+  getColumn1Data(game) {
+    if (game.id === 'goliath-slingshot') {
+      return {
+        image: game.referenceImage,
+        caption: 'Stack the 4-3-2-1 cup pyramid with a cartoon Goliath cutout mounted securely at the peak.'
+      };
+    }
+    if (game.id === 'feed-goliath') {
+      return {
+        image: game.referenceImage,
+        caption: 'Draw Goliath’s head on a large box and cut a wide open mouth hole placed at chest height.'
+      };
+    }
+    if (game.id === 'reaction-ball-cup') {
+      return {
+        image: game.referenceImage,
+        caption: 'Fasten 2 parallel strings along a straight floor tape line with cups spaced evenly along track.'
+      };
+    }
+    if (game.id === 'david-goliath-sliding') {
+      return {
+        image: game.referenceImage,
+        caption: 'Tape a large square arena on smooth floor and position the Goliath bottle cap right on the center “X”.'
+      };
+    }
+    return {
+      image: game.referenceImage,
+      caption: 'Tape two river banks 20–30 ft apart and number 5 cardboard delivery box squares from 1 to 5.'
     };
+  }
 
-    zoomButtons.forEach(btn => {
-      btn.addEventListener('click', (e) => {
+  getColumn2Data(game) {
+    if (game.id === 'goliath-slingshot') {
+      return {
+        caption: 'Campers take 3 throws from behind the rope line to topple cups and knock down Goliath!'
+      };
+    }
+    if (game.id === 'feed-goliath') {
+      return {
+        caption: 'Campers step up as David and toss crumpled paper balls directly into Goliath’s open mouth.'
+      };
+    }
+    if (game.id === 'reaction-ball-cup') {
+      return {
+        caption: 'Gently spread string tension to smoothly guide and drop the rolling ball into each cup along the path.'
+      };
+    }
+    if (game.id === 'david-goliath-sliding') {
+      return {
+        caption: 'Slide David’s colored bottle caps along the floor to strike Goliath and knock him out of bounds.'
+      };
+    }
+    return {
+      caption: 'Balance strictly on cardboard squares and pass rear boards forward hand-to-hand across the river!'
+    };
+  }
+
+  initSlideEvents() {
+    // 1. Zoom photo on click (opens active image in lightbox)
+    const visualFrames = document.querySelectorAll('.pillar-visual-frame');
+    visualFrames.forEach(frame => {
+      const getActiveSrc = () => {
+        const imgEl = frame.querySelector('.pillar-img');
+        return imgEl ? imgEl.src : frame.dataset.imgSrc;
+      };
+
+      frame.addEventListener('click', (e) => {
+        if (e.target.closest('.img-toggle-tab')) return;
         e.stopPropagation();
-        const src = btn.dataset.imgSrc;
-        if (src) handleOpen(src);
-      });
-    });
-
-    photoFrames.forEach(frame => {
-      frame.addEventListener('click', () => {
-        const src = frame.dataset.imgSrc;
-        if (src) handleOpen(src);
+        this.openLightbox(getActiveSrc());
       });
       frame.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
+          if (e.target.closest('.img-toggle-tab')) return;
           e.preventDefault();
-          const src = frame.dataset.imgSrc;
-          if (src) handleOpen(src);
+          this.openLightbox(getActiveSrc());
         }
       });
     });
 
-    const mobileTabs = document.querySelectorAll('.mobile-tab-btn');
-    mobileTabs.forEach(tabBtn => {
-      tabBtn.addEventListener('click', (e) => {
+    // 2. Photo toggle tabs (Craft Photo vs Setup Diagram)
+    const toggleTabs = document.querySelectorAll('.img-toggle-tab');
+    toggleTabs.forEach(btn => {
+      btn.addEventListener('click', (e) => {
         e.stopPropagation();
-        const tabKey = tabBtn.dataset.tab;
-        const slideView = tabBtn.closest('.game-slide-view');
-        if (!slideView) return;
+        const pillar = btn.closest('.pillar-visual');
+        if (!pillar) return;
+        const targetView = btn.dataset.view;
+        const frame = pillar.querySelector('.pillar-visual-frame');
+        const imgEl = pillar.querySelector('.pillar-img');
+        if (!frame || !imgEl) return;
 
-        slideView.querySelectorAll('.mobile-tab-btn').forEach(btn => {
-          const isActive = btn === tabBtn;
-          btn.classList.toggle('active', isActive);
-          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-        });
+        const craftSrc = frame.dataset.imgSrc;
+        const setupSrc = frame.dataset.setupSrc;
 
-        const grid = slideView.querySelector('.slide-columns-grid');
-        if (grid) {
-          grid.dataset.activeTab = tabKey;
+        pillar.querySelectorAll('.img-toggle-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        if (targetView === 'setup' && setupSrc) {
+          imgEl.src = setupSrc;
+        } else if (craftSrc) {
+          imgEl.src = craftSrc;
         }
-        sfx.playClick();
       });
     });
+
+    // 3. Category pills inside slide top pill header
+    const catBtns = document.querySelectorAll('.slide-pill-header .pill-cat-btn');
+    catBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const cat = btn.dataset.category;
+        if (cat) this.setCategory(cat);
+      });
+    });
+
+    // 4. Open rules modal
+    const ruleOpeners = document.querySelectorAll('[data-action="open-rules"]');
+    ruleOpeners.forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.openRulesModal();
+      });
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.openRulesModal();
+        }
+      });
+    });
+
+    // 5. Open deck drawer catalog
+    const drawerOpeners = document.querySelectorAll('[data-action="open-drawer"]');
+    drawerOpeners.forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.toggleDrawer();
+      });
+    });
+  }
+
+  toggleDrawer() {
+    if (this.controlsDock && typeof this.controlsDock.toggleDrawer === 'function') {
+      this.controlsDock.toggleDrawer();
+    } else {
+      const drawerModal = document.getElementById('slide-drawer-modal');
+      if (drawerModal) drawerModal.classList.toggle('open');
+    }
   }
 
   initLightbox() {
@@ -274,7 +488,6 @@ export class SlideDeck {
       img.src = src;
       modal.classList.add('active');
       modal.setAttribute('aria-hidden', 'false');
-      sfx.playClick();
     }
   }
 
@@ -286,20 +499,140 @@ export class SlideDeck {
     }
   }
 
+  initRulesModal() {
+    let modal = document.getElementById('game-rules-modal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'game-rules-modal';
+      modal.className = 'rules-modal';
+      modal.setAttribute('aria-hidden', 'true');
+      modal.innerHTML = `
+        <div class="rules-modal-backdrop" id="rules-modal-backdrop"></div>
+        <div class="rules-modal-container" role="dialog" aria-modal="true" aria-labelledby="rules-modal-title">
+          <header class="rules-modal-header">
+            <div class="rules-modal-header-left">
+              <span class="rules-modal-star">✦</span>
+              <div>
+                <div class="rules-modal-cat-tag" id="rules-modal-cat">KIDS CAMP RULES</div>
+                <h2 class="rules-modal-title" id="rules-modal-title">Official Game Rules</h2>
+              </div>
+            </div>
+            <button type="button" class="btn-close-rules-modal" id="btn-close-rules-modal" aria-label="Close Rules Modal">✕</button>
+          </header>
+
+          <div class="rules-modal-body" id="rules-modal-body">
+            <!-- Rules list injected dynamically -->
+          </div>
+
+          <footer class="rules-modal-footer" id="rules-modal-footer">
+            <!-- Objective & Coach Tips -->
+          </footer>
+        </div>
+      `;
+      document.body.appendChild(modal);
+
+      const closeBtn = modal.querySelector('#btn-close-rules-modal');
+      const backdrop = modal.querySelector('#rules-modal-backdrop');
+      const closeModal = () => this.closeRulesModal();
+
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (backdrop) backdrop.addEventListener('click', closeModal);
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          this.closeRulesModal();
+        }
+      });
+    }
+  }
+
+  openRulesModal() {
+    const game = this.activeGame;
+    if (!game) return;
+    const cat = CATEGORIES[this.currentCategory.toUpperCase()] || CATEGORIES.KIDS;
+    const modal = document.getElementById('game-rules-modal');
+    if (!modal) return;
+
+    modal.querySelector('#rules-modal-cat').textContent = `${cat.emoji} ${cat.label.toUpperCase()}`;
+    modal.querySelector('#rules-modal-title').textContent = `${game.title} — Official Rules`;
+
+    const bodyEl = modal.querySelector('#rules-modal-body');
+    bodyEl.innerHTML = `
+      <div class="rules-modal-grid">
+        ${game.rules.map((r, i) => `
+          <div class="rules-modal-card">
+            <div class="rules-modal-chip">${r.badge || `Rule ${i + 1}`}</div>
+            <div class="rules-modal-card-content">
+              <h4 class="rules-modal-rule-title">${r.title}</h4>
+              <p class="rules-modal-rule-text">${r.text}</p>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+
+    const col2 = this.getColumn2Data(game);
+    let coachTip = '';
+    if (this.currentCategory === 'kids') {
+      coachTip = game.kidsGuidance ? game.kidsGuidance.tip : 'Counselor guides and assists little campers!';
+    } else if (this.currentCategory === 'older') {
+      coachTip = game.olderGuidance ? game.olderGuidance.tip : 'Focus on precision aiming, distance, and speed!';
+    } else {
+      coachTip = game.kidsGuidance ? game.kidsGuidance.tip : '';
+    }
+
+    const footerEl = modal.querySelector('#rules-modal-footer');
+    footerEl.innerHTML = `
+      <div class="rules-footer-item">
+        <span class="rules-footer-badge">🏆 Objective:</span>
+        <span class="rules-footer-text">${col2.caption}</span>
+      </div>
+      <div class="rules-footer-item tip-item">
+        <span class="rules-footer-badge tip-badge">💡 Tip (${cat.shortLabel}):</span>
+        <span class="rules-footer-text">${coachTip}</span>
+      </div>
+    `;
+
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+
+  closeRulesModal() {
+    const modal = document.getElementById('game-rules-modal');
+    if (modal) {
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+  }
+
+  toggleRulesModal() {
+    const modal = document.getElementById('game-rules-modal');
+    if (modal && modal.classList.contains('active')) {
+      this.closeRulesModal();
+    } else {
+      this.openRulesModal();
+    }
+  }
+
   goToSlide(index) {
-    const total = this.games.length;
+    const total = this.totalSlides;
     if (index < 0 || index >= total) return;
 
     this.currentSlideIndex = index;
     this.updateTransform();
+    this.updateUrlParams();
 
-    sfx.playSlideWhoosh();
+    // Reset slide scroll positions on navigation
+    if (this.trackContainer) {
+      const slides = this.trackContainer.querySelectorAll('.slide-section');
+      slides.forEach(s => { s.scrollTop = 0; });
+    }
 
     if (this.onSlideChange) this.onSlideChange();
   }
 
   nextSlide() {
-    if (this.currentSlideIndex < this.games.length - 1) {
+    if (this.currentSlideIndex < this.totalSlides - 1) {
       this.goToSlide(this.currentSlideIndex + 1);
     }
   }
@@ -316,16 +649,14 @@ export class SlideDeck {
     this.trackContainer.style.transform = `translateX(-${offset}vw)`;
 
     if (this.progressBar) {
-      const total = this.games.length;
+      const total = this.totalSlides;
       const pct = ((this.currentSlideIndex + 1) / total) * 100;
       this.progressBar.style.width = `${pct}%`;
     }
   }
 
   initGlobalNavigation() {
-    // 1. Keyboard navigation (Desktop): Arrow Keys, Space, PageUp/Down, Home/End
     window.addEventListener('keydown', (e) => {
-      // Don't intercept if user is typing in form controls
       if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target.tagName) || e.target.isContentEditable) return;
 
       switch (e.key) {
@@ -335,8 +666,6 @@ export class SlideDeck {
         case ' ':
         case 'n':
         case 'N':
-        case 'l':
-        case 'L':
           e.preventDefault();
           this.nextSlide();
           break;
@@ -346,8 +675,6 @@ export class SlideDeck {
         case 'PageUp':
         case 'p':
         case 'P':
-        case 'h':
-        case 'H':
           e.preventDefault();
           this.prevSlide();
           break;
@@ -359,18 +686,29 @@ export class SlideDeck {
 
         case 'End':
           e.preventDefault();
-          this.goToSlide(this.games.length - 1);
+          this.goToSlide(this.totalSlides - 1);
+          break;
+
+        case 'r':
+        case 'R':
+          e.preventDefault();
+          this.toggleRulesModal();
+          break;
+
+        case 'Escape':
+          this.closeLightbox();
+          this.closeRulesModal();
           break;
       }
     });
 
-    // 2. Mobile Touch Swipe Navigation
+    // Touch Swipe
     let touchStartX = 0;
     let touchStartY = 0;
     let touchStartTime = 0;
 
     window.addEventListener('touchstart', (e) => {
-      if (e.touches.length > 1) return; // Ignore multi-touch gestures
+      if (e.touches.length > 1) return;
       touchStartX = e.changedTouches[0].screenX;
       touchStartY = e.changedTouches[0].screenY;
       touchStartTime = Date.now();
@@ -384,8 +722,7 @@ export class SlideDeck {
       const deltaY = touchEndY - touchStartY;
       const deltaTime = Date.now() - touchStartTime;
 
-      // Check for horizontal swipe gesture (distance > 35px, horizontal dominance, under 850ms)
-      if (Math.abs(deltaX) > 35 && Math.abs(deltaX) > Math.abs(deltaY) * 1.15 && deltaTime < 850) {
+      if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY) * 1.15 && deltaTime < 850) {
         if (deltaX < 0) {
           this.nextSlide();
         } else {
@@ -395,16 +732,15 @@ export class SlideDeck {
       touchStartTime = 0;
     }, { passive: true });
 
-    // 3. Desktop Mouse Drag Swipe (Allow click & drag to swipe on desktop)
+    // Desktop Mouse Drag Swipe
     let isMouseDown = false;
     let mouseStartX = 0;
     let mouseStartY = 0;
     let mouseStartTime = 0;
 
     window.addEventListener('mousedown', (e) => {
-      // Ignore clicks on buttons, links, or interactive elements
-      if (e.target.closest('button, a, input, select, textarea, .dock-container, .drawer-modal, .lightbox-modal')) return;
-      if (e.button !== 0) return; // Only primary mouse button
+      if (e.target.closest('button, a, input, select, textarea, .dock-container, .drawer-modal, .lightbox-modal, .top-nav-bar')) return;
+      if (e.button !== 0) return;
 
       isMouseDown = true;
       mouseStartX = e.clientX;
@@ -428,21 +764,5 @@ export class SlideDeck {
         }
       }
     });
-
-    // 4. Trackpad horizontal scroll debounce
-    let lastWheelTime = 0;
-    window.addEventListener('wheel', (e) => {
-      if (Math.abs(e.deltaX) > 40) {
-        const now = Date.now();
-        if (now - lastWheelTime > 450) {
-          lastWheelTime = now;
-          if (e.deltaX > 0) {
-            this.nextSlide();
-          } else {
-            this.prevSlide();
-          }
-        }
-      }
-    }, { passive: true });
   }
 }
