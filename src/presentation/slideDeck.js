@@ -115,7 +115,7 @@ export class SlideDeck {
                     data-category="kids" 
                     role="tab"
                     aria-selected="${this.currentCategory === 'kids'}"
-                    title="Kids (Age 3–6): Games 1, 2">
+                    title="Kids (Age 3–6): Games 1, 2, 3, 4">
               <span class="cat-pill-emoji">🎈</span>
               <span class="cat-pill-text">Kids <span class="cat-pill-sub">(3–6)</span></span>
             </button>
@@ -125,7 +125,7 @@ export class SlideDeck {
                     data-category="older" 
                     role="tab"
                     aria-selected="${this.currentCategory === 'older'}"
-                    title="Older Kids (Age 7+): Games 3, 4, 5">
+                    title="Older Kids (Age 7+): Games 5, 6, 7">
               <span class="cat-pill-emoji">🚀</span>
               <span class="cat-pill-text">Older <span class="cat-pill-sub">(7+)</span></span>
             </button>
@@ -135,7 +135,7 @@ export class SlideDeck {
                     data-category="all" 
                     role="tab"
                     aria-selected="${this.currentCategory === 'all'}"
-                    title="All 5 Games">
+                    title="All 7 Games">
               <span class="cat-pill-emoji">🌟</span>
               <span class="cat-pill-text">All <span class="cat-pill-sub">Games</span></span>
             </button>
@@ -279,6 +279,20 @@ export class SlideDeck {
         { num: '3', title: 'Aim for the Mouth', text: 'Toss paper balls directly into Goliath’s wide open mouth to score!' }
       ];
     }
+    if (game.id === 'david-bench-relay') {
+      return [
+        { num: '1', title: 'Crawl Under Bench', text: 'Drop to hands and knees and crawl completely under the padded bench.' },
+        { num: '2', title: 'Circle Goliath’s Cone', text: 'Sprint to the end cone, tap Goliath’s sign, and circle around the cone.' },
+        { num: '3', title: 'Crawl Back & Hand Off', text: 'Crawl under the bench a second time and pass David’s staff to the next teammate!' }
+      ];
+    }
+    if (game.id === 'footprint-stomp-toss') {
+      return [
+        { num: '1', title: 'Hop on Every Footprint', text: 'Jump with two feet into each giant footprint along the path yelling “STOMP!”' },
+        { num: '2', title: 'Toss Ball in the Basket', text: 'Stop on the final giant footprint, aim, and toss the ball into the basket!' },
+        { num: '3', title: 'Retrieve, Run & Pass', text: 'Grab the ball from the basket, sprint down the return lane, and pass to next camper!' }
+      ];
+    }
     if (game.id === 'reaction-ball-cup') {
       return [
         { num: '1', title: 'Hold Strings at Start', text: 'Hold both guide strings taut at the player starting line position.' },
@@ -314,6 +328,18 @@ export class SlideDeck {
         caption: 'Draw Goliath’s head on a large box and cut a wide open mouth hole placed at chest height.'
       };
     }
+    if (game.id === 'david-bench-relay') {
+      return {
+        image: game.referenceImage,
+        caption: 'Position sturdy benches with pool-noodle padded edges in the middle and Goliath turning cones 15–20 ft ahead.'
+      };
+    }
+    if (game.id === 'footprint-stomp-toss') {
+      return {
+        image: game.referenceImage,
+        caption: 'Tape 6–8 giant cardboard footprints in a zigzag path and set the Goliath laundry basket 3–4 ft past the finish.'
+      };
+    }
     if (game.id === 'reaction-ball-cup') {
       return {
         image: game.referenceImage,
@@ -341,6 +367,16 @@ export class SlideDeck {
     if (game.id === 'feed-goliath') {
       return {
         caption: 'Campers step up as David and toss crumpled paper balls directly into Goliath’s open mouth.'
+      };
+    }
+    if (game.id === 'david-bench-relay') {
+      return {
+        caption: 'Cheer your teammates as each runner crawls, circles the cone, and passes David’s staff to the finish!'
+      };
+    }
+    if (game.id === 'footprint-stomp-toss') {
+      return {
+        caption: 'Stomp through all the giant’s footprints, sink the soft ball into the basket, and pass to the next teammate!'
       };
     }
     if (game.id === 'reaction-ball-cup') {

@@ -118,21 +118,21 @@ export class ControlsDock {
                     data-drawer-cat="kids">
               <span class="d-pill-emoji">🎈</span>
               <span class="d-pill-label">Kids <span class="d-pill-sub">(Age 3–6)</span></span>
-              <span class="d-pill-count">2</span>
+              <span class="d-pill-count">${CATEGORIES.KIDS.gameIds.length}</span>
             </button>
             <button type="button" 
                     class="drawer-pill-btn ${currentCatKey === 'older' ? 'active' : ''}" 
                     data-drawer-cat="older">
               <span class="d-pill-emoji">🚀</span>
               <span class="d-pill-label">Older <span class="d-pill-sub">(7+)</span></span>
-              <span class="d-pill-count">3</span>
+              <span class="d-pill-count">${CATEGORIES.OLDER.gameIds.length}</span>
             </button>
             <button type="button" 
                     class="drawer-pill-btn ${currentCatKey === 'all' ? 'active' : ''}" 
                     data-drawer-cat="all">
               <span class="d-pill-emoji">🌟</span>
               <span class="d-pill-label">All <span class="d-pill-sub">Games</span></span>
-              <span class="d-pill-count">5</span>
+              <span class="d-pill-count">${CATEGORIES.ALL.gameIds.length}</span>
             </button>
           </div>
         </div>

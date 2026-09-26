@@ -1,8 +1,8 @@
 /**
  * Kids Camp Games Catalog — One Slide per Game Presentation Data
  * Split into Two Age Categories:
- * 1. Kids (Age 3–6): Games 1, 2
- * 2. Older Kids (Age 7+): Games 3, 4, 5
+ * 1. Kids (Age 3–6): Games 1, 2, 3, 4
+ * 2. Older Kids (Age 7+): Games 5, 6, 7
  * Pastel Editorial Presentation Aesthetic
  */
 
@@ -12,8 +12,8 @@ export const CATEGORIES = {
     label: 'Kids (Age 3–6)',
     shortLabel: 'Kids 3–6',
     emoji: '🎈',
-    gameIds: ['goliath-slingshot', 'feed-goliath'],
-    description: 'Games 1, 2 • Fun, Gentle & Safe',
+    gameIds: ['goliath-slingshot', 'feed-goliath', 'david-bench-relay', 'footprint-stomp-toss'],
+    description: 'Games 1, 2, 3, 4 • Fun, Gentle & Safe Obstacle Runs',
     themeColor: '#ea580c',
     pillBg: '#ffedd5',
     pillText: '#9a3412',
@@ -24,7 +24,7 @@ export const CATEGORIES = {
     shortLabel: 'Older 7+',
     emoji: '🚀',
     gameIds: ['reaction-ball-cup', 'david-goliath-sliding', 'brook-river-crossing'],
-    description: 'Games 3, 4, 5 • Focus, Accuracy, Speed & Team Strategy',
+    description: 'Games 5, 6, 7 • Focus, Accuracy, Speed & Team Strategy',
     themeColor: '#7c3aed',
     pillBg: '#f3e8ff',
     pillText: '#6b21a8',
@@ -32,10 +32,10 @@ export const CATEGORIES = {
   ALL: {
     id: 'all',
     label: 'All Games',
-    shortLabel: 'All 5 Games',
+    shortLabel: 'All 7 Games',
     emoji: '🌟',
-    gameIds: ['goliath-slingshot', 'feed-goliath', 'reaction-ball-cup', 'david-goliath-sliding', 'brook-river-crossing'],
-    description: 'Complete 5-Game Camp Activity Deck',
+    gameIds: ['goliath-slingshot', 'feed-goliath', 'david-bench-relay', 'footprint-stomp-toss', 'reaction-ball-cup', 'david-goliath-sliding', 'brook-river-crossing'],
+    description: 'Complete 7-Game Camp Activity Deck',
     themeColor: '#0284c7',
     pillBg: '#e0f2fe',
     pillText: '#0369a1',
@@ -207,12 +207,188 @@ export const GAMES_CATALOG = [
     ]
   },
   {
-    id: 'reaction-ball-cup',
+    id: 'david-bench-relay',
     catalogNumber: 3,
+    title: 'David’s Valley Bench Dash',
+    subtitle: 'Crawl Under the Mountain Bench, Round Goliath’s Cone & Relay!',
+    categories: ['kids'], // Kids (Age 3-6) ONLY
+    badge: 'GAME 03 • OBSTACLE BENCH RELAY',
+    tabTitle: 'Valley Bench Dash',
+    mascotEmoji: '🏃',
+    // Pastel Stationery Theme Colors — Soft Sunny Honey
+    palette: {
+      bgCanvas: '#fdfbf0',     // Soft Warm Sunny Cream
+      bgTab: '#faedd0',        // Top folder tab
+      tabTextColor: '#854d0e', // Dark honey charcoal
+      themeColor: '#d97706',   // Warm golden amber accent
+      accentColor: '#f59e0b',  // Sunbeam amber highlight
+      cardBorder: '#f5e3b5',   // Soft border
+      badgeBg: '#fef3c7',      // Sunny honey pill
+      badgeText: '#92400e',
+    },
+    kidsGuidance: {
+      tag: '🎈 Exclusive for Kids (Age 3–6)',
+      tip: 'Slit pool noodle on bench edge for soft head bumps • Counselor spots at bench to cheer little crawlers • 15–20 ft distance to cone!'
+    },
+    olderGuidance: {
+      tag: '🚀 For Older Kids (Age 7+)',
+      tip: 'Fast army belly-crawl under bench • 30 ft sprint to cone • Bear-crawl or backward sprint on the way back!'
+    },
+    referenceImage: '/images/david_bench_relay_craft.png',
+    referenceTitle: 'DIY Setup Photo',
+    setupImage: '/images/david_bench_relay_setup.png',
+    materials: [
+      { name: '1–2 Sturdy Benches', note: 'Gym bench, church pew bench, or low sturdy table' },
+      { name: '2 Marker Cones', note: 'With cartoon Goliath faces or helmets taped on top' },
+      { name: '1–2 Pool Noodles', note: 'Slit lengthwise to pad bench edges for 100% safe crawling' },
+      { name: '2 Shepherd Staffs or Soft Balls', note: 'Short cut pool noodle or soft foam stone as relay baton' },
+      { name: 'Floor Masking Tape', note: 'For team start lines and return lane boundaries' },
+    ],
+    setupSteps: [
+      {
+        step: 1,
+        title: 'Position the Benches',
+        desc: 'Place 1 or 2 long benches parallel across the hall, leaving ample crawl-under clearance.'
+      },
+      {
+        step: 2,
+        title: 'Pad the Lower Bench Rail',
+        desc: 'Slit a pool noodle lengthwise and tape it firmly along the bottom edge of each bench for safety.'
+      },
+      {
+        step: 3,
+        title: 'Set Goliath Turning Cones',
+        desc: 'Place orange cones 15–20 ft past each bench and tape a cartoon Goliath cutout to each cone.'
+      },
+      {
+        step: 4,
+        title: 'Tape Start Line & Queue Teams',
+        desc: 'Tape a start line 8–10 ft in front of the bench and hand the first runner David’s staff baton!'
+      }
+    ],
+    rules: [
+      {
+        badge: 'Rule 1',
+        title: 'Crawl Under the Bench',
+        text: 'On “Go!”, drop down to hands and knees and crawl completely under the padded bench without pushing it.'
+      },
+      {
+        badge: 'Rule 2',
+        title: 'Circle Goliath’s Cone',
+        text: 'Pop up, sprint to the cone, tap Goliath’s sign (“Brave like David!”), and circle around the cone.'
+      },
+      {
+        badge: 'Rule 3',
+        title: 'Crawl Back & Pass Baton',
+        text: 'Sprint back, crawl under the bench a second time, and hand off the shepherd staff to the next teammate!'
+      },
+      {
+        badge: 'Rule 4',
+        title: 'Spotter Guidance',
+        text: 'Counselors stay near the bench to encourage low crawling and ensure smooth head clearance.'
+      },
+      {
+        badge: 'Rule 5',
+        title: 'Cheer Every Runner',
+        text: 'Teams cheer loudly until every camper has successfully completed the Valley Dash!'
+      }
+    ]
+  },
+  {
+    id: 'footprint-stomp-toss',
+    catalogNumber: 4,
+    title: 'Goliath’s Footprint Stomp & Toss',
+    subtitle: 'Hop Along the Giant’s Tracks & Sink the Victory Ball into the Basket!',
+    categories: ['kids'], // Kids (Age 3-6) ONLY
+    badge: 'GAME 04 • JUMP & BASKET TOSS',
+    tabTitle: 'Footprint Toss',
+    mascotEmoji: '🦶',
+    // Pastel Stationery Theme Colors — Soft Rose Blossom / Coral Punch
+    palette: {
+      bgCanvas: '#fdf2f4',     // Soft Blossom Blush
+      bgTab: '#fce2e7',        // Top folder tab soft rose
+      tabTextColor: '#9f1239', // Deep rose charcoal
+      themeColor: '#e11d48',   // Rose berry accent
+      accentColor: '#fb7185',  // Vibrant rose glow
+      cardBorder: '#fbcfe8',   // Soft rose border
+      badgeBg: '#ffe4e6',      // Rose pill
+      badgeText: '#9f1239',
+    },
+    kidsGuidance: {
+      tag: '🎈 Exclusive for Kids (Age 3–6)',
+      tip: 'Keep footprints 1.5–2 ft apart so little legs hop safely • Basket 3–4 ft from final footprint • Counselors chant “STOMP! STOMP!” with every hop!'
+    },
+    olderGuidance: {
+      tag: '🚀 For Older Kids (Age 7+)',
+      tip: 'Space footprints 4–5 ft for giant leaps • Move basket 10–12 ft back • Time each runner with a stopwatch!'
+    },
+    referenceImage: '/images/footprint_stomp_craft.png',
+    referenceTitle: 'DIY Setup Photo',
+    setupImage: '/images/footprint_stomp_setup.png',
+    materials: [
+      { name: '6–8 Cardboard Footprints', note: 'Cut approx. 18–20 in long with drawn giant toes & armor' },
+      { name: '1 Laundry Basket or Hamper', note: 'Target basket with Goliath shield cutout on front' },
+      { name: '1 Soft Foam Ball', note: 'Single lightweight foam ball for safe tossing' },
+      { name: 'Painter’s Tape', note: 'Secures footprints to floor & marks team start line' },
+      { name: 'Marker Pen', note: 'To number footprints 1 to 6 along the trail' },
+    ],
+    setupSteps: [
+      {
+        step: 1,
+        title: 'Cut & Number Giant Footprints',
+        desc: 'Cut 6–8 oversized footprints out of cardboard delivery boxes and number them 1 to 6.'
+      },
+      {
+        step: 2,
+        title: 'Tape the Zigzag Trail',
+        desc: 'Tape footprints securely along the floor in a zigzag path spaced 1.5–2 ft apart for little hops.'
+      },
+      {
+        step: 3,
+        title: 'Position Goliath’s Target Basket',
+        desc: 'Place the laundry basket 3–4 ft past the final footprint and attach a cartoon Goliath shield.'
+      },
+      {
+        step: 4,
+        title: 'Mark Start Line & Hand Off Ball',
+        desc: 'Tape a start line 3 ft before footprint #1 and hand the first jumper a soft foam ball!'
+      }
+    ],
+    rules: [
+      {
+        badge: 'Rule 1',
+        title: 'Hop & Stomp on Every Footprint',
+        text: 'Holding the soft ball, jump with both feet into each giant footprint along the path yelling “STOMP!”'
+      },
+      {
+        badge: 'Rule 2',
+        title: 'Stop & Toss Ball into the Basket',
+        text: 'Land with two feet inside the final giant footprint, pause, aim, and toss the ball into Goliath’s basket!'
+      },
+      {
+        badge: 'Rule 3',
+        title: 'Grab Ball, Run Back & Tag',
+        text: 'Retrieve the ball from the basket, dash down the return lane, and pass the ball to the next teammate!'
+      },
+      {
+        badge: 'Rule 4',
+        title: 'Chant & Cheer the Giant Stomp',
+        text: 'Waiting teammates and counselors clap and shout “STOMP! STOMP!” with every hop.'
+      },
+      {
+        badge: 'Rule 5',
+        title: 'Bonus Try Guarantee',
+        text: 'If the ball bounces out, campers get an instant second toss or take one step closer to sink the shot!'
+      }
+    ]
+  },
+  {
+    id: 'reaction-ball-cup',
+    catalogNumber: 5,
     title: 'Reaction Ball & Cup Game',
     subtitle: 'Dual String Balance & Rolling Precision Challenge',
     categories: ['older'], // Older Kids (Age 7+) ONLY
-    badge: 'GAME 03 • REACTION & BALANCE',
+    badge: 'GAME 05 • REACTION & BALANCE',
     tabTitle: 'Balance & Roll',
     mascotEmoji: '⚡',
     // Pastel Stationery Theme Colors
@@ -291,11 +467,11 @@ export const GAMES_CATALOG = [
   },
   {
     id: 'david-goliath-sliding',
-    catalogNumber: 4,
+    catalogNumber: 6,
     title: 'David & Goliath Sliding Game',
     subtitle: 'Bottle Cap Precision Slide & Goliath Knockout',
     categories: ['older'], // Older Kids (Age 7+) ONLY
-    badge: 'GAME 04 • BOTTLE CAP SLIDE',
+    badge: 'GAME 06 • BOTTLE CAP SLIDE',
     tabTitle: 'Bottle Cap Slide',
     mascotEmoji: '🪨',
     // Pastel Stationery Theme Colors
@@ -389,11 +565,11 @@ export const GAMES_CATALOG = [
   },
   {
     id: 'brook-river-crossing',
-    catalogNumber: 5,
+    catalogNumber: 7,
     title: 'Brook of Elah: River Crossing',
     subtitle: '5 Cardboard Stepping Squares & River Crossing Relay',
     categories: ['older'], // Older Kids (Age 7+) ONLY
-    badge: 'GAME 05 • RIVER CROSSING',
+    badge: 'GAME 07 • RIVER CROSSING',
     tabTitle: 'River Crossing',
     mascotEmoji: '🌊',
     // Pastel Stationery Theme Colors
