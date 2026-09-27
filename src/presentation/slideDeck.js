@@ -18,6 +18,7 @@ export class SlideDeck {
     this.trackContainer = document.getElementById('slides-track');
     this.progressBar = document.getElementById('progress-bar-fill');
     this.onSlideChange = null;
+    this.onGoHome = null;
 
     this.renderSlides();
     this.initGlobalNavigation();
@@ -148,6 +149,13 @@ export class SlideDeck {
           </div>
 
           <div class="pill-right-group">
+            <button type="button" class="pill-btn-home" data-action="go-home" title="Return to Start Page (Press H)">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+              <span>Home</span>
+            </button>
             <span class="pill-camp-label">2026 KIDS CAMP</span>
             <button type="button" class="pill-btn-deck" data-action="open-drawer" title="Open Slide Catalog Menu">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
@@ -476,6 +484,17 @@ export class SlideDeck {
         this.toggleDrawer();
       });
     });
+
+    // 6. Return to Start Page (Home)
+    const homeBtns = document.querySelectorAll('[data-action="go-home"]');
+    homeBtns.forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (typeof this.onGoHome === 'function') {
+          this.onGoHome();
+        }
+      });
+    });
   }
 
   toggleDrawer() {
@@ -729,6 +748,14 @@ export class SlideDeck {
         case 'R':
           e.preventDefault();
           this.toggleRulesModal();
+          break;
+
+        case 'h':
+        case 'H':
+          e.preventDefault();
+          if (typeof this.onGoHome === 'function') {
+            this.onGoHome();
+          }
           break;
 
         case 'Escape':

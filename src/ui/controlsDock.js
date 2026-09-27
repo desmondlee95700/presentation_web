@@ -20,6 +20,19 @@ export class ControlsDock {
 
     this.container.innerHTML = `
       <div class="dock-inner-pill">
+        <!-- Return to Start Page Button -->
+        <button type="button" 
+                class="btn-dock-home" 
+                id="btn-dock-home" 
+                title="Return to Start Page (Press H)" 
+                aria-label="Return to Start Page">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span class="dock-btn-label">Home</span>
+        </button>
+
         <!-- Previous Slide Button -->
         <button type="button" 
                 class="btn-dock-nav btn-dock-prev" 
@@ -58,9 +71,19 @@ export class ControlsDock {
       </div>
     `;
 
+    const homeBtn = this.container.querySelector('#btn-dock-home');
     const prevBtn = this.container.querySelector('#btn-dock-prev');
     const nextBtn = this.container.querySelector('#btn-dock-next');
     const rulesBtn = this.container.querySelector('#btn-dock-rules');
+
+    if (homeBtn) {
+      homeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (typeof this.deck.onGoHome === 'function') {
+          this.deck.onGoHome();
+        }
+      });
+    }
 
     if (prevBtn) {
       prevBtn.addEventListener('click', (e) => {
@@ -107,7 +130,13 @@ export class ControlsDock {
             </div>
             <p>Click any slide to jump directly to it, or switch age groups</p>
           </div>
-          <button type="button" class="btn-close-drawer" id="btn-close-drawer" aria-label="Close Drawer">✕</button>
+          <div class="drawer-header-actions">
+            <button type="button" class="btn-drawer-home-nav" id="btn-drawer-home-nav" title="Return to Start Page">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+              <span>Start Page</span>
+            </button>
+            <button type="button" class="btn-close-drawer" id="btn-close-drawer" aria-label="Close Drawer">✕</button>
+          </div>
         </header>
 
         <!-- Category Selector (Clean Segmented Pill Track matching Slide Header) -->
@@ -184,8 +213,18 @@ export class ControlsDock {
 
     const closeBtn = this.drawerModal.querySelector('#btn-close-drawer');
     const backdrop = this.drawerModal.querySelector('#drawer-overlay-backdrop');
+    const drawerHomeBtn = this.drawerModal.querySelector('#btn-drawer-home-nav');
+
     if (closeBtn) closeBtn.addEventListener('click', () => this.closeDrawer());
     if (backdrop) backdrop.addEventListener('click', () => this.closeDrawer());
+    if (drawerHomeBtn) {
+      drawerHomeBtn.addEventListener('click', () => {
+        this.closeDrawer();
+        if (typeof this.deck.onGoHome === 'function') {
+          this.deck.onGoHome();
+        }
+      });
+    }
 
     this.drawerModal.querySelectorAll('.drawer-pill-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
