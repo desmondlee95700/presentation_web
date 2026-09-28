@@ -126,7 +126,7 @@ export class SlideDeck {
                     data-category="older" 
                     role="tab"
                     aria-selected="${this.currentCategory === 'older'}"
-                    title="Older Kids (Age 7+): Games 5, 6, 7">
+                    title="Older Kids (Age 7+): Games 6, 7, 8, 9">
               <span class="cat-pill-emoji">🚀</span>
               <span class="cat-pill-text">Older <span class="cat-pill-sub">(7+)</span></span>
             </button>
@@ -136,7 +136,7 @@ export class SlideDeck {
                     data-category="all" 
                     role="tab"
                     aria-selected="${this.currentCategory === 'all'}"
-                    title="All 7 Games">
+                    title="All 9 Games">
               <span class="cat-pill-emoji">🌟</span>
               <span class="cat-pill-text">All <span class="cat-pill-sub">Games</span></span>
             </button>
@@ -172,6 +172,24 @@ export class SlideDeck {
             <div class="slide-star-icon">✦</div>
             <h1 class="slide-title-text">${game.title}</h1>
             <p class="slide-subtitle-text">${game.subtitle}</p>
+            ${(game.place || game.assetsNeeded) ? `
+              <div class="slide-station-meta">
+                ${game.place ? `
+                  <span class="station-meta-pill place-pill">
+                    <span class="v-icon">📍</span>
+                    <span class="v-key">Place:</span>
+                    <strong class="v-val">${game.place}</strong>
+                  </span>
+                ` : ''}
+                ${game.assetsNeeded ? `
+                  <span class="station-meta-pill assets-pill">
+                    <span class="v-icon">🪵</span>
+                    <span class="v-key">Assets Needed:</span>
+                    <strong class="v-val">${game.assetsNeeded}</strong>
+                  </span>
+                ` : ''}
+              </div>
+            ` : ''}
           </div>
 
           <!-- 3-Pillar Unified Presentation Columns -->
@@ -180,7 +198,13 @@ export class SlideDeck {
             <!-- Pillar 1: Visual Showcase (Photo + Diagram) -->
             <div class="slide-pillar pillar-visual">
               <div class="pillar-header">
-                ${game.setupImage ? `
+                ${game.infographicImage ? `
+                  <div class="pillar-img-toggle">
+                    <button type="button" class="img-toggle-tab active" data-view="craft">📸 Craft Photo</button>
+                    <button type="button" class="img-toggle-tab" data-view="setup">🛠️ Setup Diagram</button>
+                    <button type="button" class="img-toggle-tab" data-view="info">📋 Infographic</button>
+                  </div>
+                ` : game.setupImage ? `
                   <div class="pillar-img-toggle">
                     <button type="button" class="img-toggle-tab active" data-view="craft">📸 Craft Photo</button>
                     <button type="button" class="img-toggle-tab" data-view="setup">🛠️ Setup Diagram</button>
@@ -191,7 +215,7 @@ export class SlideDeck {
                   </div>
                 `}
               </div>
-              <div class="pillar-visual-frame" data-img-src="${game.referenceImage}" data-setup-src="${game.setupImage || ''}" role="button" tabindex="0" title="Click to enlarge photo">
+              <div class="pillar-visual-frame" data-img-src="${game.referenceImage}" data-setup-src="${game.setupImage || ''}" data-info-src="${game.infographicImage || ''}" role="button" tabindex="0" title="Click to enlarge photo">
                 <img src="${game.referenceImage}" alt="${game.title} craft setup" class="pillar-img" loading="eager" />
                 <span class="pillar-zoom-badge">🔍 Click to Enlarge</span>
               </div>
@@ -246,7 +270,7 @@ export class SlideDeck {
               </div>
               <div class="pillar-supplies-body">
                 <ul class="slide-supplies-list">
-                  ${game.materials.slice(0, 5).map(m => `
+                  ${game.materials.slice(0, 6).map(m => `
                     <li class="slide-supply-row">
                       <span class="supply-check-bullet">✓</span>
                       <div class="supply-names">
@@ -301,6 +325,13 @@ export class SlideDeck {
         { num: '3', title: 'Retrieve, Run & Pass', text: 'Grab the ball from the basket, sprint down the return lane, and pass to next camper!' }
       ];
     }
+    if (game.id === 'david-goliath-puzzle-race') {
+      return [
+        { num: '1', title: 'One Piece per Runner', text: 'On “Go!”, dash across, grab ONE puzzle piece from your basket, and sprint back.' },
+        { num: '2', title: 'Tag & Relay Rotation', text: 'Deliver the piece to base, tag the next runner, and repeat until all pieces are in!' },
+        { num: '3', title: 'Build Together to Win!', text: 'All teammates work together on the floor — first team to assemble correctly wins!' }
+      ];
+    }
     if (game.id === 'reaction-ball-cup') {
       return [
         { num: '1', title: 'Hold Strings at Start', text: 'Hold both guide strings taut at the player starting line position.' },
@@ -315,11 +346,18 @@ export class SlideDeck {
         { num: '3', title: 'Knock Out of Bounds', text: 'Strike Goliath completely outside the taped square arena boundary!' }
       ];
     }
-    // brook-river-crossing
+    if (game.id === 'brook-river-crossing') {
+      return [
+        { num: '1', title: 'Cannot Touch Floor!', text: 'Balance strictly on cardboard steps — the floor is river water!' },
+        { num: '2', title: 'Pass Steps Forward', text: 'Pick up the rear cardboard square and pass hand-to-hand forward.' },
+        { num: '3', title: 'All Across to Win', text: 'Cooperate as a team until every camper safely reaches the Finish Bank!' }
+      ];
+    }
+    // wind-of-elah
     return [
-      { num: '1', title: 'Cannot Touch Floor!', text: 'Balance strictly on cardboard steps — the floor is river water!' },
-      { num: '2', title: 'Pass Steps Forward', text: 'Pick up the rear cardboard square and pass hand-to-hand forward.' },
-      { num: '3', title: 'All Across to Win', text: 'Cooperate as a team until every camper safely reaches the Finish Bank!' }
+      { num: '1', title: 'Air Only — No Touching!', text: 'Cannot touch paper with hands or cardboard — wave your fan to create wind gusts!' },
+      { num: '2', title: 'All-Hands Flank Sweep', text: 'All teammates fan simultaneously; flank sweepers prevent stones drifting into walls.' },
+      { num: '3', title: 'Upward Flip into Basket', text: 'Front teammates generate the upward air burst to flip fluttering stones into the basket!' }
     ];
   }
 
@@ -327,13 +365,13 @@ export class SlideDeck {
     if (game.id === 'goliath-slingshot') {
       return {
         image: game.referenceImage,
-        caption: 'Stack the 4-3-2-1 cup pyramid with a cartoon Goliath cutout mounted securely at the peak.'
+        caption: 'Set up a sturdy table in the Church Sanctuary, stack the 4-3-2-1 cup pyramid, and mount Goliath at the peak.'
       };
     }
     if (game.id === 'feed-goliath') {
       return {
         image: game.referenceImage,
-        caption: 'Draw Goliath’s head on a large box and cut a wide open mouth hole placed at chest height.'
+        caption: 'Place the cardboard Goliath target box securely on a table in the Church Sanctuary at chest height.'
       };
     }
     if (game.id === 'david-bench-relay') {
@@ -348,6 +386,12 @@ export class SlideDeck {
         caption: 'Tape 6–8 giant cardboard footprints in a zigzag path and set the Goliath laundry basket 3–4 ft past the finish.'
       };
     }
+    if (game.id === 'david-goliath-puzzle-race') {
+      return {
+        image: game.referenceImage,
+        caption: 'Line up behind cones, place 8–12 chunky puzzle pieces in team baskets across the room, and prep team floor mats.'
+      };
+    }
     if (game.id === 'reaction-ball-cup') {
       return {
         image: game.referenceImage,
@@ -360,9 +404,15 @@ export class SlideDeck {
         caption: 'Tape a large square arena on smooth floor and position the Goliath bottle cap right on the center “X”.'
       };
     }
+    if (game.id === 'brook-river-crossing') {
+      return {
+        image: game.referenceImage,
+        caption: 'Tape two river banks 20–30 ft apart and number 5 cardboard delivery box squares from 1 to 5.'
+      };
+    }
     return {
       image: game.referenceImage,
-      caption: 'Tape two river banks 20–30 ft apart and number 5 cardboard delivery box squares from 1 to 5.'
+      caption: 'Scatter 20 paper stones in FAA Pink Room, position low basketball basket as goal, and equip squad with fans.'
     };
   }
 
@@ -387,6 +437,11 @@ export class SlideDeck {
         caption: 'Stomp through all the giant’s footprints, sink the soft ball into the basket, and pass to the next teammate!'
       };
     }
+    if (game.id === 'david-goliath-puzzle-race') {
+      return {
+        caption: 'Sprint one-by-one to retrieve all pieces, then work together as a team to complete the David & Goliath puzzle!'
+      };
+    }
     if (game.id === 'reaction-ball-cup') {
       return {
         caption: 'Gently spread string tension to smoothly guide and drop the rolling ball into each cup along the path.'
@@ -397,8 +452,13 @@ export class SlideDeck {
         caption: 'Slide David’s colored bottle caps along the floor to strike Goliath and knock him out of bounds.'
       };
     }
+    if (game.id === 'brook-river-crossing') {
+      return {
+        caption: 'Balance strictly on cardboard squares and pass rear boards forward hand-to-hand across the river!'
+      };
+    }
     return {
-      caption: 'Balance strictly on cardboard squares and pass rear boards forward hand-to-hand across the river!'
+      caption: 'Work as an all-hands wind squad to herd and flip all 20 paper river stones into the low basketball basket within 60 seconds!'
     };
   }
 
@@ -439,12 +499,15 @@ export class SlideDeck {
 
         const craftSrc = frame.dataset.imgSrc;
         const setupSrc = frame.dataset.setupSrc;
+        const infoSrc = frame.dataset.infoSrc;
 
         pillar.querySelectorAll('.img-toggle-tab').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
         if (targetView === 'setup' && setupSrc) {
           imgEl.src = setupSrc;
+        } else if (targetView === 'info' && infoSrc) {
+          imgEl.src = infoSrc;
         } else if (craftSrc) {
           imgEl.src = craftSrc;
         }
@@ -646,6 +709,24 @@ export class SlideDeck {
         <span class="rules-footer-badge tip-badge">💡 Tip (${cat.shortLabel}):</span>
         <span class="rules-footer-text">${coachTip}</span>
       </div>
+      ${(game.place || game.assetsNeeded) ? `
+        <div class="rules-footer-item venue-item">
+          <span class="rules-footer-badge venue-badge">🏛️ Venue & Assets:</span>
+          <span class="rules-footer-text">Place: <strong>${game.place}</strong> • Assets Needed: <strong>${game.assetsNeeded}</strong></span>
+        </div>
+      ` : ''}
+      ${game.leaderInstruction ? `
+        <div class="rules-footer-item instruction-item">
+          <span class="rules-footer-badge instruction-badge">📢 Leader Speech:</span>
+          <span class="rules-footer-text instruction-text">${game.leaderInstruction}</span>
+        </div>
+      ` : ''}
+      ${game.spiritualTakeaway ? `
+        <div class="rules-footer-item takeaway-item">
+          <span class="rules-footer-badge takeaway-badge">📖 Lesson Takeaway:</span>
+          <span class="rules-footer-text takeaway-text">${game.spiritualTakeaway}</span>
+        </div>
+      ` : ''}
     `;
 
     modal.classList.add('active');

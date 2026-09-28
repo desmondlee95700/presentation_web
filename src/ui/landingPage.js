@@ -81,7 +81,7 @@ export class LandingPage {
         </div>
         <div class="scatter-item scatter-craft-badge">
           <span class="sc-badge-emoji">🏆</span>
-          <span class="sc-badge-label">7 Knockdown Games</span>
+          <span class="sc-badge-label">9 Camp Games</span>
         </div>
         <div class="scatter-item scatter-river-badge">
           <span class="sc-badge-emoji">🌊</span>
@@ -101,7 +101,7 @@ export class LandingPage {
             <span class="brand-sep">•</span>
             <span class="brand-theme">DAVID & GOLIATH</span>
             <span class="brand-sep mobile-hide">•</span>
-            <span class="brand-games-count mobile-hide">7 ACTIVE GAMES</span>
+            <span class="brand-games-count mobile-hide">9 ACTIVE GAMES</span>
           </div>
         </header>
 
@@ -150,7 +150,7 @@ export class LandingPage {
                     <span class="track-name">Kids Track</span>
                     <span class="track-age-pill age-kids">Age 3–6</span>
                   </div>
-                  <span class="track-meta">Games 01–04 • Gentle & Fun</span>
+                  <span class="track-meta">Games 01–05 • Gentle & Fun</span>
                 </div>
                 <div class="track-action-badge">
                   <span class="track-arrow">➔</span>
@@ -166,7 +166,7 @@ export class LandingPage {
                     <span class="track-name">Older Track</span>
                     <span class="track-age-pill age-older">Age 7+</span>
                   </div>
-                  <span class="track-meta">Games 05–07 • Speed & Aim</span>
+                  <span class="track-meta">Games 06–09 • Speed & Fan Herd</span>
                 </div>
                 <div class="track-action-badge">
                   <span class="track-arrow">➔</span>
@@ -175,9 +175,9 @@ export class LandingPage {
             </div>
 
             <!-- All Games Direct Access Pill -->
-            <button type="button" class="btn-all-games-pill" data-action="launch-all" title="Explore all 7 games">
+            <button type="button" class="btn-all-games-pill" data-action="launch-all" title="Explore all 9 games">
               <span class="all-games-star">✦</span>
-              <span>Explore All 7 Camp Games</span>
+              <span>Explore All 9 Camp Games</span>
               <span class="all-games-arrow">➔</span>
             </button>
 

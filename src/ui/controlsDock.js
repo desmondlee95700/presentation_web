@@ -196,6 +196,7 @@ export class ControlsDock {
                       <span class="drawer-card-cat-pill" style="--cat-bg: ${g.palette.badgeBg}; --cat-color: ${g.palette.badgeText};">
                         ${g.tabTitle || g.title}
                       </span>
+                      ${g.place ? `<span class="drawer-card-place-pill">📍 ${g.place}</span>` : ''}
                       <span class="drawer-card-supplies-tag">📦 ${g.materials.length} Items</span>
                     </div>
                     <h4 class="drawer-card-title">${g.title}</h4>

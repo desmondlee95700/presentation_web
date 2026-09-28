@@ -12,8 +12,8 @@ export const CATEGORIES = {
     label: 'Kids (Age 3–6)',
     shortLabel: 'Kids 3–6',
     emoji: '🎈',
-    gameIds: ['goliath-slingshot', 'feed-goliath', 'david-bench-relay', 'footprint-stomp-toss'],
-    description: 'Games 1, 2, 3, 4 • Fun, Gentle & Safe Obstacle Runs',
+    gameIds: ['goliath-slingshot', 'feed-goliath', 'david-bench-relay', 'footprint-stomp-toss', 'david-goliath-puzzle-race'],
+    description: 'Games 1 to 5 • Fun, Gentle, Safe Obstacles & Teamwork Relay',
     themeColor: '#ea580c',
     pillBg: '#ffedd5',
     pillText: '#9a3412',
@@ -23,8 +23,8 @@ export const CATEGORIES = {
     label: 'Older Kids (Age 7+)',
     shortLabel: 'Older 7+',
     emoji: '🚀',
-    gameIds: ['reaction-ball-cup', 'david-goliath-sliding', 'brook-river-crossing'],
-    description: 'Games 5, 6, 7 • Focus, Accuracy, Speed & Team Strategy',
+    gameIds: ['reaction-ball-cup', 'david-goliath-sliding', 'brook-river-crossing', 'wind-of-elah'],
+    description: 'Games 6, 7, 8, 9 • Focus, Accuracy, Speed & Fan Herd Challenge',
     themeColor: '#7c3aed',
     pillBg: '#f3e8ff',
     pillText: '#6b21a8',
@@ -32,10 +32,10 @@ export const CATEGORIES = {
   ALL: {
     id: 'all',
     label: 'All Games',
-    shortLabel: 'All 7 Games',
+    shortLabel: 'All 9 Games',
     emoji: '🌟',
-    gameIds: ['goliath-slingshot', 'feed-goliath', 'david-bench-relay', 'footprint-stomp-toss', 'reaction-ball-cup', 'david-goliath-sliding', 'brook-river-crossing'],
-    description: 'Complete 7-Game Camp Activity Deck',
+    gameIds: ['goliath-slingshot', 'feed-goliath', 'david-bench-relay', 'footprint-stomp-toss', 'david-goliath-puzzle-race', 'reaction-ball-cup', 'david-goliath-sliding', 'brook-river-crossing', 'wind-of-elah'],
+    description: 'Complete 9-Game Camp Activity Deck',
     themeColor: '#0284c7',
     pillBg: '#e0f2fe',
     pillText: '#0369a1',
@@ -71,10 +71,13 @@ export const GAMES_CATALOG = [
       tag: '🚀 For Older Kids (Age 7+)',
       tip: 'Stand behind 8–10 ft line • Knock Goliath top cup for +50 bonus points • 3 timed quick throws!'
     },
+    place: 'Church Sanctuary',
+    assetsNeeded: 'Table',
     referenceImage: '/images/goliath_slingshot_craft.png',
     referenceTitle: 'DIY Craft Photo',
     setupImage: '/images/balloon_slingshot_setup.png',
     materials: [
+      { name: '1 Sturdy Table', note: 'Set up in Church Sanctuary for the cup pyramid' },
       { name: '10–12 Plastic Cups', note: '1 big cup for Giant Goliath & 9 smaller cups for 4-3-2-1 Pyramid' },
       { name: '1–2 Soft Balls', note: 'Foam or soft felt balls' },
       { name: '1 Cardboard Goliath Cutout', note: 'Drawn with helmet, shield & spear' },
@@ -140,10 +143,13 @@ export const GAMES_CATALOG = [
       tag: '🎈 Exclusive for Kids (Age 3–6)',
       tip: 'Big open mouth target makes tossing fun and easy! Light crumpled paper balls are 100% safe for little hands.'
     },
+    place: 'Church Sanctuary',
+    assetsNeeded: 'Table',
     referenceImage: '/images/feed_goliath_craft.png',
     referenceTitle: 'DIY Craft Photo',
     setupImage: '/images/feed_goliath_setup.png',
     materials: [
+      { name: '1 Sturdy Table', note: 'Set up in Church Sanctuary to hold the Goliath target box' },
       { name: 'Cardboard Box (or large sheet)', note: 'Sturdy base to hold Goliath’s head' },
       { name: 'Paper or Cardboard for Face', note: 'For sketching Goliath’s features' },
       { name: 'Markers, Crayons, or Paint', note: 'To color helmet, beard, and teeth' },
@@ -234,6 +240,8 @@ export const GAMES_CATALOG = [
       tag: '🚀 For Older Kids (Age 7+)',
       tip: 'Fast army belly-crawl under bench • 30 ft sprint to cone • Bear-crawl or backward sprint on the way back!'
     },
+    place: 'Church Sanctuary',
+    assetsNeeded: 'Chairs and cones',
     referenceImage: '/images/david_bench_relay_craft.png',
     referenceTitle: 'DIY Setup Photo',
     setupImage: '/images/david_bench_relay_setup.png',
@@ -322,6 +330,8 @@ export const GAMES_CATALOG = [
       tag: '🚀 For Older Kids (Age 7+)',
       tip: 'Space footprints 4–5 ft for giant leaps • Move basket 10–12 ft back • Time each runner with a stopwatch!'
     },
+    place: 'Outside church waiting area',
+    assetsNeeded: 'None',
     referenceImage: '/images/footprint_stomp_craft.png',
     referenceTitle: 'DIY Setup Photo',
     setupImage: '/images/footprint_stomp_setup.png',
@@ -383,12 +393,107 @@ export const GAMES_CATALOG = [
     ]
   },
   {
-    id: 'reaction-ball-cup',
+    id: 'david-goliath-puzzle-race',
     catalogNumber: 5,
+    title: 'David & Goliath Puzzle Race',
+    subtitle: 'Team Relay & Giant Floor Puzzle Assembly Challenge',
+    categories: ['kids'], // Kids (Age 3-6)
+    badge: 'GAME 05 • PUZZLE RELAY RACE',
+    tabTitle: 'Puzzle Race',
+    mascotEmoji: '🧩',
+    // Pastel Stationery Theme Colors — Soft Royal Periwinkle
+    palette: {
+      bgCanvas: '#f4f6fe',     // Soft Royal Periwinkle
+      bgTab: '#dfe5fc',        // Top folder tab
+      tabTextColor: '#3730a3', // Deep indigo charcoal
+      themeColor: '#4f46e5',   // Indigo / Periwinkle accent
+      accentColor: '#6366f1',  // Bright glow highlight
+      cardBorder: '#cdd7fb',   // Soft border
+      badgeBg: '#e0e7ff',      // Periwinkle pill
+      badgeText: '#3730a3',
+    },
+    kidsGuidance: {
+      tag: '🎈 Exclusive for Kids (Age 3–6)',
+      tip: 'Cut picture into 8–12 chunky pieces • 1 piece per runner • All teammates sit together on the floor to assemble!'
+    },
+    olderGuidance: {
+      tag: '🚀 For Older Kids (Age 7+)',
+      tip: 'Increase to 16–24 pieces • Add obstacle hops between cones • Strict blind hand-off relay rules!'
+    },
+    place: 'Church Sanctuary',
+    assetsNeeded: 'None',
+    referenceImage: '/images/puzzle_race_craft.png',
+    referenceTitle: 'Teamwork Puzzle Photo',
+    setupImage: '/images/puzzle_race_setup.png',
+    infographicImage: '/images/puzzle_race_infographic.jpg',
+    timeEstimate: '10–15 minutes',
+    playersCount: '2–4 teams',
+    spiritualTakeaway: '“Just like David faced Goliath with courage and faith in God, we can overcome challenges when we work together, encourage one another, and trust God.”',
+    takeawayHighlight: 'Working together helps us overcome challenges.',
+    leaderInstruction: '“Today we are going to have a David & Goliath Puzzle Race! Each team needs to work together. One person can only take ONE puzzle piece each time. Run, collect your piece, come back, and tag the next person. When you have collected all the pieces, work together to complete your puzzle. Remember—teamwork is important!”',
+    materials: [
+      { name: 'Printed Puzzle Pictures', note: 'David & Goliath illustration cut into 8–12 large chunky pieces' },
+      { name: 'Marker Cones or Floor Tape', note: 'To clearly mark team starting lines and running lanes' },
+      { name: '2–4 Baskets or Envelopes', note: 'Placed at opposite end of room to hold each team’s puzzle pieces' },
+      { name: 'Floor Assembly Mats', note: 'Designated flat carpet or gym floor space for each team' },
+    ],
+    setupSteps: [
+      {
+        step: 1,
+        title: 'Divide into 2–4 Teams',
+        desc: 'Divide campers into 2–4 equal teams. Each team lines up single-file behind their marked starting line.'
+      },
+      {
+        step: 2,
+        title: 'Prepare the Puzzle Pieces',
+        desc: 'Cut each David & Goliath picture into 8–12 chunky pieces and place each team’s mixed set in a basket across the room.'
+      },
+      {
+        step: 3,
+        title: 'Mark Relay Lanes & Assembly Base',
+        desc: 'Use cones or masking tape to establish clear running tracks (15–20 ft) and an open assembly space at each team’s base.'
+      },
+      {
+        step: 4,
+        title: 'Leader Countdown',
+        desc: 'Explain the single-piece rule, ensure runners know their return lane, and announce: “Ready, Set, GO!”'
+      }
+    ],
+    rules: [
+      {
+        badge: 'Rule 1',
+        title: 'One Piece per Runner',
+        text: 'When the leader says “Go!”, the first player sprints across, collects ONE puzzle piece, and dashes back.'
+      },
+      {
+        badge: 'Rule 2',
+        title: 'Tag Teammate & Queue',
+        text: 'Deliver the piece to base, tag or high-five the next runner, who races to collect another piece.'
+      },
+      {
+        badge: 'Rule 3',
+        title: 'Collect All Pieces First',
+        text: 'Runners continue taking turns one by one until all 8–12 puzzle pieces are safely at the team base.'
+      },
+      {
+        badge: 'Rule 4',
+        title: 'Build the Puzzle Together',
+        text: 'Everyone must help! All teammates sit together on the floor and cooperate to assemble the puzzle.'
+      },
+      {
+        badge: 'Rule 5',
+        title: 'First Complete Puzzle Wins!',
+        text: 'The first team to finish their David & Goliath picture correctly raises their hands and wins!'
+      }
+    ]
+  },
+  {
+    id: 'reaction-ball-cup',
+    catalogNumber: 6,
     title: 'Reaction Ball & Cup Game',
     subtitle: 'Dual String Balance & Rolling Precision Challenge',
     categories: ['older'], // Older Kids (Age 7+) ONLY
-    badge: 'GAME 05 • REACTION & BALANCE',
+    badge: 'GAME 06 • REACTION & BALANCE',
     tabTitle: 'Balance & Roll',
     mascotEmoji: '⚡',
     // Pastel Stationery Theme Colors
@@ -406,6 +511,8 @@ export const GAMES_CATALOG = [
       tag: '🚀 Exclusive for Older Kids (Age 7+)',
       tip: 'Requires fine motor control and steady two-hand coordination! Challenge: guide ball smoothly into all 4 cups sequentially.'
     },
+    place: 'FAA Cafeteria',
+    assetsNeeded: 'None',
     referenceImage: '/images/reaction_ball_craft.png',
     referenceTitle: 'DIY Craft Photo',
     setupImage: '/images/reaction_ball_setup.png',
@@ -467,11 +574,11 @@ export const GAMES_CATALOG = [
   },
   {
     id: 'david-goliath-sliding',
-    catalogNumber: 6,
+    catalogNumber: 7,
     title: 'David & Goliath Sliding Game',
     subtitle: 'Bottle Cap Precision Slide & Goliath Knockout',
     categories: ['older'], // Older Kids (Age 7+) ONLY
-    badge: 'GAME 06 • BOTTLE CAP SLIDE',
+    badge: 'GAME 07 • BOTTLE CAP SLIDE',
     tabTitle: 'Bottle Cap Slide',
     mascotEmoji: '🪨',
     // Pastel Stationery Theme Colors
@@ -493,6 +600,8 @@ export const GAMES_CATALOG = [
       tag: '🚀 For Older Kids (Age 7+)',
       tip: 'Standard 6-ft taped boundary • Knock Goliath completely out of bounds • Tactical stone bank shots!'
     },
+    place: 'FAA Blue Room',
+    assetsNeeded: 'None',
     referenceImage: '/images/sliding_game_craft.png',
     referenceTitle: 'DIY Craft Photo',
     setupImage: '/images/david_goliath_sliding_setup.png',
@@ -565,11 +674,11 @@ export const GAMES_CATALOG = [
   },
   {
     id: 'brook-river-crossing',
-    catalogNumber: 7,
+    catalogNumber: 8,
     title: 'Brook of Elah: River Crossing',
     subtitle: '5 Cardboard Stepping Squares & River Crossing Relay',
     categories: ['older'], // Older Kids (Age 7+) ONLY
-    badge: 'GAME 07 • RIVER CROSSING',
+    badge: 'GAME 08 • RIVER CROSSING',
     tabTitle: 'River Crossing',
     mascotEmoji: '🌊',
     // Pastel Stationery Theme Colors
@@ -591,6 +700,8 @@ export const GAMES_CATALOG = [
       tag: '🚀 For Older Kids (Age 7+)',
       tip: 'Full 25–30 ft river • Strict floor touch penalty: foot in water washes board back! • Speed relay race against the clock!'
     },
+    place: 'FAA JLC Room',
+    assetsNeeded: 'None',
     referenceImage: '/images/brook_river_reference.png',
     referenceTitle: 'DIY Reference Photo',
     setupImage: '/images/brook_river_setup.png',
@@ -647,6 +758,95 @@ export const GAMES_CATALOG = [
         badge: 'Rule 5',
         title: 'All Across to Win',
         text: 'The mission is complete when every team member safely reaches the Finish Bank!'
+      }
+    ]
+  },
+  {
+    id: 'wind-of-elah',
+    catalogNumber: 9,
+    title: 'The Wind of Elah',
+    subtitle: 'All-Hands Paper Stone Fan & Basket Herd Challenge',
+    categories: ['older'], // Older Kids (Age 7+)
+    badge: 'GAME 09 • PAPER FAN HERD',
+    tabTitle: 'Paper Fan Herd',
+    mascotEmoji: '💨',
+    // Pastel Stationery Theme Colors — Soft Warm Papaya & Tangerine Breeze
+    palette: {
+      bgCanvas: '#fff7f0',     // Soft Warm Papaya Breeze
+      bgTab: '#fde0cc',        // Top folder tab
+      tabTextColor: '#9a3412', // Warm terracotta charcoal
+      themeColor: '#ea580c',   // Warm tangerine accent
+      accentColor: '#fb923c',  // Sunset glow highlight
+      cardBorder: '#fed0b0',   // Soft border
+      badgeBg: '#ffedd5',      // Peach pill
+      badgeText: '#9a3412',
+    },
+    kidsGuidance: {
+      tag: '🎈 For Kids (Age 3–6)',
+      tip: 'Stand 5 ft from basket • Counselor helps fan from behind to create big wind gusts!'
+    },
+    olderGuidance: {
+      tag: '🚀 Exclusive for Older Kids (Age 7+)',
+      tip: 'Full team participation! Designate 2 flank sweepers to prevent wall drift and 2 basket flippers for the final upward lift.'
+    },
+    place: 'FAA Pink Room',
+    assetsNeeded: 'Low basket',
+    referenceImage: '/images/wind_of_elah_craft.png',
+    referenceTitle: 'All-Hands Fan Photo',
+    setupImage: '/images/wind_of_elah_setup.png',
+    timeEstimate: '10–12 minutes',
+    playersCount: '6–8 players per team',
+    spiritualTakeaway: '“Just as the invisible wind moves the stones, God’s Holy Spirit empowers us when we work together in one accord, lifting each other up to overcome giant obstacles.”',
+    takeawayHighlight: 'Working together in unity overcomes any giant challenge.',
+    leaderInstruction: '“Welcome to The Wind of Elah! For this challenge, your whole squad works together as David’s wind brigade. There are 20 paper river stones on the floor. NO HANDS and NO TOUCHING with your cardboard — you can ONLY fan the air to create wind currents! Left flank, right flank, push together and flip every stone into the low basketball basket. 60 seconds on the clock. Ready, fan, GO!”',
+    materials: [
+      { name: '1 Low Basketball Stand / Basket', note: 'Set at low height in FAA Pink Room as the target goal' },
+      { name: '6–8 Cardboard Fans', note: '1 rigid cardboard flap or heavy folder per player' },
+      { name: '20 Paper River Stones', note: 'Cut from colored paper/origami paper into river stone shapes' },
+      { name: 'Painter’s Tape', note: 'Marks the 15-ft scatter zone boundary' },
+    ],
+    setupSteps: [
+      {
+        step: 1,
+        title: 'Scatter 20 Paper Stones',
+        desc: 'Place 20 lightweight paper stone cutouts spread out across a 15-ft smooth floor zone in the FAA Pink Room.'
+      },
+      {
+        step: 2,
+        title: 'Position Low Basketball Goal',
+        desc: 'Place the low basketball hoop or basket at the far end of the FAA Pink Room as the goal.'
+      },
+      {
+        step: 3,
+        title: 'Arm the Fan Squad',
+        desc: 'Equip all 6–8 teammates with a rigid cardboard fan paddle and line them up at the start line.'
+      },
+      {
+        step: 4,
+        title: 'Assign Flanks & Start Timer',
+        desc: 'Designate left and right flank sweepers to corral strays and center sweepers to push forward!'
+      }
+    ],
+    rules: [
+      {
+        badge: 'Rule 1',
+        title: 'Air Only — Strictly No Hands!',
+        text: 'Players cannot touch paper stones with hands or fans. You must wave the cardboard to create wind currents!'
+      },
+      {
+        badge: 'Rule 2',
+        title: 'All-Hands Flank Sweep',
+        text: 'All teammates fan simultaneously; flank sweepers prevent stones drifting into walls while center sweepers drive forward.'
+      },
+      {
+        badge: 'Rule 3',
+        title: 'Flip Over the Basket Lip',
+        text: 'Work together at the finish line to create an upward air breeze that flips fluttering stones into the basket!'
+      },
+      {
+        badge: 'Rule 4',
+        title: '60-Second Team Clock',
+        text: 'The team that safely herds the most paper river stones into the basket before the timer expires wins!'
       }
     ]
   }

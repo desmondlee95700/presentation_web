@@ -15,9 +15,11 @@ All future style updates, UI additions, and components MUST adhere strictly to t
   - Game 2 (*Feed Goliath Game*): Soft Warm Peach & Blush Coral (`#fef5f0` / tab `#fde4d8`).
   - Game 3 (*David’s Valley Bench Dash*): Soft Sunny Honey (`#fdfbf0` / tab `#faedd0`).
   - Game 4 (*Goliath’s Footprint Stomp & Toss*): Soft Blossom Blush (`#fdf2f4` / tab `#fce2e7`).
-  - Game 5 (*Reaction Ball & Cup Game*): Soft Powder Sky Blue (`#f0f6fc` / tab `#daebf8`).
-  - Game 6 (*David & Goliath Sliding Game*): Soft Dreamy Lilac (`#f6f1fc` / tab `#eae1f8`).
-  - Game 7 (*Brook of Elah River Crossing*): Soft Lagoon Aqua (`#f0faf8` / tab `#dbeefa`).
+  - Game 5 (*David & Goliath Puzzle Race*): Soft Royal Periwinkle (`#f4f6fe` / tab `#dfe5fc`).
+  - Game 6 (*Reaction Ball & Cup Game*): Soft Powder Sky Blue (`#f0f6fc` / tab `#daebf8`).
+  - Game 7 (*David & Goliath Sliding Game*): Soft Dreamy Lilac (`#f6f1fc` / tab `#eae1f8`).
+  - Game 8 (*Brook of Elah River Crossing*): Soft Lagoon Aqua (`#f0faf8` / tab `#dbeefa`).
+  - Game 9 (*The Wind of Elah*): Soft Warm Papaya Breeze (`#fff7f0` / tab `#fde0cc`).
 - **Strictly Prohibited**: NO audio sound effects, NO arcade game widgets/tappers, NO fake clip-art emojis, and NO cramped dashboards.
 - **Layout (Modeled directly on Slide 01 in the reference template)**:
   - **Top Pill Header**: Horizontal rounded pill (`border-radius: 9999px`) holding category tag on the left, slide number in the center (`01`, `02`, `03`, `04`, etc.), and camp date on the right.
@@ -32,13 +34,13 @@ All future style updates, UI additions, and components MUST adhere strictly to t
 ## 👥 Age Categories & Game Mapping
 
 1. **🎈 Kids (Age 3–6)**:
-   - Games: **1, 2, 3, 4**
-   - Characteristics: Fun, gentle motor skills, safe obstacle crawling, and counselor guidance.
+   - Games: **1, 2, 3, 4, 5**
+   - Characteristics: Fun, gentle motor skills, safe obstacle crawling, cooperative puzzle relay, and counselor guidance.
 2. **🚀 Older Kids (Age 7+)**:
-   - Games: **5, 6, 7**
-   - Characteristics: Precision, dual-string balance, knockout distance, and speed relay races.
+   - Games: **6, 7, 8, 9**
+   - Characteristics: Precision, dual-string balance, knockout distance, all-hands fan herd, and speed relay races.
 3. **🌟 All Games**:
-   - Includes all 7 activities with category indicator tags.
+   - Includes all 9 activities with category indicator tags.
 
 ---
 
