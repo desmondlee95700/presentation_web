@@ -12,7 +12,7 @@ export const CATEGORIES = {
     label: 'Kids (Age 3–6)',
     shortLabel: 'Kids 3–6',
     emoji: '🎈',
-    gameIds: ['goliath-slingshot', 'feed-goliath', 'david-bench-relay', 'footprint-stomp-toss', 'david-goliath-puzzle-race'],
+    gameIds: ['goliath-slingshot', 'feed-goliath', 'david-bench-relay', 'footprint-stomp-toss', 'find-the-david'],
     description: 'Games 1 to 5 • Fun, Gentle, Safe Obstacles & Teamwork Relay',
     themeColor: '#ea580c',
     pillBg: '#ffedd5',
@@ -34,7 +34,7 @@ export const CATEGORIES = {
     label: 'All Games',
     shortLabel: 'All 9 Games',
     emoji: '🌟',
-    gameIds: ['goliath-slingshot', 'feed-goliath', 'david-bench-relay', 'footprint-stomp-toss', 'david-goliath-puzzle-race', 'reaction-ball-cup', 'david-goliath-sliding', 'brook-river-crossing', 'wind-of-elah'],
+    gameIds: ['goliath-slingshot', 'feed-goliath', 'david-bench-relay', 'footprint-stomp-toss', 'find-the-david', 'reaction-ball-cup', 'david-goliath-sliding', 'brook-river-crossing', 'wind-of-elah'],
     description: 'Complete 9-Game Camp Activity Deck',
     themeColor: '#0284c7',
     pillBg: '#e0f2fe',
@@ -393,14 +393,14 @@ export const GAMES_CATALOG = [
     ]
   },
   {
-    id: 'david-goliath-puzzle-race',
+    id: 'find-the-david',
     catalogNumber: 5,
-    title: 'David & Goliath Puzzle Race',
-    subtitle: 'Team Relay & Giant Floor Puzzle Assembly Challenge',
+    title: 'Find the David',
+    subtitle: 'Memory Grid & Anointing of the True King',
     categories: ['kids'], // Kids (Age 3-6)
-    badge: 'GAME 05 • PUZZLE RELAY RACE',
-    tabTitle: 'Puzzle Race',
-    mascotEmoji: '🧩',
+    badge: 'GAME 05 • MEMORY CARD GRID',
+    tabTitle: 'Find David',
+    mascotEmoji: '👑',
     // Pastel Stationery Theme Colors — Soft Royal Periwinkle
     palette: {
       bgCanvas: '#f4f6fe',     // Soft Royal Periwinkle
@@ -414,76 +414,75 @@ export const GAMES_CATALOG = [
     },
     kidsGuidance: {
       tag: '🎈 Exclusive for Kids (Age 3–6)',
-      tip: 'Cut picture into 8–12 chunky pieces • 1 piece per runner • All teammates sit together on the floor to assemble!'
+      tip: 'Arrange a 3×3 grid • Counselors help flip cards gently • Cheer every flip & celebrate finding the true king!'
     },
     olderGuidance: {
       tag: '🚀 For Older Kids (Age 7+)',
-      tip: 'Increase to 16–24 pieces • Add obstacle hops between cones • Strict blind hand-off relay rules!'
+      tip: 'Expand to a 4×4 grid (16 cards) • 5-second peek timer • Fast memory relay challenge!'
     },
     place: 'Church Sanctuary',
-    assetsNeeded: 'None',
-    referenceImage: '/images/puzzle_race_craft.png',
-    referenceTitle: 'Teamwork Puzzle Photo',
-    setupImage: '/images/puzzle_race_setup.png',
-    infographicImage: '/images/puzzle_race_infographic.jpg',
+    assetsNeeded: 'Table or Low Carpet Rug',
+    referenceImage: '/images/find_david_craft.png',
+    referenceTitle: 'DIY Cards Craft Photo',
+    setupImage: '/images/find_david_setup.png',
     timeEstimate: '10–15 minutes',
-    playersCount: '2–4 teams',
-    spiritualTakeaway: '“Just like David faced Goliath with courage and faith in God, we can overcome challenges when we work together, encourage one another, and trust God.”',
-    takeawayHighlight: 'Working together helps us overcome challenges.',
-    leaderInstruction: '“Today we are going to have a David & Goliath Puzzle Race! Each team needs to work together. One person can only take ONE puzzle piece each time. Run, collect your piece, come back, and tag the next person. When you have collected all the pieces, work together to complete your puzzle. Remember—teamwork is important!”',
+    playersCount: 'Circle of campers (take turns)',
+    spiritualTakeaway: '“The Lord does not look at the things people see. People look at the outward appearance, but the Lord looks at the heart.” (1 Samuel 16:7) — Jesse’s older sons were tall and strong warriors, but God chose young shepherd David because of his pure and faithful heart.',
+    takeawayHighlight: 'The Lord looks at the heart, not outward appearance (1 Sam 16:7).',
+    leaderInstruction: '“Welcome campers to Find the David! The prophet Samuel went to Jesse looking for God’s chosen king. Jesse presented his tallest, strongest sons, but God said no. Today, you are Samuel! Each camper steps up, flips ONE card, and checks the face. If it is an older brother, turn it back. If it is David, keep it open! Can we remember where the brothers are and find both Davids?”',
     materials: [
-      { name: 'Printed Puzzle Pictures', note: 'David & Goliath illustration cut into 8–12 large chunky pieces' },
-      { name: 'Marker Cones or Floor Tape', note: 'To clearly mark team starting lines and running lanes' },
-      { name: '2–4 Baskets or Envelopes', note: 'Placed at opposite end of room to hold each team’s puzzle pieces' },
-      { name: 'Floor Assembly Mats', note: 'Designated flat carpet or gym floor space for each team' },
+      { name: 'Sturdy Cardboard Bases', note: 'Cut thick cardboard into equal squares/rectangles as rigid bases' },
+      { name: 'A4 Printed Character Sheets', note: 'David and older brother illustrations printed on standard A4 paper' },
+      { name: 'Glue Stick or Tape', note: 'Securely stick the A4 printed cutouts on top of each cardboard base' },
+      { name: '2 Matching David Cards', note: 'Young shepherd boy with harp or sling and a golden heart' },
     ],
     setupSteps: [
       {
         step: 1,
-        title: 'Divide into 2–4 Teams',
-        desc: 'Divide campers into 2–4 equal teams. Each team lines up single-file behind their marked starting line.'
+        title: 'Print A4 Character Sheets',
+        desc: 'Print 2 matching David illustrations and multiple decoy older brother faces onto standard A4 paper.'
       },
       {
         step: 2,
-        title: 'Prepare the Puzzle Pieces',
-        desc: 'Cut each David & Goliath picture into 8–12 chunky pieces and place each team’s mixed set in a basket across the room.'
+        title: 'Stick onto Cardboard Bases',
+        desc: 'Cut thick cardboard into card tiles and glue each A4 printout firmly on top so the cards are sturdy and opaque.'
       },
       {
         step: 3,
-        title: 'Mark Relay Lanes & Assembly Base',
-        desc: 'Use cones or masking tape to establish clear running tracks (15–20 ft) and an open assembly space at each team’s base.'
+        title: 'Lay Out the Face-Down Grid',
+        desc: 'Shuffle and place all cards face down in a neat 3×3 (for younger kids) or 4×4 grid on the table or carpet floor.'
       },
       {
         step: 4,
-        title: 'Leader Countdown',
-        desc: 'Explain the single-piece rule, ensure runners know their return lane, and announce: “Ready, Set, GO!”'
+        title: 'Campers Circle & Samuel Turn',
+        desc: 'Have campers sit in a circle. Each child steps up in turn as Samuel to flip 1 card and search for David!'
       }
     ],
     rules: [
       {
         badge: 'Rule 1',
-        title: 'One Piece per Runner',
-        text: 'When the leader says “Go!”, the first player sprints across, collects ONE puzzle piece, and dashes back.'
+        title: 'Take Turns as Samuel',
+        text: 'Kids line up or sit in a circle. One child steps up per turn as Samuel looking for God’s chosen king.'
       },
       {
         badge: 'Rule 2',
-        title: 'Tag Teammate & Queue',
-        text: 'Deliver the piece to base, tag or high-five the next runner, who races to collect another piece.'
+        title: 'Flip Only ONE Card',
+        text: 'On their turn, the child flips over strictly 1 card to check the face.'
       },
       {
         badge: 'Rule 3',
-        title: 'Collect All Pieces First',
-        text: 'Runners continue taking turns one by one until all 8–12 puzzle pieces are safely at the team base.'
+        title: 'Decoy Brother Turns Back',
+        text: 'If it is NOT David: the child turns it back face-down in the exact same spot. Play moves immediately to the next child.'
       },
       {
         badge: 'Rule 4',
-        title: 'Build the Puzzle Together',
-        text: 'Everyone must help! All teammates sit together on the floor and cooperate to assemble the puzzle.'
+        title: 'David Stays Face-Up!',
+        text: 'If it IS David: the card stays face-up and open! The child gets cheers, and the turn passes to the next child.'
       },
       {
         badge: 'Rule 5',
-        title: 'First Complete Puzzle Wins!',
-        text: 'The first team to finish their David & Goliath picture correctly raises their hands and wins!'
+        title: 'Find Both Davids to Win!',
+        text: 'Children continue taking turns, remembering where the wrong brothers are. When the 2nd David is revealed, the group celebrates the true king!'
       }
     ]
   },

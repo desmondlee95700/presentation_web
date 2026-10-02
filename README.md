@@ -51,7 +51,7 @@
 | **02** | **Feed Goliath Game** | Ball-toss feeding challenge into Goliath's mouth | Warm Peach (`#fef5f0`) |
 | **03** | **David's Valley Bench Dash** | Low-bench balance beam crawl & stone rescue relay | Sunny Honey (`#fdfbf0`) |
 | **04** | **Goliath's Footprint Stomp & Toss** | Big-step footprint agility course & beanbag landing | Blossom Blush (`#fdf2f4`) |
-| **05** | **David & Goliath Puzzle Race** | Cooperative floor puzzle assembly relay sprint | Royal Periwinkle (`#f4f6fe`) |
+| **05** | **Find the David** | Memory card grid & anointing of God's chosen king | Royal Periwinkle (`#f4f6fe`) |
 
 ### 🚀 Older Kids Track (Age 7+)
 *Speed, precision aiming, dual-string balance coordination, and strategic team play.*

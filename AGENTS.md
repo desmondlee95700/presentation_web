@@ -15,7 +15,7 @@ All future style updates, UI additions, and components MUST adhere strictly to t
   - Game 2 (*Feed Goliath Game*): Soft Warm Peach & Blush Coral (`#fef5f0` / tab `#fde4d8`).
   - Game 3 (*David’s Valley Bench Dash*): Soft Sunny Honey (`#fdfbf0` / tab `#faedd0`).
   - Game 4 (*Goliath’s Footprint Stomp & Toss*): Soft Blossom Blush (`#fdf2f4` / tab `#fce2e7`).
-  - Game 5 (*David & Goliath Puzzle Race*): Soft Royal Periwinkle (`#f4f6fe` / tab `#dfe5fc`).
+  - Game 5 (*Find the David*): Soft Royal Periwinkle (`#f4f6fe` / tab `#dfe5fc`).
   - Game 6 (*Reaction Ball & Cup Game*): Soft Powder Sky Blue (`#f0f6fc` / tab `#daebf8`).
   - Game 7 (*David & Goliath Sliding Game*): Soft Dreamy Lilac (`#f6f1fc` / tab `#eae1f8`).
   - Game 8 (*Brook of Elah River Crossing*): Soft Lagoon Aqua (`#f0faf8` / tab `#dbeefa`).

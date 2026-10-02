@@ -325,11 +325,11 @@ export class SlideDeck {
         { num: '3', title: 'Retrieve, Run & Pass', text: 'Grab the ball from the basket, sprint down the return lane, and pass to next camper!' }
       ];
     }
-    if (game.id === 'david-goliath-puzzle-race') {
+    if (game.id === 'find-the-david') {
       return [
-        { num: '1', title: 'One Piece per Runner', text: 'On “Go!”, dash across, grab ONE puzzle piece from your basket, and sprint back.' },
-        { num: '2', title: 'Tag & Relay Rotation', text: 'Deliver the piece to base, tag the next runner, and repeat until all pieces are in!' },
-        { num: '3', title: 'Build Together to Win!', text: 'All teammates work together on the floor — first team to assemble correctly wins!' }
+        { num: '1', title: 'Step Up as Samuel', text: 'Kids take turns stepping forward as Samuel searching for God’s chosen king.' },
+        { num: '2', title: 'Flip Exactly 1 Card', text: 'Flip 1 card only. If it’s an older brother, turn it face-down in the exact same spot!' },
+        { num: '3', title: 'Find Both Davids to Win', text: 'David cards stay face-up! When the second David is revealed, celebrate the true king!' }
       ];
     }
     if (game.id === 'reaction-ball-cup') {
@@ -386,10 +386,10 @@ export class SlideDeck {
         caption: 'Tape 6–8 giant cardboard footprints in a zigzag path and set the Goliath laundry basket 3–4 ft past the finish.'
       };
     }
-    if (game.id === 'david-goliath-puzzle-race') {
+    if (game.id === 'find-the-david') {
       return {
         image: game.referenceImage,
-        caption: 'Line up behind cones, place 8–12 chunky puzzle pieces in team baskets across the room, and prep team floor mats.'
+        caption: 'Stick printed A4 character sheets onto sturdy cardboard bases, then lay them face-down in a neat grid.'
       };
     }
     if (game.id === 'reaction-ball-cup') {
@@ -437,9 +437,9 @@ export class SlideDeck {
         caption: 'Stomp through all the giant’s footprints, sink the soft ball into the basket, and pass to the next teammate!'
       };
     }
-    if (game.id === 'david-goliath-puzzle-race') {
+    if (game.id === 'find-the-david') {
       return {
-        caption: 'Sprint one-by-one to retrieve all pieces, then work together as a team to complete the David & Goliath puzzle!'
+        caption: 'Campers take turns flipping cards and remembering locations until both David cards are revealed!'
       };
     }
     if (game.id === 'reaction-ball-cup') {
