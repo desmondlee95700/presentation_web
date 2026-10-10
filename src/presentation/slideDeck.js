@@ -116,7 +116,7 @@ export class SlideDeck {
                     data-category="kids" 
                     role="tab"
                     aria-selected="${this.currentCategory === 'kids'}"
-                    title="Kids (Age 3–6): 6 Games">
+                    title="Kids (Age 3–6): 5 Games">
               <span class="cat-pill-emoji">🎈</span>
               <span class="cat-pill-text">Kids <span class="cat-pill-sub">(3–6)</span></span>
             </button>
@@ -136,7 +136,7 @@ export class SlideDeck {
                     data-category="all" 
                     role="tab"
                     aria-selected="${this.currentCategory === 'all'}"
-                    title="All 11 Games">
+                    title="All 10 Games">
               <span class="cat-pill-emoji">🌟</span>
               <span class="cat-pill-text">All <span class="cat-pill-sub">Games</span></span>
             </button>
@@ -311,13 +311,6 @@ export class SlideDeck {
         { num: '3', title: 'Aim for the Mouth', text: 'Toss paper balls directly into Goliath’s wide open mouth to score!' }
       ];
     }
-    if (game.id === 'david-bench-relay') {
-      return [
-        { num: '1', title: 'Crawl Under Bench', text: 'Drop to hands and knees and crawl completely under the padded bench.' },
-        { num: '2', title: 'Circle Goliath’s Cone', text: 'Sprint to the end cone, tap Goliath’s sign, and circle around the cone.' },
-        { num: '3', title: 'Crawl Back & Hand Off', text: 'Crawl under the bench a second time and pass David’s staff to the next teammate!' }
-      ];
-    }
     if (game.id === 'footprint-stomp-toss') {
       return [
         { num: '1', title: 'Hop on Every Footprint', text: 'Jump with two feet into each giant footprint along the path yelling “STOMP!”' },
@@ -397,12 +390,6 @@ export class SlideDeck {
         caption: 'Place the cardboard Goliath target box securely on a table in the Church Sanctuary at chest height.'
       };
     }
-    if (game.id === 'david-bench-relay') {
-      return {
-        image: game.referenceImage,
-        caption: 'Position sturdy benches with pool-noodle padded edges in the middle and Goliath turning cones 15–20 ft ahead.'
-      };
-    }
     if (game.id === 'footprint-stomp-toss') {
       return {
         image: game.referenceImage,
@@ -466,11 +453,6 @@ export class SlideDeck {
     if (game.id === 'feed-goliath') {
       return {
         caption: 'Campers step up as David and toss crumpled paper balls directly into Goliath’s open mouth.'
-      };
-    }
-    if (game.id === 'david-bench-relay') {
-      return {
-        caption: 'Cheer your teammates as each runner crawls, circles the cone, and passes David’s staff to the finish!'
       };
     }
     if (game.id === 'footprint-stomp-toss') {

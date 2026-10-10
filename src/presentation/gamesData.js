@@ -12,8 +12,8 @@ export const CATEGORIES = {
     label: 'Kids (Age 3–6)',
     shortLabel: 'Kids 3–6',
     emoji: '🎈',
-    gameIds: ['goliath-slingshot', 'feed-goliath', 'david-bench-relay', 'footprint-stomp-toss', 'find-the-david', 'miracle-motion'],
-    description: 'Games 1 to 5 & 10 • Fun, Gentle, Safe Obstacles & Miracle Motion',
+    gameIds: ['goliath-slingshot', 'feed-goliath', 'footprint-stomp-toss', 'find-the-david', 'miracle-motion'],
+    description: 'Games 1 to 5 • Fun, Gentle, Safe Obstacles & Miracle Motion',
     themeColor: '#ea580c',
     pillBg: '#ffedd5',
     pillText: '#9a3412',
@@ -24,7 +24,7 @@ export const CATEGORIES = {
     shortLabel: 'Older 7+',
     emoji: '🚀',
     gameIds: ['reaction-ball-cup', 'david-goliath-sliding', 'brook-river-crossing', 'wind-of-elah', 'faith-and-balance'],
-    description: 'Games 6 to 9 & 11 • Focus, Accuracy, Speed, Fan Herd & Faith Balance',
+    description: 'Games 6 to 10 • Focus, Accuracy, Speed, Fan Herd & Faith Balance',
     themeColor: '#7c3aed',
     pillBg: '#f3e8ff',
     pillText: '#6b21a8',
@@ -32,10 +32,10 @@ export const CATEGORIES = {
   ALL: {
     id: 'all',
     label: 'All Games',
-    shortLabel: 'All 11 Games',
+    shortLabel: 'All 10 Games',
     emoji: '🌟',
-    gameIds: ['goliath-slingshot', 'feed-goliath', 'david-bench-relay', 'footprint-stomp-toss', 'find-the-david', 'reaction-ball-cup', 'david-goliath-sliding', 'brook-river-crossing', 'wind-of-elah', 'miracle-motion', 'faith-and-balance'],
-    description: 'Complete 11-Game Camp Activity Deck',
+    gameIds: ['goliath-slingshot', 'feed-goliath', 'footprint-stomp-toss', 'find-the-david', 'miracle-motion', 'reaction-ball-cup', 'david-goliath-sliding', 'brook-river-crossing', 'wind-of-elah', 'faith-and-balance'],
+    description: 'Complete 10-Game Camp Activity Deck',
     themeColor: '#0284c7',
     pillBg: '#e0f2fe',
     pillText: '#0369a1',
@@ -213,102 +213,12 @@ export const GAMES_CATALOG = [
     ]
   },
   {
-    id: 'david-bench-relay',
-    catalogNumber: 3,
-    title: 'David’s Valley Bench Dash',
-    subtitle: 'Crawl Under the Mountain Bench, Round Goliath’s Cone & Relay!',
-    categories: ['kids'], // Kids (Age 3-6) ONLY
-    badge: 'GAME 03 • OBSTACLE BENCH RELAY',
-    tabTitle: 'Valley Bench Dash',
-    mascotEmoji: '🏃',
-    // Pastel Stationery Theme Colors — Soft Sunny Honey
-    palette: {
-      bgCanvas: '#fdfbf0',     // Soft Warm Sunny Cream
-      bgTab: '#faedd0',        // Top folder tab
-      tabTextColor: '#854d0e', // Dark honey charcoal
-      themeColor: '#d97706',   // Warm golden amber accent
-      accentColor: '#f59e0b',  // Sunbeam amber highlight
-      cardBorder: '#f5e3b5',   // Soft border
-      badgeBg: '#fef3c7',      // Sunny honey pill
-      badgeText: '#92400e',
-    },
-    kidsGuidance: {
-      tag: '🎈 Exclusive for Kids (Age 3–6)',
-      tip: 'Slit pool noodle on bench edge for soft head bumps • Counselor spots at bench to cheer little crawlers • 15–20 ft distance to cone!'
-    },
-    olderGuidance: {
-      tag: '🚀 For Older Kids (Age 7+)',
-      tip: 'Fast army belly-crawl under bench • 30 ft sprint to cone • Bear-crawl or backward sprint on the way back!'
-    },
-    place: 'Church Sanctuary',
-    assetsNeeded: 'Chairs and cones',
-    referenceImage: '/images/david_bench_relay_craft.png',
-    referenceTitle: 'DIY Setup Photo',
-    setupImage: '/images/david_bench_relay_setup.png',
-    materials: [
-      { name: '1–2 Sturdy Benches', note: 'Gym bench, church pew bench, or low sturdy table' },
-      { name: '2 Marker Cones', note: 'With cartoon Goliath faces or helmets taped on top' },
-      { name: '1–2 Pool Noodles', note: 'Slit lengthwise to pad bench edges for 100% safe crawling' },
-      { name: '2 Shepherd Staffs or Soft Balls', note: 'Short cut pool noodle or soft foam stone as relay baton' },
-      { name: 'Floor Masking Tape', note: 'For team start lines and return lane boundaries' },
-    ],
-    setupSteps: [
-      {
-        step: 1,
-        title: 'Position the Benches',
-        desc: 'Place 1 or 2 long benches parallel across the hall, leaving ample crawl-under clearance.'
-      },
-      {
-        step: 2,
-        title: 'Pad the Lower Bench Rail',
-        desc: 'Slit a pool noodle lengthwise and tape it firmly along the bottom edge of each bench for safety.'
-      },
-      {
-        step: 3,
-        title: 'Set Goliath Turning Cones',
-        desc: 'Place orange cones 15–20 ft past each bench and tape a cartoon Goliath cutout to each cone.'
-      },
-      {
-        step: 4,
-        title: 'Tape Start Line & Queue Teams',
-        desc: 'Tape a start line 8–10 ft in front of the bench and hand the first runner David’s staff baton!'
-      }
-    ],
-    rules: [
-      {
-        badge: 'Rule 1',
-        title: 'Crawl Under the Bench',
-        text: 'On “Go!”, drop down to hands and knees and crawl completely under the padded bench without pushing it.'
-      },
-      {
-        badge: 'Rule 2',
-        title: 'Circle Goliath’s Cone',
-        text: 'Pop up, sprint to the cone, tap Goliath’s sign (“Brave like David!”), and circle around the cone.'
-      },
-      {
-        badge: 'Rule 3',
-        title: 'Crawl Back & Pass Baton',
-        text: 'Sprint back, crawl under the bench a second time, and hand off the shepherd staff to the next teammate!'
-      },
-      {
-        badge: 'Rule 4',
-        title: 'Spotter Guidance',
-        text: 'Counselors stay near the bench to encourage low crawling and ensure smooth head clearance.'
-      },
-      {
-        badge: 'Rule 5',
-        title: 'Cheer Every Runner',
-        text: 'Teams cheer loudly until every camper has successfully completed the Valley Dash!'
-      }
-    ]
-  },
-  {
     id: 'footprint-stomp-toss',
-    catalogNumber: 4,
+    catalogNumber: 3,
     title: 'Goliath’s Footprint Stomp & Toss',
     subtitle: 'Hop Along the Giant’s Tracks & Sink the Victory Ball into the Basket!',
     categories: ['kids'], // Kids (Age 3-6) ONLY
-    badge: 'GAME 04 • JUMP & BASKET TOSS',
+    badge: 'GAME 03 • JUMP & BASKET TOSS',
     tabTitle: 'Footprint Toss',
     mascotEmoji: '🦶',
     // Pastel Stationery Theme Colors — Soft Rose Blossom / Coral Punch
@@ -394,11 +304,11 @@ export const GAMES_CATALOG = [
   },
   {
     id: 'find-the-david',
-    catalogNumber: 5,
+    catalogNumber: 4,
     title: 'Find the David',
     subtitle: 'Memory Grid & Anointing of the True King',
     categories: ['kids'], // Kids (Age 3-6)
-    badge: 'GAME 05 • MEMORY CARD GRID',
+    badge: 'GAME 04 • MEMORY CARD GRID',
     tabTitle: 'Find David',
     mascotEmoji: '👑',
     // Pastel Stationery Theme Colors — Soft Royal Periwinkle
@@ -510,7 +420,7 @@ export const GAMES_CATALOG = [
       tag: '🚀 Exclusive for Older Kids (Age 7+)',
       tip: 'Requires fine motor control and steady two-hand coordination! Challenge: guide ball smoothly into all 4 cups sequentially.'
     },
-    place: 'FAA Cafeteria',
+    place: 'FAA Upstair Lounge',
     assetsNeeded: 'None',
     referenceImage: '/images/reaction_ball_craft.png',
     referenceTitle: 'DIY Craft Photo',
@@ -699,7 +609,7 @@ export const GAMES_CATALOG = [
       tag: '🚀 For Older Kids (Age 7+)',
       tip: 'Full 25–30 ft river • Strict floor touch penalty: foot in water washes board back! • Speed relay race against the clock!'
     },
-    place: 'FAA JLC Room',
+    place: 'FAA Cafeteria',
     assetsNeeded: 'None',
     referenceImage: '/images/brook_river_reference.png',
     referenceTitle: 'DIY Reference Photo',
@@ -851,11 +761,11 @@ export const GAMES_CATALOG = [
   },
   {
     id: 'miracle-motion',
-    catalogNumber: 10,
+    catalogNumber: 5,
     title: 'Miracle Motion',
     subtitle: 'Bible Charades & Silent Action Guessing Relay',
     categories: ['kids'], // Kids (Age 3-6)
-    badge: 'GAME 10 • MIRACLE MOTION',
+    badge: 'GAME 05 • MIRACLE MOTION',
     tabTitle: 'Miracle Motion',
     mascotEmoji: '🎭',
     // Pastel Stationery Theme Colors — Soft Sunny Buttercup
@@ -874,7 +784,7 @@ export const GAMES_CATALOG = [
       tip: 'Counselor whispers or shows the picture card to the actor • If shy, counselor mimes alongside them! • Keep guessing fast & cheer every turn!'
     },
     place: 'Church Sanctuary / Carpet Area',
-    assetsNeeded: 'Prompt Cards & Tally Board',
+    assetsNeeded: 'None',
     referenceImage: '/images/miracle_motion_craft.png',
     referenceTitle: 'DIY Prompt Cards Photo',
     setupImage: '/images/miracle_motion_setup.png',
@@ -941,11 +851,11 @@ export const GAMES_CATALOG = [
   },
   {
     id: 'faith-and-balance',
-    catalogNumber: 11,
+    catalogNumber: 10,
     title: 'Faith & Balance',
     subtitle: 'Spoon-and-Ball Speed Navigation & 2-Minute Basket Relay',
     categories: ['older'], // Older Kids (Age 7+)
-    badge: 'GAME 11 • FAITH & BALANCE',
+    badge: 'GAME 10 • FAITH & BALANCE',
     tabTitle: 'Faith & Balance',
     mascotEmoji: '🥄',
     // Pastel Stationery Theme Colors — Soft Emerald Mint
@@ -963,7 +873,7 @@ export const GAMES_CATALOG = [
       tag: '🚀 Exclusive for Older Kids (Age 7+)',
       tip: 'Bend knees slightly for a low center of gravity • Do not sprint until ball is dropped in bucket • Keep spare spoons on deck behind start line!'
     },
-    place: 'Church Gym / Fellowship Hall',
+    place: 'FAA JLC Room',
     assetsNeeded: 'Spoons, Balls, Target Basket & Floor Tape',
     referenceImage: '/images/faith_balance_craft.png',
     referenceTitle: 'DIY Supplies Photo',
@@ -974,11 +884,11 @@ export const GAMES_CATALOG = [
     takeawayHighlight: 'Walking with steady faith and patience under pressure leads to victory.',
     leaderInstruction: '“Campers, welcome to Faith & Balance! Each team gets ONE plastic spoon. At the start line, you must scoop a ball onto your spoon. WITHOUT touching the ball with your hands, carefully navigate across the gym and deposit it into the Target Basket. Once it drops cleanly into the basket, sprint back and hand off the spoon to your next teammate. You have exactly 2 minutes on the clock — how many balls can your squad collect? Ready, balance, GO!”',
     materials: [
-      { name: 'Small Balls (15–20 pcs)', note: 'Lightweight ping-pong balls, mini plastic balls, or tightly crumpled paper balls (cheapest DIY option)' },
-      { name: 'Sturdy Plastic Spoons (4–6 pcs)', note: '1 spoon per active team, plus spare backup spoons in case of breakage' },
+      { name: 'Small Balls (15–20 pcs)', note: 'Lightweight balls or tightly crumpled paper balls (cheapest DIY option)' },
+      { name: 'Sturdy Plastic Spoons', note: '1 spoon per active team (plus spares in case of breakage)' },
       { name: 'Target Baskets / Buckets (2 pcs)', note: 'Plastic laundry basket, storage tub, or bucket placed at the far end' },
       { name: 'Floor Masking Tape', note: 'To mark the start line, runner lanes, and return sprint track' },
-      { name: 'Stopwatch / 2-Minute Timer', note: 'Digital sports timer or camp countdown clock' },
+      { name: 'Stopwatch / 2-Minute Timer', note: 'Digital sports timer or countdown clock' },
     ],
     setupSteps: [
       {
