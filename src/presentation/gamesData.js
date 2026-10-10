@@ -592,10 +592,8 @@ export const GAMES_CATALOG = [
     referenceTitle: 'DIY Reference Photo',
     setupImage: '/images/brook_river_setup.png',
     materials: [
-      { name: '5 Cardboard Squares', note: 'Cut from cardboard delivery boxes, numbered 1–5' },
-      { name: 'Painter’s Tape or Rope', note: 'Marks Start Bank & Finish Bank (20–30 ft apart)' },
-      { name: 'Marker Pen', note: 'To number cardboard squares 1 to 5' },
-      { name: 'Smooth Floor Surface', note: 'Camp hall, gym, or flat lawn' }
+      { name: '10 A4 Paper', note: '' },
+      { name: 'Items for kids to hold', note: 'TBC' }
     ],
     setupSteps: [
       {
@@ -686,10 +684,9 @@ export const GAMES_CATALOG = [
     takeawayHighlight: 'Working together in unity overcomes any giant challenge.',
     leaderInstruction: '“Welcome to The Wind of Elah! For this challenge, your whole squad works together as David’s wind brigade. There are 20 paper river stones on the floor. NO HANDS and NO TOUCHING with your cardboard — you can ONLY fan the air to create wind currents! Left flank, right flank, push together and flip every stone into the low basketball basket. 60 seconds on the clock. Ready, fan, GO!”',
     materials: [
-      { name: '1 Low Basketball Stand / Basket', note: 'Set at low height in FAA Pink Room as the target goal' },
-      { name: '6–8 Cardboard Fans', note: '1 rigid cardboard flap or heavy folder per player' },
-      { name: '20 Paper River Stones', note: 'Cut from colored paper/origami paper into river stone shapes' },
-      { name: 'Painter’s Tape', note: 'Marks the 15-ft scatter zone boundary' },
+      { name: '1 Low Basketball Basket', note: 'Set at low height in FAA Pink Room as the target goal' },
+      { name: '8-10 plastic plate', note: 'each kid will take one' },
+      { name: 'X number Paper River Stones', note: 'Cut from colored paper/origami paper into river stone shapes' },
     ],
     setupSteps: [
       {
@@ -858,11 +855,9 @@ export const GAMES_CATALOG = [
     takeawayHighlight: 'Walking with steady faith and patience under pressure leads to victory.',
     leaderInstruction: '“Campers, welcome to Faith & Balance! Each team gets ONE plastic spoon. At the start line, you must scoop a ball onto your spoon. WITHOUT touching the ball with your hands, carefully navigate across the gym and deposit it into the Target Basket. Once it drops cleanly into the basket, sprint back and hand off the spoon to your next teammate. You have exactly 2 minutes on the clock — how many balls can your squad collect? Ready, balance, GO!”',
     materials: [
-      { name: 'Small Balls (15–20 pcs)', note: 'Lightweight balls or tightly crumpled paper balls (cheapest DIY option)' },
-      { name: 'Sturdy Plastic Spoons', note: '1 spoon per active team (plus spares in case of breakage)' },
+      { name: 'Small Balls (10 pcs)', note: 'tightly crumpled paper balls (cheapest DIY option)' },
+      { name: '40 - Sturdy Plastic Spoons', note: '1 spoon per active team (plus spares in case of breakage)' },
       { name: 'Target Baskets / Buckets (2 pcs)', note: 'Plastic laundry basket, storage tub, or bucket placed at the far end' },
-      { name: 'Floor Masking Tape', note: 'To mark the start line, runner lanes, and return sprint track' },
-      { name: 'Stopwatch / 2-Minute Timer', note: 'Digital sports timer or countdown clock' },
     ],
     setupSteps: [
       {

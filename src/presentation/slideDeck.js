@@ -666,14 +666,30 @@ export class SlideDeck {
         <div class="rules-modal-backdrop" id="rules-modal-backdrop"></div>
         <div class="rules-modal-container" role="dialog" aria-modal="true" aria-labelledby="rules-modal-title">
           <header class="rules-modal-header">
-            <div class="rules-modal-header-left">
-              <span class="rules-modal-star">✦</span>
-              <div>
-                <div class="rules-modal-cat-tag" id="rules-modal-cat">KIDS CAMP RULES</div>
-                <h2 class="rules-modal-title" id="rules-modal-title">Official Game Rules</h2>
+            <div class="rules-modal-header-top">
+              <div class="rules-modal-badge-group">
+                <span class="rules-modal-cat-pill" id="rules-modal-cat">🚀 OLDER KIDS (AGE 7+)</span>
+                <span class="rules-modal-num-pill" id="rules-modal-num-pill">GAME 06</span>
+              </div>
+              <div class="rules-modal-header-actions">
+                <span class="rules-modal-esc-hint">Press <kbd>ESC</kbd></span>
+                <button type="button" class="btn-close-rules-modal" id="btn-close-rules-modal" aria-label="Close Rules Modal" title="Close Sheet (Esc)">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
               </div>
             </div>
-            <button type="button" class="btn-close-rules-modal" id="btn-close-rules-modal" aria-label="Close Rules Modal">✕</button>
+            <div class="rules-modal-title-row">
+              <div class="rules-modal-star-wrap">
+                <span class="rules-modal-star">✦</span>
+              </div>
+              <div class="rules-modal-title-text-group">
+                <h2 class="rules-modal-title" id="rules-modal-title">Official Game Rules</h2>
+                <p class="rules-modal-subtitle" id="rules-modal-subtitle">Official facilitator guide & gameplay rules</p>
+              </div>
+            </div>
           </header>
 
           <div class="rules-modal-body" id="rules-modal-body">
@@ -681,7 +697,7 @@ export class SlideDeck {
           </div>
 
           <footer class="rules-modal-footer" id="rules-modal-footer">
-            <!-- Objective & Coach Tips -->
+            <!-- Objective, Tips & Venue Cards -->
           </footer>
         </div>
       `;
@@ -709,17 +725,40 @@ export class SlideDeck {
     const modal = document.getElementById('game-rules-modal');
     if (!modal) return;
 
+    // Apply active game's dynamic palette tokens
+    modal.style.setProperty('--modal-theme', game.palette?.themeColor || '#2563eb');
+    modal.style.setProperty('--modal-accent', game.palette?.accentColor || '#3b82f6');
+    modal.style.setProperty('--modal-tab-bg', game.palette?.bgTab || '#e0f2fe');
+    modal.style.setProperty('--modal-tab-color', game.palette?.tabTextColor || '#0369a1');
+    modal.style.setProperty('--modal-canvas', game.palette?.bgCanvas || '#f8fafc');
+    modal.style.setProperty('--modal-card-border', game.palette?.cardBorder || '#bae6fd');
+
     modal.querySelector('#rules-modal-cat').textContent = `${cat.emoji} ${cat.label.toUpperCase()}`;
-    modal.querySelector('#rules-modal-title').textContent = `${game.title} — Official Rules`;
+    modal.querySelector('#rules-modal-num-pill').textContent = game.badge || `GAME ${String(game.catalogNumber || '').padStart(2, '0')}`;
+    modal.querySelector('#rules-modal-title').textContent = `${game.title}`;
+    modal.querySelector('#rules-modal-subtitle').textContent = game.subtitle || 'Official Facilitator Gameplay Rules';
 
     const bodyEl = modal.querySelector('#rules-modal-body');
     bodyEl.innerHTML = `
+      <div class="rules-modal-section-header">
+        <div class="rules-modal-section-title">
+          <span class="section-icon">📜</span>
+          <span>Official Gameplay Rules</span>
+        </div>
+        <span class="rules-modal-count-pill">${game.rules.length} Steps</span>
+      </div>
       <div class="rules-modal-grid">
         ${game.rules.map((r, i) => `
           <div class="rules-modal-card">
-            <div class="rules-modal-chip">${r.badge || `Rule ${i + 1}`}</div>
+            <div class="rules-modal-step-badge">
+              <span class="step-num">${String(i + 1).padStart(2, '0')}</span>
+              <span class="step-label">RULE</span>
+            </div>
             <div class="rules-modal-card-content">
-              <h4 class="rules-modal-rule-title">${r.title}</h4>
+              <div class="rules-modal-card-header">
+                <h4 class="rules-modal-rule-title">${r.title}</h4>
+                ${r.badge ? `<span class="rules-modal-custom-badge">${r.badge}</span>` : ''}
+              </div>
               <p class="rules-modal-rule-text">${r.text}</p>
             </div>
           </div>
@@ -739,30 +778,63 @@ export class SlideDeck {
 
     const footerEl = modal.querySelector('#rules-modal-footer');
     footerEl.innerHTML = `
-      <div class="rules-footer-item">
-        <span class="rules-footer-badge">🏆 Objective:</span>
-        <span class="rules-footer-text">${col2.caption}</span>
+      <div class="rules-footer-cards-grid">
+        <div class="rules-footer-card card-objective">
+          <div class="footer-card-header">
+            <span class="footer-card-icon">🏆</span>
+            <span class="footer-card-title">Winning Objective</span>
+          </div>
+          <p class="footer-card-desc">${col2.caption}</p>
+        </div>
+        <div class="rules-footer-card card-tip">
+          <div class="footer-card-header">
+            <span class="footer-card-icon">💡</span>
+            <span class="footer-card-title">${cat.shortLabel} Facilitator Tip</span>
+          </div>
+          <p class="footer-card-desc">${coachTip}</p>
+        </div>
       </div>
-      <div class="rules-footer-item tip-item">
-        <span class="rules-footer-badge tip-badge">💡 Tip (${cat.shortLabel}):</span>
-        <span class="rules-footer-text">${coachTip}</span>
-      </div>
+
       ${(game.place || game.assetsNeeded) ? `
-        <div class="rules-footer-item venue-item">
-          <span class="rules-footer-badge venue-badge">🏛️ Venue & Assets:</span>
-          <span class="rules-footer-text">Place: <strong>${game.place}</strong> • Assets Needed: <strong>${game.assetsNeeded}</strong></span>
+        <div class="rules-footer-meta-bar">
+          ${game.place ? `
+            <div class="rules-meta-pill place-pill">
+              <span class="meta-icon">📍</span>
+              <span class="meta-label">Place:</span>
+              <strong class="meta-val">${game.place}</strong>
+            </div>
+          ` : ''}
+          ${game.assetsNeeded ? `
+            <div class="rules-meta-pill assets-pill">
+              <span class="meta-icon">🪵</span>
+              <span class="meta-label">Assets Needed:</span>
+              <strong class="meta-val">${game.assetsNeeded}</strong>
+            </div>
+          ` : ''}
+          <div class="rules-meta-pill camp-pill">
+            <span class="meta-icon">🏕️</span>
+            <span class="meta-val">2026 KIDS CAMP</span>
+          </div>
         </div>
       ` : ''}
+
       ${game.leaderInstruction ? `
-        <div class="rules-footer-item instruction-item">
-          <span class="rules-footer-badge instruction-badge">📢 Leader Speech:</span>
-          <span class="rules-footer-text instruction-text">${game.leaderInstruction}</span>
+        <div class="rules-footer-callout speech-callout">
+          <div class="callout-header">
+            <span class="callout-icon">📢</span>
+            <strong>Counselor Opening Speech</strong>
+          </div>
+          <p class="callout-quote">${game.leaderInstruction}</p>
         </div>
       ` : ''}
+
       ${game.spiritualTakeaway ? `
-        <div class="rules-footer-item takeaway-item">
-          <span class="rules-footer-badge takeaway-badge">📖 Lesson Takeaway:</span>
-          <span class="rules-footer-text takeaway-text">${game.spiritualTakeaway}</span>
+        <div class="rules-footer-callout takeaway-callout">
+          <div class="callout-header">
+            <span class="callout-icon">📖</span>
+            <strong>Camp Biblical Lesson</strong>
+          </div>
+          <p class="callout-body">${game.spiritualTakeaway}</p>
         </div>
       ` : ''}
     `;
