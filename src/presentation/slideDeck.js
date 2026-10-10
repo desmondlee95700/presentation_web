@@ -334,9 +334,9 @@ export class SlideDeck {
     }
     if (game.id === 'david-goliath-sliding') {
       return [
-        { num: '1', title: 'Slide, Do Not Throw!', text: 'Smoothly slide one David bottle cap at a time flat along the floor.' },
-        { num: '2', title: 'Aim for Goliath', text: 'Target the giant Goliath bottle cap resting directly on the center “X”.' },
-        { num: '3', title: 'Knock Out of Bounds', text: 'Strike Goliath completely outside the taped square arena boundary!' }
+        { num: '1', title: 'Tabletop Slide or Flick', text: 'Slide or flick David’s bottle caps flat across the table surface — never throw through the air!' },
+        { num: '2', title: 'Aim Across Distance', text: 'Target the Goliath cap stationed at the far end of the long table.' },
+        { num: '3', title: 'Shoot Down Goliath!', text: 'Strike Goliath across the table distance to knock him down or off the table to win!' }
       ];
     }
     if (game.id === 'brook-river-crossing') {
@@ -411,7 +411,7 @@ export class SlideDeck {
     if (game.id === 'david-goliath-sliding') {
       return {
         image: game.referenceImage,
-        caption: 'Tape a large square arena on smooth floor and position the Goliath bottle cap right on the center “X”.'
+        caption: 'Place Goliath at the far end of a smooth table and line up David’s 5 colored bottle caps at the shooting edge.'
       };
     }
     if (game.id === 'brook-river-crossing') {
@@ -472,7 +472,7 @@ export class SlideDeck {
     }
     if (game.id === 'david-goliath-sliding') {
       return {
-        caption: 'Slide David’s colored bottle caps along the floor to strike Goliath and knock him out of bounds.'
+        caption: 'Slide or flick David’s 5 stones across the table distance to strike and shoot down Goliath!'
       };
     }
     if (game.id === 'brook-river-crossing') {

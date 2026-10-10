@@ -77,11 +77,9 @@ export const GAMES_CATALOG = [
     referenceTitle: 'DIY Craft Photo',
     setupImage: '/images/balloon_slingshot_setup.png',
     materials: [
-      { name: '1 Sturdy Table', note: 'Set up in Church Sanctuary for the cup pyramid' },
       { name: '10–12 Plastic Cups', note: '1 big cup for Giant Goliath & 9 smaller cups for 4-3-2-1 Pyramid' },
-      { name: '1–2 Soft Balls', note: 'Foam or soft felt balls' },
+      { name: '1–2 Soft Balls', note: 'Crumbled paper balls' },
       { name: '1 Cardboard Goliath Cutout', note: 'Drawn with helmet, shield & spear' },
-      { name: 'Rope or Masking Tape', note: 'For throwing distance line' },
       { name: 'Balloon & Cup Slingshot', note: 'Cut balloon tied to bottomless cup' },
     ],
     setupSteps: [
@@ -149,13 +147,8 @@ export const GAMES_CATALOG = [
     referenceTitle: 'DIY Craft Photo',
     setupImage: '/images/feed_goliath_setup.png',
     materials: [
-      { name: '1 Sturdy Table', note: 'Set up in Church Sanctuary to hold the Goliath target box' },
       { name: 'Cardboard Box (or large sheet)', note: 'Sturdy base to hold Goliath’s head' },
-      { name: 'Paper or Cardboard for Face', note: 'For sketching Goliath’s features' },
-      { name: 'Markers, Crayons, or Paint', note: 'To color helmet, beard, and teeth' },
-      { name: 'Scissors or Craft Knife', note: 'To cut out the large open mouth' },
-      { name: 'Tape or Glue', note: 'To secure face to the box' },
-      { name: 'Newspaper or Soft Balls', note: 'Crumpled sheets for ammo' },
+      { name: 'Newspaper or A4 Paper', note: 'Crumpled sheets' },
     ],
     setupSteps: [
       {
@@ -246,11 +239,9 @@ export const GAMES_CATALOG = [
     referenceTitle: 'DIY Setup Photo',
     setupImage: '/images/footprint_stomp_setup.png',
     materials: [
-      { name: '6–8 Cardboard Footprints', note: 'Cut approx. 18–20 in long with drawn giant toes & armor' },
+      { name: '6 A4 paper Footprints', note: 'Draw giant footprints' },
       { name: '1 Laundry Basket or Hamper', note: 'Target basket with Goliath shield cutout on front' },
-      { name: '1 Soft Foam Ball', note: 'Single lightweight foam ball for safe tossing' },
-      { name: 'Painter’s Tape', note: 'Secures footprints to floor & marks team start line' },
-      { name: 'Marker Pen', note: 'To number footprints 1 to 6 along the trail' },
+      { name: '1 BALL', note: 'Take from FAA' },
     ],
     setupSteps: [
       {
@@ -341,10 +332,9 @@ export const GAMES_CATALOG = [
     takeawayHighlight: 'The Lord looks at the heart, not outward appearance (1 Sam 16:7).',
     leaderInstruction: '“Welcome campers to Find the David! The prophet Samuel went to Jesse looking for God’s chosen king. Jesse presented his tallest, strongest sons, but God said no. Today, you are Samuel! Each camper steps up, flips ONE card, and checks the face. If it is an older brother, turn it back. If it is David, keep it open! Can we remember where the brothers are and find both Davids?”',
     materials: [
-      { name: 'Sturdy Cardboard Bases', note: 'Cut thick cardboard into equal squares/rectangles as rigid bases' },
       { name: 'A4 Printed Character Sheets', note: 'David and older brother illustrations printed on standard A4 paper' },
-      { name: 'Glue Stick or Tape', note: 'Securely stick the A4 printed cutouts on top of each cardboard base' },
-      { name: '2 Matching David Cards', note: 'Young shepherd boy with harp or sling and a golden heart' },
+      { name: '10 Matching David Cards', note: 'Young shepherd boy with harp or sling and a golden heart' },
+      { name: '20 Golliath Cards', note: '' },
     ],
     setupSteps: [
       {
@@ -426,10 +416,9 @@ export const GAMES_CATALOG = [
     referenceTitle: 'DIY Craft Photo',
     setupImage: '/images/reaction_ball_setup.png',
     materials: [
-      { name: '2 Long Strings (or Broom Handles)', note: 'Taut parallel guide rails for the ball' },
-      { name: 'Balls (Tennis ball, Foam, or FAA balls)', note: 'Smooth rolling balls for the track' },
-      { name: '3–5 Cups, Bowls, or Placeholders', note: 'Positioned in a row along the path' },
-      { name: 'Painter’s Tape or Floor Line', note: 'Marks straight track on the ground' }
+      { name: '2 brooms', note: 'Guide rails for the ball' },
+      { name: 'FAA balls', note: 'Smooth rolling balls for the track' },
+      { name: '2 basket', note: 'Positioned in a row along the path' },
     ],
     setupSteps: [
       {
@@ -503,81 +492,69 @@ export const GAMES_CATALOG = [
     },
     kidsGuidance: {
       tag: '🎈 For Kids (Age 3–6)',
-      tip: 'Compact 4-ft taped ring • Gentle floor slide • Practice 1 slide before aiming at Goliath!'
+      tip: 'Stand closer along the table edge • Gentle finger flick or slide • Practice 1 slide before aiming at Goliath!'
     },
     olderGuidance: {
       tag: '🚀 For Older Kids (Age 7+)',
-      tip: 'Standard 6-ft taped boundary • Knock Goliath completely out of bounds • Tactical stone bank shots!'
+      tip: 'Shoot from the far edge across the full table length • Aim to knock Goliath completely down or off the table!'
     },
     place: 'FAA Blue Room',
-    assetsNeeded: 'None',
+    assetsNeeded: 'Table',
     referenceImage: '/images/sliding_game_craft.png',
-    referenceTitle: 'DIY Craft Photo',
+    referenceTitle: 'DIY Tabletop Setup Photo',
     setupImage: '/images/david_goliath_sliding_setup.png',
     materials: [
-      { name: '5 Colored Bottle Caps', note: 'David’s 5 stones (Red, Yellow, Green, Blue, Purple)' },
-      { name: '1 Goliath Bottle Cap', note: 'Marked with “G” in center (black or dark blue)' },
-      { name: 'Masking Tape', note: 'To tape the floor square and center “X”' },
-      { name: 'Marker Pen', note: 'To write “G” on Goliath’s cap' },
-      { name: 'Smooth Floor Surface', note: 'Tile, laminate, or smooth gym floor' }
+      { name: '5 Colored Bottle Caps', note: 'David’s 5 smooth stones (Red, Yellow, Green, Orange, Purple)' },
+      { name: '1 Goliath Bottle Cap', note: 'Marked with “G” in center (target standing at far end)' },
+      { name: '1 Smooth Table', note: 'Long wooden activity or dining table in FAA Blue Room' },
     ],
     setupSteps: [
       {
         step: 1,
-        title: 'Tape the Playing Square',
-        desc: 'Use masking tape to mark a large square boundary on the smooth floor.'
+        title: 'Clear a Smooth Table',
+        desc: 'Set up a long, smooth activity table in the FAA Blue Room with an unobstructed sliding surface.'
       },
       {
         step: 2,
-        title: 'Mark the Center Target X',
-        desc: 'Place a small tape “X” directly in the center of the taped square.'
+        title: 'Position Goliath at Far End',
+        desc: 'Place the Goliath bottle cap (marked “G”) at the far opposite end of the table as the knockdown target.'
       },
       {
         step: 3,
-        title: 'Place Goliath on the X',
-        desc: 'Put the Goliath bottle cap (marked “G”) right on the center X.'
+        title: 'Line Up David’s 5 Stones',
+        desc: 'Place the 5 colored David bottle caps at the front shooting edge, leaving a good distance to Goliath.'
       },
       {
         step: 4,
-        title: 'Position Players Around Edge',
-        desc: 'Have children sit or stand around the outside edge of the square.'
-      },
-      {
-        step: 5,
-        title: 'Hand Out the 5 David Stones',
-        desc: 'Give the children the 5 different-colored David bottle caps ready to slide.'
+        title: 'Queue Campers at Table Edge',
+        desc: 'Have children line up at the shooting edge of the table ready to take their turns!'
       }
     ],
     rules: [
       {
         badge: 'Rule 1',
-        title: 'Take Turns (1 Cap Each)',
-        text: 'Players take turns sliding one David bottle cap at a time toward Goliath.'
+        title: 'Step Up to the Table Edge',
+        text: 'Players take turns stepping up to the front edge of the table to aim David’s 5 stones.'
       },
       {
         badge: 'Rule 2',
-        title: 'Slide, Do Not Throw!',
-        text: 'Must slide the bottle cap along the floor. Never throw or toss caps!'
+        title: 'Slide or Flick — No Throwing!',
+        text: 'Slide or flick the bottle cap flat along the tabletop surface towards Goliath across the distance. Never throw through the air!'
       },
       {
         badge: 'Rule 3',
-        title: 'Aim to Hit Goliath',
-        text: 'Try to strike the Goliath bottle cap resting in the center of the square.'
+        title: 'Aim to Shoot Down Goliath',
+        text: 'Aim across the table distance to strike Goliath directly and shoot him down or off the table!'
       },
       {
         badge: 'Rule 4',
-        title: 'Knock Goliath Out of Bounds',
-        text: 'The goal is to knock Goliath completely outside the taped square boundary.'
+        title: '5 Stones per Player',
+        text: 'Each player slides David’s 5 colored bottle caps one by one before retrieving ammo for the next teammate.'
       },
       {
         badge: 'Rule 5',
-        title: 'One Player at a Time',
-        text: 'Wait your turn! Never slide multiple bottle caps simultaneously.'
-      },
-      {
-        badge: 'Rule 6',
         title: 'Rotate Until Goliath Falls',
-        text: 'If Goliath remains inside the square, next player slides until Goliath is knocked out!'
+        text: 'Teams cheer and rotate shooters until a brave shot knocks Goliath down in victory!'
       }
     ]
   },
@@ -794,10 +771,7 @@ export const GAMES_CATALOG = [
     takeawayHighlight: 'Joyful whole-body worship and courageous actions speak louder than words.',
     leaderInstruction: '“Welcome campers to Miracle Motion! One brave camper steps to the front as our secret actor. I will show you a card — an animal, Bible hero, or camp expression. STRICTLY NO TALKING or sound effects! You have to act it out with your hands, face, and body. Teammates, raise your hands to guess! 1 correct guess gives 1 mark. Can your squad collect at least 5 marks to pass the Miracle test? Ready... ACT!”',
     materials: [
-      { name: 'Prompt Cards Set', note: 'Paper sheets with characters (David, Goliath), animals (Lion, Sheep), & emotions (Happy, Brave, Surprised)' },
-      { name: 'Tally Board or Easel', note: 'Chalkboard, whiteboard, or poster to track the 5 marks needed to pass' },
-      { name: 'Colored Markers & Paper', note: 'To draw quick extra prompts or spontaneous bonus rounds' },
-      { name: 'Camp Carpet or Rug', note: 'Cozy seating area where team sits in a semicircle' },
+      { name: 'Prompt Cards Set', note: 'Prepare A4 Paper or Manilla card' },
     ],
     setupSteps: [
       {
