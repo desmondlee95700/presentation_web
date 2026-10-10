@@ -644,6 +644,7 @@ export class SlideDeck {
       img.src = src;
       modal.classList.add('active');
       modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
     }
   }
 
@@ -652,6 +653,7 @@ export class SlideDeck {
     if (modal) {
       modal.classList.remove('active');
       modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
     }
   }
 
@@ -841,6 +843,10 @@ export class SlideDeck {
 
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+
+    const container = modal.querySelector('.rules-modal-container');
+    if (container) container.scrollTop = 0;
   }
 
   closeRulesModal() {
@@ -848,6 +854,7 @@ export class SlideDeck {
     if (modal) {
       modal.classList.remove('active');
       modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
     }
   }
 
