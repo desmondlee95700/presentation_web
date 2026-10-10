@@ -116,7 +116,7 @@ export class SlideDeck {
                     data-category="kids" 
                     role="tab"
                     aria-selected="${this.currentCategory === 'kids'}"
-                    title="Kids (Age 3–6): Games 1, 2, 3, 4">
+                    title="Kids (Age 3–6): 6 Games">
               <span class="cat-pill-emoji">🎈</span>
               <span class="cat-pill-text">Kids <span class="cat-pill-sub">(3–6)</span></span>
             </button>
@@ -126,7 +126,7 @@ export class SlideDeck {
                     data-category="older" 
                     role="tab"
                     aria-selected="${this.currentCategory === 'older'}"
-                    title="Older Kids (Age 7+): Games 6, 7, 8, 9">
+                    title="Older Kids (Age 7+): 5 Games">
               <span class="cat-pill-emoji">🚀</span>
               <span class="cat-pill-text">Older <span class="cat-pill-sub">(7+)</span></span>
             </button>
@@ -136,7 +136,7 @@ export class SlideDeck {
                     data-category="all" 
                     role="tab"
                     aria-selected="${this.currentCategory === 'all'}"
-                    title="All 9 Games">
+                    title="All 11 Games">
               <span class="cat-pill-emoji">🌟</span>
               <span class="cat-pill-text">All <span class="cat-pill-sub">Games</span></span>
             </button>
@@ -353,12 +353,35 @@ export class SlideDeck {
         { num: '3', title: 'All Across to Win', text: 'Cooperate as a team until every camper safely reaches the Finish Bank!' }
       ];
     }
-    // wind-of-elah
-    return [
-      { num: '1', title: 'Air Only — No Touching!', text: 'Cannot touch paper with hands or cardboard — wave your fan to create wind gusts!' },
-      { num: '2', title: 'All-Hands Flank Sweep', text: 'All teammates fan simultaneously; flank sweepers prevent stones drifting into walls.' },
-      { num: '3', title: 'Upward Flip into Basket', text: 'Front teammates generate the upward air burst to flip fluttering stones into the basket!' }
-    ];
+    if (game.id === 'wind-of-elah') {
+      return [
+        { num: '1', title: 'Air Only — No Touching!', text: 'Cannot touch paper with hands or cardboard — wave your fan to create wind gusts!' },
+        { num: '2', title: 'All-Hands Flank Sweep', text: 'All teammates fan simultaneously; flank sweepers prevent stones drifting into walls.' },
+        { num: '3', title: 'Upward Flip into Basket', text: 'Front teammates generate the upward air burst to flip fluttering stones into the basket!' }
+      ];
+    }
+    if (game.id === 'miracle-motion') {
+      return [
+        { num: '1', title: 'Actor to the Front', text: 'One child steps forward and receives a secret character, animal, or expression prompt card.' },
+        { num: '2', title: 'Silent Act — No Speaking!', text: 'Act out the card purely with motions and gestures without making a single sound or word!' },
+        { num: '3', title: 'Guess 5 to Pass', text: 'Teammates raise hands and guess. Rotate actors each turn; get at least 5 marks to pass!' }
+      ];
+    }
+    if (game.id === 'faith-and-balance') {
+      return [
+        { num: '1', title: 'Balance with Spoon', text: 'Scoop a ball onto your team’s spoon — strictly no hands holding or touching the ball!' },
+        { num: '2', title: 'Drop in Target Basket', text: 'Navigate carefully down the lane and deposit the ball safely into the target bin.' },
+        { num: '3', title: 'Sprint Back & Pass Relay', text: 'Sprint back, hand the spoon to the next teammate, and repeat for 2 minutes to collect the most balls!' }
+      ];
+    }
+    if (game.rules && game.rules.length >= 3) {
+      return game.rules.slice(0, 3).map((r, i) => ({
+        num: String(i + 1),
+        title: r.title,
+        text: r.text
+      }));
+    }
+    return [];
   }
 
   getColumn1Data(game) {
@@ -410,9 +433,27 @@ export class SlideDeck {
         caption: 'Tape two river banks 20–30 ft apart and number 5 cardboard delivery box squares from 1 to 5.'
       };
     }
+    if (game.id === 'wind-of-elah') {
+      return {
+        image: game.referenceImage,
+        caption: 'Scatter 20 paper stones in FAA Pink Room, position low basketball basket as goal, and equip squad with fans.'
+      };
+    }
+    if (game.id === 'miracle-motion') {
+      return {
+        image: game.referenceImage,
+        caption: 'Prepare prompt cards with characters, animals, and expressions on a table, and seat campers in a semicircle.'
+      };
+    }
+    if (game.id === 'faith-and-balance') {
+      return {
+        image: game.referenceImage,
+        caption: 'Tape the start line, position the target basket 20–25 ft away, and set out plastic spoons with plenty of small balls.'
+      };
+    }
     return {
       image: game.referenceImage,
-      caption: 'Scatter 20 paper stones in FAA Pink Room, position low basketball basket as goal, and equip squad with fans.'
+      caption: game.subtitle || ''
     };
   }
 
@@ -457,8 +498,23 @@ export class SlideDeck {
         caption: 'Balance strictly on cardboard squares and pass rear boards forward hand-to-hand across the river!'
       };
     }
+    if (game.id === 'wind-of-elah') {
+      return {
+        caption: 'Work as an all-hands wind squad to herd and flip all 20 paper river stones into the low basketball basket within 60 seconds!'
+      };
+    }
+    if (game.id === 'miracle-motion') {
+      return {
+        caption: 'Campers take turns acting silently without words until the team guesses at least 5 acts correctly!'
+      };
+    }
+    if (game.id === 'faith-and-balance') {
+      return {
+        caption: 'Collect as many balls into the target basket as you can in 2 minutes through steady spoon relay handoffs!'
+      };
+    }
     return {
-      caption: 'Work as an all-hands wind squad to herd and flip all 20 paper river stones into the low basketball basket within 60 seconds!'
+      caption: game.subtitle || ''
     };
   }
 

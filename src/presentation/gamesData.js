@@ -12,8 +12,8 @@ export const CATEGORIES = {
     label: 'Kids (Age 3–6)',
     shortLabel: 'Kids 3–6',
     emoji: '🎈',
-    gameIds: ['goliath-slingshot', 'feed-goliath', 'david-bench-relay', 'footprint-stomp-toss', 'find-the-david'],
-    description: 'Games 1 to 5 • Fun, Gentle, Safe Obstacles & Teamwork Relay',
+    gameIds: ['goliath-slingshot', 'feed-goliath', 'david-bench-relay', 'footprint-stomp-toss', 'find-the-david', 'miracle-motion'],
+    description: 'Games 1 to 5 & 10 • Fun, Gentle, Safe Obstacles & Miracle Motion',
     themeColor: '#ea580c',
     pillBg: '#ffedd5',
     pillText: '#9a3412',
@@ -23,8 +23,8 @@ export const CATEGORIES = {
     label: 'Older Kids (Age 7+)',
     shortLabel: 'Older 7+',
     emoji: '🚀',
-    gameIds: ['reaction-ball-cup', 'david-goliath-sliding', 'brook-river-crossing', 'wind-of-elah'],
-    description: 'Games 6, 7, 8, 9 • Focus, Accuracy, Speed & Fan Herd Challenge',
+    gameIds: ['reaction-ball-cup', 'david-goliath-sliding', 'brook-river-crossing', 'wind-of-elah', 'faith-and-balance'],
+    description: 'Games 6 to 9 & 11 • Focus, Accuracy, Speed, Fan Herd & Faith Balance',
     themeColor: '#7c3aed',
     pillBg: '#f3e8ff',
     pillText: '#6b21a8',
@@ -32,10 +32,10 @@ export const CATEGORIES = {
   ALL: {
     id: 'all',
     label: 'All Games',
-    shortLabel: 'All 9 Games',
+    shortLabel: 'All 11 Games',
     emoji: '🌟',
-    gameIds: ['goliath-slingshot', 'feed-goliath', 'david-bench-relay', 'footprint-stomp-toss', 'find-the-david', 'reaction-ball-cup', 'david-goliath-sliding', 'brook-river-crossing', 'wind-of-elah'],
-    description: 'Complete 9-Game Camp Activity Deck',
+    gameIds: ['goliath-slingshot', 'feed-goliath', 'david-bench-relay', 'footprint-stomp-toss', 'find-the-david', 'reaction-ball-cup', 'david-goliath-sliding', 'brook-river-crossing', 'wind-of-elah', 'miracle-motion', 'faith-and-balance'],
+    description: 'Complete 11-Game Camp Activity Deck',
     themeColor: '#0284c7',
     pillBg: '#e0f2fe',
     pillText: '#0369a1',
@@ -846,6 +846,187 @@ export const GAMES_CATALOG = [
         badge: 'Rule 4',
         title: '60-Second Team Clock',
         text: 'The team that safely herds the most paper river stones into the basket before the timer expires wins!'
+      }
+    ]
+  },
+  {
+    id: 'miracle-motion',
+    catalogNumber: 10,
+    title: 'Miracle Motion',
+    subtitle: 'Bible Charades & Silent Action Guessing Relay',
+    categories: ['kids'], // Kids (Age 3-6)
+    badge: 'GAME 10 • MIRACLE MOTION',
+    tabTitle: 'Miracle Motion',
+    mascotEmoji: '🎭',
+    // Pastel Stationery Theme Colors — Soft Sunny Buttercup
+    palette: {
+      bgCanvas: '#fdfce8',     // Soft Sunny Buttercup
+      bgTab: '#f7f3cb',        // Top folder tab
+      tabTextColor: '#713f12', // Warm amber charcoal
+      themeColor: '#ca8a04',   // Golden honey accent
+      accentColor: '#eab308',  // Sunbeam highlight
+      cardBorder: '#edeab2',   // Soft border
+      badgeBg: '#fef9c3',      // Buttercup pill
+      badgeText: '#854d0e',
+    },
+    kidsGuidance: {
+      tag: '🎈 Exclusive for Kids (Age 3–6)',
+      tip: 'Counselor whispers or shows the picture card to the actor • If shy, counselor mimes alongside them! • Keep guessing fast & cheer every turn!'
+    },
+    place: 'Church Sanctuary / Carpet Area',
+    assetsNeeded: 'Prompt Cards & Tally Board',
+    referenceImage: '/images/miracle_motion_craft.png',
+    referenceTitle: 'DIY Prompt Cards Photo',
+    setupImage: '/images/miracle_motion_setup.png',
+    timeEstimate: '10–12 minutes',
+    playersCount: 'Circle of campers (take turns)',
+    spiritualTakeaway: '“Whatever you do, work at it with all your heart, as working for the Lord!” (Colossians 3:23) — David praised God not just with words, but with joyful whole-body worship, courage against lions and bears, and humble obedience.',
+    takeawayHighlight: 'Joyful whole-body worship and courageous actions speak louder than words.',
+    leaderInstruction: '“Welcome campers to Miracle Motion! One brave camper steps to the front as our secret actor. I will show you a card — an animal, Bible hero, or camp expression. STRICTLY NO TALKING or sound effects! You have to act it out with your hands, face, and body. Teammates, raise your hands to guess! 1 correct guess gives 1 mark. Can your squad collect at least 5 marks to pass the Miracle test? Ready... ACT!”',
+    materials: [
+      { name: 'Prompt Cards Set', note: 'Paper sheets with characters (David, Goliath), animals (Lion, Sheep), & emotions (Happy, Brave, Surprised)' },
+      { name: 'Tally Board or Easel', note: 'Chalkboard, whiteboard, or poster to track the 5 marks needed to pass' },
+      { name: 'Colored Markers & Paper', note: 'To draw quick extra prompts or spontaneous bonus rounds' },
+      { name: 'Camp Carpet or Rug', note: 'Cozy seating area where team sits in a semicircle' },
+    ],
+    setupSteps: [
+      {
+        step: 1,
+        title: 'Prepare Illustrated Prompt Cards',
+        desc: 'Draw or print simple picture prompt cards for characters (Shepherd David, Goliath), animals (Lion, Bear, Lamb), and emotions (Happy, Brave, Surprised).'
+      },
+      {
+        step: 2,
+        title: 'Seat Campers in a Semicircle',
+        desc: 'Gather children on the carpet in a half-circle facing the front stage area with clear sightlines.'
+      },
+      {
+        step: 3,
+        title: 'Set Up 5-Star Tally Board',
+        desc: 'Place a small chalkboard or easel near the stage with 5 empty star slots ready to be filled with marks.'
+      },
+      {
+        step: 4,
+        title: 'Assign Counselor Stage Partner',
+        desc: 'A counselor stands near the stage to hold cards, whisper prompts to shy little ones, and guide turns.'
+      }
+    ],
+    rules: [
+      {
+        badge: 'Rule 1',
+        title: 'Choose One Actor to the Front',
+        text: 'One child steps to the front stage to be the actor for the round.'
+      },
+      {
+        badge: 'Rule 2',
+        title: 'Strictly Silent Acting — No Speaking!',
+        text: 'The actor is shown a secret prompt card and must act out the character, animal, or expression without making any words or sounds.'
+      },
+      {
+        badge: 'Rule 3',
+        title: 'Teammates Raise Hands to Guess',
+        text: 'Seated members raise their hands and take turns shouting their guesses. 1 correct guess awards 1 mark to the team!'
+      },
+      {
+        badge: 'Rule 4',
+        title: 'Rotate Actors Every Turn',
+        text: 'Once guessed correctly, choose the next camper to step up so everyone gets a turn to act.'
+      },
+      {
+        badge: 'Rule 5',
+        title: 'Collect 5 Marks to Pass!',
+        text: 'The team continues rotating actors until they achieve at least 5 correct guesses to complete the challenge!'
+      }
+    ]
+  },
+  {
+    id: 'faith-and-balance',
+    catalogNumber: 11,
+    title: 'Faith & Balance',
+    subtitle: 'Spoon-and-Ball Speed Navigation & 2-Minute Basket Relay',
+    categories: ['older'], // Older Kids (Age 7+)
+    badge: 'GAME 11 • FAITH & BALANCE',
+    tabTitle: 'Faith & Balance',
+    mascotEmoji: '🥄',
+    // Pastel Stationery Theme Colors — Soft Emerald Mint
+    palette: {
+      bgCanvas: '#edfbf5',     // Soft Emerald Mint
+      bgTab: '#d4f5e7',        // Top folder tab
+      tabTextColor: '#065f46', // Deep emerald charcoal
+      themeColor: '#059669',   // Emerald mint accent
+      accentColor: '#10b981',  // Mint glow highlight
+      cardBorder: '#c0eed9',   // Soft border
+      badgeBg: '#d1fae5',      // Mint pill
+      badgeText: '#065f46',
+    },
+    olderGuidance: {
+      tag: '🚀 Exclusive for Older Kids (Age 7+)',
+      tip: 'Bend knees slightly for a low center of gravity • Do not sprint until ball is dropped in bucket • Keep spare spoons on deck behind start line!'
+    },
+    place: 'Church Gym / Fellowship Hall',
+    assetsNeeded: 'Spoons, Balls, Target Basket & Floor Tape',
+    referenceImage: '/images/faith_balance_craft.png',
+    referenceTitle: 'DIY Supplies Photo',
+    setupImage: '/images/faith_balance_setup.png',
+    timeEstimate: '8–10 minutes',
+    playersCount: 'Teams of 4–8 players',
+    spiritualTakeaway: '“We walk by faith, not by sight.” (2 Corinthians 5:7) & “Whoever can be trusted with very little can also be trusted with much.” (Luke 16:10) — Just like balancing a small ball on a spoon takes focus, patience, and composure, holding onto our faith requires steady trust in God even when rushing through life.',
+    takeawayHighlight: 'Walking with steady faith and patience under pressure leads to victory.',
+    leaderInstruction: '“Campers, welcome to Faith & Balance! Each team gets ONE plastic spoon. At the start line, you must scoop a ball onto your spoon. WITHOUT touching the ball with your hands, carefully navigate across the gym and deposit it into the Target Basket. Once it drops cleanly into the basket, sprint back and hand off the spoon to your next teammate. You have exactly 2 minutes on the clock — how many balls can your squad collect? Ready, balance, GO!”',
+    materials: [
+      { name: 'Small Balls (15–20 pcs)', note: 'Lightweight ping-pong balls, mini plastic balls, or tightly crumpled paper balls (cheapest DIY option)' },
+      { name: 'Sturdy Plastic Spoons (4–6 pcs)', note: '1 spoon per active team, plus spare backup spoons in case of breakage' },
+      { name: 'Target Baskets / Buckets (2 pcs)', note: 'Plastic laundry basket, storage tub, or bucket placed at the far end' },
+      { name: 'Floor Masking Tape', note: 'To mark the start line, runner lanes, and return sprint track' },
+      { name: 'Stopwatch / 2-Minute Timer', note: 'Digital sports timer or camp countdown clock' },
+    ],
+    setupSteps: [
+      {
+        step: 1,
+        title: 'Tape the Start Line & Lane',
+        desc: 'Use masking tape to mark a straight start line and a 20–25 ft walking lane across the smooth floor.'
+      },
+      {
+        step: 2,
+        title: 'Place Target Basket at Far End',
+        desc: 'Position a sturdy plastic laundry basket or bucket at the far end of each team lane.'
+      },
+      {
+        step: 3,
+        title: 'Prepare Ball Bowl & Spoons',
+        desc: 'Place a bowl of ping-pong or crumpled paper balls at the start line alongside 1 active spoon and spares.'
+      },
+      {
+        step: 4,
+        title: 'Line Up Teams & Set 2-Min Clock',
+        desc: 'Queue campers in single-file behind the tape line and set the official countdown timer to 2:00.'
+      }
+    ],
+    rules: [
+      {
+        badge: 'Rule 1',
+        title: '1 Spoon per Team — No Touching Ball!',
+        text: 'The runner must scoop and balance the ball on the plastic spoon without using fingers or hands to hold it in place.'
+      },
+      {
+        badge: 'Rule 2',
+        title: 'Carry Ball into Target Basket',
+        text: 'Carefully walk or run down the lane and drop the ball cleanly into the target basket or bucket.'
+      },
+      {
+        badge: 'Rule 3',
+        title: 'Ball Drop Reset',
+        text: 'If the ball falls off the spoon, freeze! Pick it up with the spoon from that spot before continuing forward.'
+      },
+      {
+        badge: 'Rule 4',
+        title: 'Sprint Back & Hand Off Spoon',
+        text: 'Once the ball is in the basket, sprint down the return lane and hand the spoon to the next queued teammate.'
+      },
+      {
+        badge: 'Rule 5',
+        title: '2-Minute Clock Challenge',
+        text: 'Repeat the relay in rotation until the 2-minute timer ends. The team with the most collected balls wins!'
       }
     ]
   }

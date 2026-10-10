@@ -20,6 +20,8 @@ All future style updates, UI additions, and components MUST adhere strictly to t
   - Game 7 (*David & Goliath Sliding Game*): Soft Dreamy Lilac (`#f6f1fc` / tab `#eae1f8`).
   - Game 8 (*Brook of Elah River Crossing*): Soft Lagoon Aqua (`#f0faf8` / tab `#dbeefa`).
   - Game 9 (*The Wind of Elah*): Soft Warm Papaya Breeze (`#fff7f0` / tab `#fde0cc`).
+  - Game 10 (*Miracle Motion*): Soft Sunny Buttercup (`#fdfce8` / tab `#f7f3cb`).
+  - Game 11 (*Faith & Balance*): Soft Emerald Mint (`#edfbf5` / tab `#d4f5e7`).
 - **Strictly Prohibited**: NO audio sound effects, NO arcade game widgets/tappers, NO fake clip-art emojis, and NO cramped dashboards.
 - **Layout (Modeled directly on Slide 01 in the reference template)**:
   - **Top Pill Header**: Horizontal rounded pill (`border-radius: 9999px`) holding category tag on the left, slide number in the center (`01`, `02`, `03`, `04`, etc.), and camp date on the right.
@@ -34,13 +36,13 @@ All future style updates, UI additions, and components MUST adhere strictly to t
 ## 👥 Age Categories & Game Mapping
 
 1. **🎈 Kids (Age 3–6)**:
-   - Games: **1, 2, 3, 4, 5**
-   - Characteristics: Fun, gentle motor skills, safe obstacle crawling, cooperative puzzle relay, and counselor guidance.
+   - Games: **1, 2, 3, 4, 5, 10**
+   - Characteristics: Fun, gentle motor skills, safe obstacle crawling, cooperative puzzle relay, and Miracle Motion charades.
 2. **🚀 Older Kids (Age 7+)**:
-   - Games: **6, 7, 8, 9**
-   - Characteristics: Precision, dual-string balance, knockout distance, all-hands fan herd, and speed relay races.
+   - Games: **6, 7, 8, 9, 11**
+   - Characteristics: Precision, dual-string balance, knockout distance, all-hands fan herd, and Faith & Balance spoon relay.
 3. **🌟 All Games**:
-   - Includes all 9 activities with category indicator tags.
+   - Includes all 11 activities with category indicator tags.
 
 ---
 

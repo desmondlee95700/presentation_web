@@ -18,7 +18,7 @@
 <p align="center">
   <a href="https://vitejs.dev/"><img src="https://img.shields.io/badge/Vite-6.0-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite"></a>
   <img src="https://img.shields.io/badge/Ages-3--6%20%7C%207%2B-FF9800?style=flat-square" alt="Age Groups">
-  <img src="https://img.shields.io/badge/Games-9%20Activities-4CAF50?style=flat-square" alt="9 Games">
+  <img src="https://img.shields.io/badge/Games-11%20Activities-4CAF50?style=flat-square" alt="11 Games">
   <img src="https://img.shields.io/badge/Design-Warm%20Pastel-E91E63?style=flat-square" alt="Warm Pastel Desk">
   <img src="https://img.shields.io/badge/Audio-Zero%20Dependencies-9C27B0?style=flat-square" alt="Zero Audio">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-brightgreen.svg?style=flat-square" alt="MIT License"></a>
@@ -28,7 +28,7 @@
 
 ## 🌟 Highlights & Features
 
-- **🎯 Age-Tailored Tracks**: Instantly filter and launch games tailored for **🎈 Kids (Age 3–6)** or **🚀 Older Kids (Age 7+)**, or browse all 9 activities.
+- **🎯 Age-Tailored Tracks**: Instantly filter and launch games tailored for **🎈 Kids (Age 3–6)** or **🚀 Older Kids (Age 7+)**, or browse all 11 activities.
 - **🎨 Warm Pastel Editorial Canvas**: Clean, spacious desk aesthetic (`#fbf8f1`) featuring bespoke signature pastel color themes for every single game.
 - **📸 3-Column Facilitator View**:
   1. **DIY Craft Card**: Real workshop craft photo with concise preparation details.
@@ -43,7 +43,7 @@
 ## 🎮 Game Catalog
 
 ### 🎈 Kids Track (Age 3–6)
-*Gentle motor coordination, safe obstacle navigation, cooperative relay, and counselor support.*
+*Gentle motor coordination, safe obstacle navigation, cooperative relay, and charades guessing.*
 
 | # | Game Title | Theme & Focus | Signature Pastel |
 |---|---|---|---|
@@ -52,16 +52,18 @@
 | **03** | **David's Valley Bench Dash** | Low-bench balance beam crawl & stone rescue relay | Sunny Honey (`#fdfbf0`) |
 | **04** | **Goliath's Footprint Stomp & Toss** | Big-step footprint agility course & beanbag landing | Blossom Blush (`#fdf2f4`) |
 | **05** | **Find the David** | Memory card grid & anointing of God's chosen king | Royal Periwinkle (`#f4f6fe`) |
+| **10** | **Miracle Motion** | Bible charades & silent action guessing (5 marks to pass) | Sunny Buttercup (`#fdfce8`) |
 
 ### 🚀 Older Kids Track (Age 7+)
 *Speed, precision aiming, dual-string balance coordination, and strategic team play.*
 
 | # | Game Title | Theme & Focus | Signature Pastel |
 |---|---|---|---|
-| **06** | **Reaction Ball & Cup Game** | Fast reflexes, ping-pong bounce catching duel | Powder Sky Blue (`#f0f6fc`) |
+| **06** | **Reaction Ball & Cup Game** | Fast reflexes, dual-string balance & cup drop | Powder Sky Blue (`#f0f6fc`) |
 | **07** | **David & Goliath Sliding Game** | Dual-string pulley steering & precision ring drop | Dreamy Lilac (`#f6f1fc`) |
 | **08** | **Brook of Elah River Crossing** | Stepping stone floor balance & river sprint | Lagoon Aqua (`#f0faf8`) |
-| **09** | **The Wind of Elah** | Handheld fan wind race herding ping-pong "sheep" | Papaya Breeze (`#fff7f0`) |
+| **09** | **The Wind of Elah** | Handheld fan wind race herding paper stones | Papaya Breeze (`#fff7f0`) |
+| **11** | **Faith & Balance** | Spoon-and-ball balance navigation & 2-min basket relay | Emerald Mint (`#edfbf5`) |
 
 ---
 
@@ -70,7 +72,7 @@
 All visual components adhere to our minimal editorial design rules:
 - **Palette**: Warm pastel desk canvas (`#fbf8f1` / `#fcf9f2`) with soft ambient glows.
 - **Typography**: `Outfit` for bold modern headings, `Plus Jakarta Sans` for body copy, and `JetBrains Mono` for badges and metadata.
-- **Top Pill Header**: Category indicator on left, zero-padded slide number (`01`–`09`) in the center, and camp date badge on right.
+- **Top Pill Header**: Category indicator on left, zero-padded slide number (`01`–`11`) in the center, and camp date badge on right.
 
 ---
 
