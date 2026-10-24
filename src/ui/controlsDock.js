@@ -46,15 +46,6 @@ export class ControlsDock {
           <span class="dock-btn-label">Prev</span>
         </button>
 
-        <!-- Game Rules Quick Button -->
-        <button type="button" 
-                class="btn-dock-rules" 
-                id="btn-dock-rules" 
-                title="View Full Rules Modal (Press R)" 
-                aria-label="View Game Rules">
-          <span class="dock-rules-icon">🎯</span>
-          <span class="dock-rules-text">Rules Sheet</span>
-        </button>
 
         <!-- Next Slide Button -->
         <button type="button" 
@@ -74,7 +65,6 @@ export class ControlsDock {
     const homeBtn = this.container.querySelector('#btn-dock-home');
     const prevBtn = this.container.querySelector('#btn-dock-prev');
     const nextBtn = this.container.querySelector('#btn-dock-next');
-    const rulesBtn = this.container.querySelector('#btn-dock-rules');
 
     if (homeBtn) {
       homeBtn.addEventListener('click', (e) => {
@@ -99,12 +89,6 @@ export class ControlsDock {
       });
     }
 
-    if (rulesBtn) {
-      rulesBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        this.deck.openRulesModal();
-      });
-    }
 
     this.renderDrawer();
   }

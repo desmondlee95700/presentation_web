@@ -620,28 +620,18 @@ export const GAMES_CATALOG = [
     rules: [
       {
         badge: 'Rule 1',
-        title: 'Cannot Step on Floor',
-        text: 'All players must balance strictly on the cardboard squares. You cannot step on the floor!'
+        title: 'Hold an Item',
+        text: 'Assign few kids to hold an item'
       },
       {
         badge: 'Rule 2',
-        title: 'Pass Rear Cardboard Forward',
-        text: 'Pick up cardboard from the rear and pass hand-to-hand forward to make new steps.'
+        title: 'Pass Steps Forward',
+        text: 'Step on the A4 paper and pass'
       },
       {
         badge: 'Rule 3',
-        title: 'Floor Touch Penalty',
-        text: 'If any foot touches the bare floor, that cardboard square washes back to the start line!'
-      },
-      {
-        badge: 'Rule 4',
-        title: 'Cooperate Closely',
-        text: 'Stay close and communicate to keep cardboard squares moving quickly along the line.'
-      },
-      {
-        badge: 'Rule 5',
         title: 'All Across to Win',
-        text: 'The mission is complete when every team member safely reaches the Finish Bank!'
+        text: 'All kids must bring all the item back to successfully cross the river'
       }
     ]
   },

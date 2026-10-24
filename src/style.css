@@ -651,9 +651,24 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 8px;
-  margin: 10px 0 12px 0;
-  cursor: pointer;
+  gap: 7px;
+  margin: 8px 0 10px 0;
+  overflow-y: auto;
+  padding-right: 2px;
+  scrollbar-width: thin;
+}
+
+.pillar-rules-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.pillar-rules-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pillar-rules-body::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 9999px;
 }
 
 .slide-rule-card {

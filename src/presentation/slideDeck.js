@@ -235,11 +235,9 @@ export class SlideDeck {
                   <span class="header-icon">🎯</span>
                   <span class="header-title rules-title-color">How to Play</span>
                 </div>
-                <button type="button" class="btn-enlarge-rules" data-action="open-rules" title="Open Full Rules Sheet (Press R)">
-                  <span>🔍 Full Sheet</span>
-                </button>
+                <span class="header-counter-pill">${slideRules.length} Rules</span>
               </div>
-              <div class="pillar-rules-body" data-action="open-rules" role="button" tabindex="0" title="Click to view full rules sheet">
+              <div class="pillar-rules-body">
                 ${slideRules.map(r => `
                   <div class="slide-rule-card">
                     <span class="slide-rule-num">${r.num}</span>
@@ -297,78 +295,8 @@ export class SlideDeck {
   }
 
   getSlideRules(game) {
-    if (game.id === 'goliath-slingshot') {
-      return [
-        { num: '1', title: '3 Throws per Player', text: 'Step up and take 3 throws per turn using soft balls or balloon slingshots.' },
-        { num: '2', title: 'Stay Behind the Line', text: 'All shots must be released strictly from behind the marked floor line.' },
-        { num: '3', title: 'Team Turn Rotation', text: 'Teams alternate throwers while teammates cheer from behind the station!' }
-      ];
-    }
-    if (game.id === 'feed-goliath') {
-      return [
-        { num: '1', title: 'Step Up as David', text: 'Campers take turns holding crumpled paper balls ready to defeat Goliath.' },
-        { num: '2', title: 'Stay Behind the Line', text: 'Release all throws strictly from behind the 4-ft marked throwing line.' },
-        { num: '3', title: 'Aim for the Mouth', text: 'Toss paper balls directly into Goliath’s wide open mouth to score!' }
-      ];
-    }
-    if (game.id === 'footprint-stomp-toss') {
-      return [
-        { num: '1', title: 'Hop on Every Footprint', text: 'Jump with two feet into each giant footprint along the path yelling “STOMP!”' },
-        { num: '2', title: 'Toss Ball in the Basket', text: 'Stop on the final giant footprint, aim, and toss the ball into the basket!' },
-        { num: '3', title: 'Retrieve, Run & Pass', text: 'Grab the ball from the basket, sprint down the return lane, and pass to next camper!' }
-      ];
-    }
-    if (game.id === 'find-the-david') {
-      return [
-        { num: '1', title: 'Step Up as Samuel', text: 'Kids take turns stepping forward as Samuel searching for God’s chosen king.' },
-        { num: '2', title: 'Flip Exactly 1 Card', text: 'Flip 1 card only. If it’s an older brother, turn it face-down in the exact same spot!' },
-        { num: '3', title: 'Find Both Davids to Win', text: 'David cards stay face-up! When the second David is revealed, celebrate the true king!' }
-      ];
-    }
-    if (game.id === 'reaction-ball-cup') {
-      return [
-        { num: '1', title: 'Hold Strings at Start', text: 'Hold both guide strings taut at the player starting line position.' },
-        { num: '2', title: 'Guide Ball Smoothly', text: 'Gently spread, lift, and tilt strings to roll the ball along the track.' },
-        { num: '3', title: 'Drop in Every Cup', text: 'Control string tension to drop the ball cleanly into cups 1 through 4!' }
-      ];
-    }
-    if (game.id === 'david-goliath-sliding') {
-      return [
-        { num: '1', title: 'Tabletop Slide or Flick', text: 'Slide or flick David’s bottle caps flat across the table surface — never throw through the air!' },
-        { num: '2', title: 'Aim Across Distance', text: 'Target the Goliath cap stationed at the far end of the long table.' },
-        { num: '3', title: 'Shoot Down Goliath!', text: 'Strike Goliath across the table distance to knock him down or off the table to win!' }
-      ];
-    }
-    if (game.id === 'brook-river-crossing') {
-      return [
-        { num: '1', title: 'Cannot Touch Floor!', text: 'Balance strictly on cardboard steps — the floor is river water!' },
-        { num: '2', title: 'Pass Steps Forward', text: 'Pick up the rear cardboard square and pass hand-to-hand forward.' },
-        { num: '3', title: 'All Across to Win', text: 'Cooperate as a team until every camper safely reaches the Finish Bank!' }
-      ];
-    }
-    if (game.id === 'wind-of-elah') {
-      return [
-        { num: '1', title: 'Air Only — No Touching!', text: 'Cannot touch paper with hands or cardboard — wave your fan to create wind gusts!' },
-        { num: '2', title: 'All-Hands Flank Sweep', text: 'All teammates fan simultaneously; flank sweepers prevent stones drifting into walls.' },
-        { num: '3', title: 'Upward Flip into Basket', text: 'Front teammates generate the upward air burst to flip fluttering stones into the basket!' }
-      ];
-    }
-    if (game.id === 'miracle-motion') {
-      return [
-        { num: '1', title: 'Actor to the Front', text: 'One child steps forward and receives a secret character, animal, or expression prompt card.' },
-        { num: '2', title: 'Silent Act — No Speaking!', text: 'Act out the card purely with motions and gestures without making a single sound or word!' },
-        { num: '3', title: 'Guess 5 to Pass', text: 'Teammates raise hands and guess. Rotate actors each turn; get at least 5 marks to pass!' }
-      ];
-    }
-    if (game.id === 'faith-and-balance') {
-      return [
-        { num: '1', title: 'Balance with Spoon', text: 'Scoop a ball onto your team’s spoon — strictly no hands holding or touching the ball!' },
-        { num: '2', title: 'Drop in Target Basket', text: 'Navigate carefully down the lane and deposit the ball safely into the target bin.' },
-        { num: '3', title: 'Sprint Back & Pass Relay', text: 'Sprint back, hand the spoon to the next teammate, and repeat for 2 minutes to collect the most balls!' }
-      ];
-    }
-    if (game.rules && game.rules.length >= 3) {
-      return game.rules.slice(0, 3).map((r, i) => ({
+    if (game.rules && game.rules.length > 0) {
+      return game.rules.map((r, i) => ({
         num: String(i + 1),
         title: r.title,
         text: r.text
