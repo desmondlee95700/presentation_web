@@ -305,6 +305,14 @@ html, body {
   opacity: 0.85;
 }
 
+.cat-pill-pic {
+  font-size: 10px;
+  font-weight: 600;
+  opacity: 0.75;
+  padding-left: 6px;
+  border-left: 1px solid currentColor;
+}
+
 .pill-center-num {
   font-family: var(--font-mono);
   font-size: 12.5px;
@@ -440,6 +448,10 @@ html, body {
 .station-meta-pill .v-val {
   color: #0f172a;
   font-weight: 700;
+}
+
+.station-meta-pill.helper-pill {
+  border-color: var(--theme-color, #cbd5e1);
 }
 
 .station-meta-pill.place-pill {
@@ -1698,41 +1710,43 @@ body.modal-open {
 
 .drawer-header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  padding: 20px 26px 16px 26px;
+  gap: 12px;
+  padding: 22px 24px 14px 24px;
   background: #ffffff;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 .drawer-header-title-box {
   display: flex;
   flex-direction: column;
+  gap: 2px;
 }
 
-.drawer-title-row {
-  display: flex;
+.drawer-eyebrow {
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.drawer-star {
+  color: #f59e0b;
+  font-size: 12px;
 }
 
 .drawer-header h3 {
   font-family: var(--font-heading);
-  font-size: 20px;
-  font-weight: 750;
-  color: #1e293b;
-  letter-spacing: -0.01em;
-}
-
-.drawer-star {
-  color: #d97706;
-  font-size: 18px;
-}
-
-.drawer-header p {
-  font-size: 12.5px;
-  color: #64748b;
-  margin-top: 3px;
+  font-size: 24px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
 .drawer-header-actions {
@@ -1741,122 +1755,136 @@ body.modal-open {
   gap: 8px;
 }
 
-.btn-drawer-home-nav {
+.btn-drawer-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 9999px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #475569;
+  cursor: pointer;
   display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 12px;
-  border-radius: 9999px;
-  background: #fff7ed;
-  border: 1px solid #fed7aa;
-  color: #c2410c;
-  font-family: var(--font-heading);
-  font-size: 11.5px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.btn-drawer-home-nav:hover {
-  background: #ffedd5;
-  border-color: #fb923c;
-  transform: translateY(-1px);
-}
-
-.btn-close-drawer {
-  width: 32px;
-  height: 32px;
-  border-radius: 9999px;
-  border: 1.5px solid #e2e8f0;
-  background: #f8fafc;
-  color: #64748b;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
   align-items: center;
   justify-content: center;
   transition: all var(--transition-fast);
 }
 
-.btn-close-drawer:hover {
-  background: #fee2e2;
-  border-color: #fca5a5;
-  color: #ef4444;
-  transform: scale(1.05);
+.btn-drawer-icon:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #0f172a;
 }
 
 .drawer-category-bar {
-  padding: 12px 24px;
+  padding: 0 24px 16px 24px;
   background: #ffffff;
   border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
+/* Segmented age control */
 .drawer-pill-track {
   display: flex;
-  align-items: center;
-  gap: 6px;
-  background: #f1f5f9;
+  gap: 4px;
   padding: 4px;
   border-radius: 9999px;
-  border: 1px solid #e2e8f0;
+  background: #f4f1ea;
 }
 
 .drawer-pill-btn {
   flex: 1;
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
   gap: 6px;
-  padding: 8px 12px;
-  border-radius: 9999px;
+  height: 40px;
+  padding: 0 14px;
+  align-items: center;
   border: none;
+  border-radius: 9999px;
   background: transparent;
   cursor: pointer;
-  font-family: var(--font-heading);
-  font-size: 12.5px;
-  font-weight: 650;
-  color: #64748b;
-  transition: all var(--transition-fast);
-  white-space: nowrap;
+  color: #78716c;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.drawer-pill-btn:hover {
-  color: #1e293b;
-  background: rgba(255, 255, 255, 0.6);
+.drawer-pill-btn:hover:not(.active) {
+  color: #292524;
 }
 
 .drawer-pill-btn.active {
-  background: #ffffff;
-  color: #0f172a;
-  font-weight: 750;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
-}
-
-.d-pill-emoji {
-  font-size: 14px;
+  background: var(--tab-accent, #0f172a);
+  color: #ffffff;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--tab-accent, #0f172a) 30%, transparent);
 }
 
 .d-pill-label {
   font-family: var(--font-heading);
+  font-size: 14.5px;
+  font-weight: 700;
+}
+
+.d-pill-sub {
+  font-family: var(--font-heading);
   font-size: 12.5px;
-  font-weight: inherit;
+  font-weight: 600;
+  opacity: 0.7;
 }
 
-.d-pill-count {
-  font-family: var(--font-mono);
-  font-size: 11px;
+/* PIC + game count for the selected group */
+.drawer-group-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 4px;
+}
+
+.drawer-pic {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.drawer-pic-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--group-tint, #f1f5f9);
+  color: var(--group-accent, #0f172a);
+  font-family: var(--font-heading);
+  font-size: 14px;
   font-weight: 800;
-  background: rgba(100, 116, 139, 0.12);
-  color: inherit;
-  padding: 1px 7px;
-  border-radius: 9999px;
 }
 
-.drawer-pill-btn.active .d-pill-count {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+.drawer-pic-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.drawer-pic-text strong {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
   color: #0f172a;
+}
+
+.drawer-pic-text span {
+  font-size: 11.5px;
+  color: #94a3b8;
+}
+
+.drawer-game-count {
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #78716c;
 }
 
 /* Drawer Body & Grid */
@@ -1870,72 +1898,50 @@ body.modal-open {
   background: #fdfbf7;
 }
 
-.drawer-grid-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 0 2px;
-}
-
-.drawer-group-name {
-  font-family: var(--font-heading);
-  font-size: 14px;
-  font-weight: 750;
-  color: #1e293b;
-}
-
-.drawer-group-desc {
-  font-size: 12px;
-  color: #64748b;
-  font-style: italic;
-}
-
 .drawer-visual-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 14px;
 }
 
-/* Individual Slide Card */
+/* Individual Slide Card — pastel canvas per game, matching its slide */
 .drawer-slide-card {
-  background: #ffffff;
-  border-radius: 16px;
-  border: 1.5px solid rgba(226, 232, 240, 0.9);
-  overflow: hidden;
+  background: var(--card-bg, #ffffff);
+  border-radius: 18px;
+  border: 1.5px solid var(--card-border, rgba(226, 232, 240, 0.9));
+  padding: 8px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  gap: 4px;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
   text-align: left;
 }
 
 .drawer-slide-card:hover {
   transform: translateY(-3px);
-  border-color: #cbd5e1;
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
 }
 
 .drawer-slide-card:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.3);
+  box-shadow: 0 0 0 3px var(--card-accent, #d97706);
 }
 
 .drawer-slide-card.is-active {
-  border-color: #d97706;
-  box-shadow: 0 0 0 2px #f59e0b, 0 8px 24px rgba(217, 119, 6, 0.16);
-  background: #fffdfa;
+  border-color: var(--card-accent, #d97706);
+  box-shadow: 0 0 0 2px var(--card-accent, #d97706), 0 10px 24px rgba(15, 23, 42, 0.08);
 }
 
-/* Card Thumbnail */
+/* Card Thumbnail (inset photo) */
 .drawer-card-thumb {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 10;
   background: #f1f5f9;
   overflow: hidden;
-  border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+  border-radius: 12px;
 }
 
 .drawer-thumb-img {
@@ -1950,87 +1956,112 @@ body.modal-open {
   transform: scale(1.04);
 }
 
-.drawer-thumb-badge {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  color: #ffffff;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 750;
-  padding: 2.5px 8px;
-  border-radius: 6px;
-  letter-spacing: 0.02em;
-}
-
 .drawer-thumb-active-tag {
   position: absolute;
   top: 8px;
-  right: 8px;
-  background: #d97706;
-  color: #ffffff;
+  left: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #0f172a;
   font-family: var(--font-heading);
-  font-size: 10.5px;
-  font-weight: 750;
-  padding: 2.5px 9px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px 3px 8px;
   border-radius: 9999px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  letter-spacing: 0.01em;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.15);
+}
+
+.drawer-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--card-accent, #d97706);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--card-accent, #d97706) 25%, transparent);
 }
 
 /* Card Info Body */
 .drawer-card-info {
-  padding: 11px 13px 13px 13px;
+  padding: 8px 6px 4px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 }
 
-.drawer-card-tags-row {
+.drawer-card-head {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
+  align-items: baseline;
+  gap: 8px;
 }
 
-.drawer-card-cat-pill {
+.drawer-card-num {
   font-family: var(--font-heading);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 9999px;
-  background: var(--cat-bg, #f1f5f9);
-  color: var(--cat-color, #334155);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.drawer-card-supplies-tag {
-  font-size: 11px;
-  font-weight: 600;
-  color: #64748b;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--card-accent, #64748b);
+  font-variant-numeric: tabular-nums;
 }
 
 .drawer-card-title {
   font-family: var(--font-heading);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 750;
   color: #0f172a;
   line-height: 1.25;
-  margin-top: 2px;
 }
 
-.drawer-card-desc {
-  font-size: 11.5px;
-  color: #64748b;
-  line-height: 1.35;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.drawer-card-meta-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 10px;
 }
+
+.drawer-helper-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 10px 2px 2px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--card-border, #e2e8f0);
+}
+
+.drawer-helper-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card-accent, #64748b);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.drawer-helper-name {
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--card-ink, #0f172a);
+}
+
+.drawer-card-place {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.drawer-card-place svg {
+  flex-shrink: 0;
+  color: var(--card-accent, #94a3b8);
+}
+
 
 /* Compact Viewport Height Adaptation (Laptops & Small Displays) */
 @media (max-height: 760px) and (min-width: 901px) {
@@ -2098,7 +2129,7 @@ body.modal-open {
     -webkit-overflow-scrolling: touch;
     touch-action: pan-y;
     pointer-events: auto;
-    padding: 10px 12px calc(76px + env(safe-area-inset-bottom, 12px)) 12px;
+    padding: 10px 12px calc(96px + env(safe-area-inset-bottom, 12px)) 12px;
     box-sizing: border-box;
     overscroll-behavior-y: contain;
   }
@@ -2119,6 +2150,7 @@ body.modal-open {
     max-width: 580px;
     height: auto;
     min-height: auto;
+    max-height: none;
     gap: 8px;
     margin: 0 auto;
   }
@@ -2154,6 +2186,20 @@ body.modal-open {
     display: none;
   }
 
+  .pill-cat-btn {
+    white-space: nowrap;
+  }
+
+  /* Only the active age group shows its PIC on phones */
+  .pill-cat-btn:not(.active) .cat-pill-pic {
+    display: none;
+  }
+
+  .cat-pill-pic {
+    font-size: 9.5px;
+    padding-left: 5px;
+  }
+
   .pill-center-num {
     font-size: 11.5px;
     padding: 0 4px;
@@ -2175,6 +2221,7 @@ body.modal-open {
 
   /* Slide Canvas Card */
   .game-slide-canvas {
+    flex: none;
     height: auto;
     max-height: none;
     padding: 14px 12px 18px 12px;
@@ -2205,8 +2252,24 @@ body.modal-open {
     margin-top: 2px;
   }
 
+  /* Helper / Place / Assets pills wrap instead of overflowing */
+  .slide-station-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  .station-meta-pill {
+    white-space: nowrap;
+    font-size: 11px;
+    padding: 3px 9px;
+  }
+
   /* Single Column Stacked Presentation Pillars */
   .slide-three-columns {
+    flex: none;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -2628,67 +2691,35 @@ body.modal-open {
   }
 
   .drawer-header {
-    padding: 14px 16px 10px 16px;
+    padding: 16px 16px 12px 16px;
   }
 
   .drawer-header h3 {
-    font-size: 17px;
+    font-size: 20px;
   }
 
-  .drawer-header p {
-    font-size: 11.5px;
+  .btn-drawer-icon {
+    width: 34px;
+    height: 34px;
   }
 
   .drawer-category-bar {
-    padding: 8px 12px;
-  }
-
-  .drawer-pill-track {
-    padding: 3px;
-    gap: 3px;
-    border-radius: 9999px;
+    padding: 0 16px 14px 16px;
+    gap: 12px;
   }
 
   .drawer-pill-btn {
-    padding: 6px 8px;
-    font-size: 11.5px;
-    gap: 4px;
-  }
-
-  .d-pill-emoji {
-    font-size: 12px;
+    height: 38px;
+    padding: 0 10px;
   }
 
   .d-pill-label {
-    font-size: 11.5px;
-  }
-
-  .d-pill-sub {
-    display: none;
-  }
-
-  .d-pill-count {
-    font-size: 10px;
-    padding: 1px 5px;
+    font-size: 14px;
   }
 
   .drawer-body-scroll {
     padding: 12px 14px calc(24px + env(safe-area-inset-bottom, 12px)) 14px;
     gap: 12px;
-  }
-
-  .drawer-grid-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
-  }
-
-  .drawer-group-name {
-    font-size: 13px;
-  }
-
-  .drawer-group-desc {
-    font-size: 11px;
   }
 
   .drawer-visual-grid {
@@ -2698,12 +2729,13 @@ body.modal-open {
   }
 
   .drawer-slide-card {
-    border-radius: 14px;
+    border-radius: 16px;
   }
 
   .drawer-card-thumb {
     height: 160px;
     aspect-ratio: 16 / 9;
+    border-radius: 10px;
   }
 
   .drawer-thumb-img {
@@ -2713,16 +2745,12 @@ body.modal-open {
   }
 
   .drawer-card-info {
-    padding: 10px 12px;
-    gap: 3px;
+    padding: 8px 4px 4px;
+    gap: 6px;
   }
 
   .drawer-card-title {
     font-size: 13.5px;
-  }
-
-  .drawer-card-desc {
-    font-size: 11px;
   }
 
   /* Lightbox Modal */

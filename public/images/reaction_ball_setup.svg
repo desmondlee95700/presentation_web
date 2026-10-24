@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" width="900" height="1200" font-family="Fredoka, Outfit, 'Arial Rounded MT Bold', 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0369a1"/>
+    </marker>
+    <marker id="pointer" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#57534e"/>
+    </marker>
+  </defs>
+
+  <!-- Paper card -->
+  <rect width="900" height="1200" fill="#fbf8f1"/>
+  <rect x="20" y="20" width="860" height="1160" rx="36" fill="#f5faff" stroke="#c3e2f5" stroke-width="3"/>
+
+  <!-- Title pill -->
+  <rect x="250" y="48" width="400" height="76" rx="38" fill="#0284c7"/>
+  <text x="450" y="99" text-anchor="middle" font-size="40" font-weight="700" fill="#fff">Setup Diagram</text>
+
+  <!-- Scene: lounge wall and floor -->
+  <clipPath id="scene"><rect x="50" y="150" width="800" height="710" rx="26"/></clipPath>
+  <g clip-path="url(#scene)">
+    <rect x="50" y="150" width="800" height="590" fill="#eef6fc"/>
+    <rect x="50" y="740" width="800" height="120" fill="#e3d2bd"/>
+    <line x1="50" y1="740" x2="850" y2="740" stroke="#c4a888" stroke-width="4"/>
+    <rect x="420" y="215" width="150" height="170" rx="10" fill="#fdfeff" stroke="#c3e2f5" stroke-width="4"/>
+    <line x1="495" y1="215" x2="495" y2="385" stroke="#c3e2f5" stroke-width="3"/>
+    <rect x="630" y="215" width="150" height="170" rx="10" fill="#fdfeff" stroke="#c3e2f5" stroke-width="4"/>
+    <line x1="705" y1="215" x2="705" y2="385" stroke="#c3e2f5" stroke-width="3"/>
+  </g>
+  <rect x="50" y="150" width="800" height="710" rx="26" fill="none" stroke="#c3e2f5" stroke-width="3"/>
+
+  <!-- Broom heads (held end, behind the kids' hands) -->
+  <path d="M196,612 L232,624 L224,652 L184,640 Z" fill="#eab308" stroke="#a16207" stroke-width="2"/>
+  <path d="M244,628 L282,640 L274,668 L232,656 Z" fill="#eab308" stroke="#a16207" stroke-width="2"/>
+
+  <!-- Kid 1 (back) -->
+  <line x1="196" y1="680" x2="190" y2="740" stroke="#334155" stroke-width="11" stroke-linecap="round"/>
+  <line x1="212" y1="680" x2="218" y2="740" stroke="#334155" stroke-width="11" stroke-linecap="round"/>
+  <rect x="186" y="598" width="38" height="88" rx="14" fill="#0284c7"/>
+  <line x1="218" y1="614" x2="238" y2="634" stroke="#0284c7" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="205" cy="574" r="23" fill="#f6d0b1"/>
+
+  <!-- Kid 2 (front) -->
+  <line x1="248" y1="688" x2="242" y2="740" stroke="#334155" stroke-width="11" stroke-linecap="round"/>
+  <line x1="264" y1="688" x2="270" y2="740" stroke="#334155" stroke-width="11" stroke-linecap="round"/>
+  <rect x="238" y="606" width="38" height="88" rx="14" fill="#f59e0b"/>
+  <line x1="270" y1="624" x2="290" y2="650" stroke="#f59e0b" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="257" cy="582" r="23" fill="#f6d0b1"/>
+
+  <!-- Baskets in a row in front of the kids -->
+  <path d="M420,702 H530 L518,740 H432 Z" fill="#d97706" stroke="#92400e" stroke-width="3"/>
+  <path d="M432,716 H518 M435,728 H515" stroke="#92400e" stroke-width="2"/>
+  <path d="M640,702 H750 L738,740 H652 Z" fill="#d97706" stroke="#92400e" stroke-width="3"/>
+  <path d="M652,716 H738 M655,728 H735" stroke="#92400e" stroke-width="2"/>
+
+  <!-- Broom handles (the track) -->
+  <line x1="232" y1="634" x2="790" y2="652" stroke="#92400e" stroke-width="9" stroke-linecap="round"/>
+  <line x1="282" y1="652" x2="806" y2="670" stroke="#a16207" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- Ball on the track -->
+  <circle cx="360" cy="628" r="16" fill="#facc15" stroke="#ca8a04" stroke-width="2"/>
+  <path d="M322,624 L302,623 M324,634 L304,633" stroke="#0369a1" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Roll forward and drop -->
+  <path d="M384,624 Q470,610 474,690" fill="none" stroke="#0284c7" stroke-width="4" stroke-dasharray="8 7" marker-end="url(#arrow)"/>
+
+  <!-- Labels -->
+  <g font-size="21" fill="#44403c" font-weight="600">
+    <text x="230" y="520" text-anchor="middle">2 kids, 1 broom each</text>
+
+    <text x="620" y="570" text-anchor="middle">Broom track</text>
+    <line x1="620" y1="582" x2="620" y2="640" stroke="#57534e" stroke-width="2" marker-end="url(#pointer)"/>
+
+    <text x="420" y="580" text-anchor="middle">Roll &amp; drop</text>
+
+    <text x="475" y="790" text-anchor="middle">Basket 1</text>
+    <text x="695" y="790" text-anchor="middle">Basket 2</text>
+  </g>
+
+  <!-- Steps -->
+  <g font-size="27" fill="#292524">
+    <text x="80" y="922"><tspan font-weight="700" fill="#0284c7">1.</tspan> Put 2 baskets in a row in front of the kids.</text>
+    <text x="80" y="968"><tspan font-weight="700" fill="#0284c7">2.</tspan> Two kids hold the brooms side by side.</text>
+    <text x="80" y="1014"><tspan font-weight="700" fill="#0284c7">3.</tspan> Put a ball on the brooms at the kids’ end.</text>
+    <text x="80" y="1060"><tspan font-weight="700" fill="#0284c7">4.</tspan> Roll it forward and drop it into a basket.</text>
+    <text x="80" y="1106"><tspan font-weight="700" fill="#0284c7">5.</tspan> One ball in each basket, then the next pair goes.</text>
+  </g>
+</svg>

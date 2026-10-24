@@ -99,7 +99,7 @@ export class ControlsDock {
     const currentCatKey = this.deck.currentCategory;
     const currentActiveGameId = this.deck.activeGame ? this.deck.activeGame.id : null;
     const activeGames = getGamesByCategoryId(currentCatKey);
-    const catConfig = CATEGORIES[currentCatKey.toUpperCase()] || CATEGORIES.KIDS;
+    const activeCat = CATEGORIES[currentCatKey.toUpperCase()] || CATEGORIES.KIDS;
 
     this.drawerModal.innerHTML = `
       <div class="drawer-overlay" id="drawer-overlay-backdrop"></div>
@@ -108,55 +108,52 @@ export class ControlsDock {
         <!-- Header -->
         <header class="drawer-header">
           <div class="drawer-header-title-box">
-            <div class="drawer-title-row">
-              <span class="drawer-star">✦</span>
-              <h3>Slide Deck Catalog</h3>
-            </div>
-            <p>Click any slide to jump directly to it, or switch age groups</p>
+            <span class="drawer-eyebrow"><span class="drawer-star">✦</span> 2026 Kids Camp</span>
+            <h3>Slide Deck</h3>
           </div>
           <div class="drawer-header-actions">
-            <button type="button" class="btn-drawer-home-nav" id="btn-drawer-home-nav" title="Return to Start Page">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-              <span>Start Page</span>
+            <button type="button" class="btn-drawer-icon" id="btn-drawer-home-nav" title="Return to Start Page" aria-label="Start Page">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
             </button>
-            <button type="button" class="btn-close-drawer" id="btn-close-drawer" aria-label="Close Drawer">✕</button>
+            <button type="button" class="btn-drawer-icon" id="btn-close-drawer" aria-label="Close Drawer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg>
+            </button>
           </div>
         </header>
 
-        <!-- Category Selector (Clean Segmented Pill Track matching Slide Header) -->
-        <div class="drawer-category-bar">
+        <!-- Age Group Tabs -->
+        <div class="drawer-category-bar" style="--group-accent: ${activeCat.themeColor}; --group-tint: ${activeCat.pillBg};">
           <div class="drawer-pill-track" role="tablist" aria-label="Select Age Group">
             <button type="button" 
                     class="drawer-pill-btn ${currentCatKey === 'kids' ? 'active' : ''}" 
-                    data-drawer-cat="kids">
-              <span class="d-pill-emoji">🎈</span>
-              <span class="d-pill-label">Kids <span class="d-pill-sub">(Age 3–6)</span></span>
-              <span class="d-pill-count">${CATEGORIES.KIDS.gameIds.length}</span>
+                    data-drawer-cat="kids"
+                    role="tab"
+                    aria-selected="${currentCatKey === 'kids'}"
+                    style="--tab-accent: ${CATEGORIES.KIDS.themeColor};">
+              <span class="d-pill-label">Kids</span>
+              <span class="d-pill-sub">3–6</span>
             </button>
             <button type="button" 
                     class="drawer-pill-btn ${currentCatKey === 'older' ? 'active' : ''}" 
-                    data-drawer-cat="older">
-              <span class="d-pill-emoji">🚀</span>
-              <span class="d-pill-label">Older <span class="d-pill-sub">(7+)</span></span>
-              <span class="d-pill-count">${CATEGORIES.OLDER.gameIds.length}</span>
+                    data-drawer-cat="older"
+                    role="tab"
+                    aria-selected="${currentCatKey === 'older'}"
+                    style="--tab-accent: ${CATEGORIES.OLDER.themeColor};">
+              <span class="d-pill-label">Older Kids</span>
+              <span class="d-pill-sub">7+</span>
             </button>
-            <button type="button" 
-                    class="drawer-pill-btn ${currentCatKey === 'all' ? 'active' : ''}" 
-                    data-drawer-cat="all">
-              <span class="d-pill-emoji">🌟</span>
-              <span class="d-pill-label">All <span class="d-pill-sub">Games</span></span>
-              <span class="d-pill-count">${CATEGORIES.ALL.gameIds.length}</span>
-            </button>
+          </div>
+          <div class="drawer-group-info">
+            <span class="drawer-pic">
+              <span class="drawer-pic-avatar">${activeCat.pic.charAt(0)}</span>
+              <span class="drawer-pic-text"><strong>${activeCat.pic}</strong> <span>Person in charge</span></span>
+            </span>
+            <span class="drawer-game-count">${activeCat.gameIds.length} games</span>
           </div>
         </div>
 
-        <!-- Slide Cards Grid (Clean, visual presentation thumbnails) -->
+        <!-- Slide Cards Grid -->
         <div class="drawer-body-scroll">
-          <div class="drawer-grid-header">
-            <span class="drawer-group-name">${catConfig.emoji} ${catConfig.label}</span>
-            <span class="drawer-group-desc">${catConfig.description}</span>
-          </div>
-
           <div class="drawer-visual-grid">
             ${activeGames.map((g, idx) => {
               const isActive = g.id === currentActiveGameId;
@@ -167,24 +164,33 @@ export class ControlsDock {
                      data-game-id="${g.id}"
                      role="button"
                      tabindex="0"
-                     title="Jump to Slide ${slideNum}: ${g.title}">
+                     title="Jump to Slide ${slideNum}: ${g.title}"
+                     style="--card-bg: ${g.palette.bgCanvas}; --card-border: ${g.palette.cardBorder}; --card-accent: ${g.palette.themeColor}; --card-ink: ${g.palette.tabTextColor};">
                   
                   <div class="drawer-card-thumb">
                     <img src="${g.referenceImage}" alt="${g.title}" class="drawer-thumb-img" loading="lazy" />
-                    <span class="drawer-thumb-badge">Slide ${slideNum}</span>
-                    ${isActive ? `<span class="drawer-thumb-active-tag">● Presenting</span>` : ''}
+                    ${isActive ? `<span class="drawer-thumb-active-tag"><span class="drawer-live-dot"></span>Presenting</span>` : ''}
                   </div>
 
                   <div class="drawer-card-info">
-                    <div class="drawer-card-tags-row">
-                      <span class="drawer-card-cat-pill" style="--cat-bg: ${g.palette.badgeBg}; --cat-color: ${g.palette.badgeText};">
-                        ${g.tabTitle || g.title}
-                      </span>
-                      ${g.place ? `<span class="drawer-card-place-pill">📍 ${g.place}</span>` : ''}
-                      <span class="drawer-card-supplies-tag">📦 ${g.materials.length} Items</span>
+                    <div class="drawer-card-head">
+                      <span class="drawer-card-num">${slideNum}</span>
+                      <h4 class="drawer-card-title">${g.title}</h4>
                     </div>
-                    <h4 class="drawer-card-title">${g.title}</h4>
-                    <p class="drawer-card-desc">${g.subtitle}</p>
+                    <div class="drawer-card-meta-row">
+                      ${g.helper ? `
+                        <span class="drawer-helper-chip">
+                          <span class="drawer-helper-avatar">${g.helper.charAt(0)}</span>
+                          <span class="drawer-helper-name">${g.helper}</span>
+                        </span>
+                      ` : ''}
+                      ${g.place ? `
+                        <span class="drawer-card-place">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>
+                          <span>${g.place}</span>
+                        </span>
+                      ` : ''}
+                    </div>
                   </div>
 
                 </div>

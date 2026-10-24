@@ -5,7 +5,7 @@ export class SlideDeck {
     // Default to 'kids' group (Age 3-6) or URL params
     const urlParams = new URLSearchParams(window.location.search);
     const catParam = urlParams.get('cat') || urlParams.get('category');
-    this.currentCategory = (catParam && ['kids', 'older', 'all'].includes(catParam.toLowerCase())) 
+    this.currentCategory = (catParam && ['kids', 'older'].includes(catParam.toLowerCase())) 
       ? catParam.toLowerCase() 
       : 'kids';
     this.games = getGamesByCategoryId(this.currentCategory);
@@ -119,6 +119,7 @@ export class SlideDeck {
                     title="Kids (Age 3–6): 5 Games">
               <span class="cat-pill-emoji">🎈</span>
               <span class="cat-pill-text">Kids <span class="cat-pill-sub">(3–6)</span></span>
+              <span class="cat-pill-pic">PIC: ${CATEGORIES.KIDS.pic}</span>
             </button>
 
             <button type="button" 
@@ -129,16 +130,7 @@ export class SlideDeck {
                     title="Older Kids (Age 7+): 5 Games">
               <span class="cat-pill-emoji">🚀</span>
               <span class="cat-pill-text">Older <span class="cat-pill-sub">(7+)</span></span>
-            </button>
-
-            <button type="button" 
-                    class="pill-cat-btn ${this.currentCategory === 'all' ? 'active' : ''}" 
-                    data-category="all" 
-                    role="tab"
-                    aria-selected="${this.currentCategory === 'all'}"
-                    title="All 10 Games">
-              <span class="cat-pill-emoji">🌟</span>
-              <span class="cat-pill-text">All <span class="cat-pill-sub">Games</span></span>
+              <span class="cat-pill-pic">PIC: ${CATEGORIES.OLDER.pic}</span>
             </button>
           </div>
 
@@ -149,13 +141,6 @@ export class SlideDeck {
           </div>
 
           <div class="pill-right-group">
-            <button type="button" class="pill-btn-home" data-action="go-home" title="Return to Start Page (Press H)">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                <polyline points="9 22 9 12 15 12 15 22"></polyline>
-              </svg>
-              <span>Home</span>
-            </button>
             <span class="pill-camp-label">2026 KIDS CAMP</span>
             <button type="button" class="pill-btn-deck" data-action="open-drawer" title="Open Slide Catalog Menu">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
@@ -172,8 +157,15 @@ export class SlideDeck {
             <div class="slide-star-icon">✦</div>
             <h1 class="slide-title-text">${game.title}</h1>
             <p class="slide-subtitle-text">${game.subtitle}</p>
-            ${(game.place || game.assetsNeeded) ? `
+            ${(game.place || game.assetsNeeded || game.helper) ? `
               <div class="slide-station-meta">
+                ${game.helper ? `
+                  <span class="station-meta-pill helper-pill">
+                    <span class="v-icon">🙋</span>
+                    <span class="v-key">Helper:</span>
+                    <strong class="v-val">${game.helper}</strong>
+                  </span>
+                ` : ''}
                 ${game.place ? `
                   <span class="station-meta-pill place-pill">
                     <span class="v-icon">📍</span>
@@ -219,13 +211,6 @@ export class SlideDeck {
                 <img src="${game.referenceImage}" alt="${game.title} craft setup" class="pillar-img" loading="eager" />
                 <span class="pillar-zoom-badge">🔍 Click to Enlarge</span>
               </div>
-              <div class="pillar-footer setup-footer">
-                <span class="footer-icon">🛠️</span>
-                <div class="footer-text-wrap">
-                  <span class="footer-title">Setup Guide</span>
-                  <p class="footer-desc">${col1.caption}</p>
-                </div>
-              </div>
             </div>
 
             <!-- Pillar 2: 🎯 Official Game Rules -->
@@ -247,13 +232,6 @@ export class SlideDeck {
                     </div>
                   </div>
                 `).join('')}
-              </div>
-              <div class="pillar-footer win-footer">
-                <span class="footer-icon">🏆</span>
-                <div class="footer-text-wrap">
-                  <span class="footer-title">Winning Goal</span>
-                  <p class="footer-desc">${col2.caption}</p>
-                </div>
               </div>
             </div>
 
@@ -278,13 +256,6 @@ export class SlideDeck {
                     </li>
                   `).join('')}
                 </ul>
-              </div>
-              <div class="pillar-footer tip-footer">
-                <span class="footer-icon">💡</span>
-                <div class="footer-text-wrap">
-                  <span class="footer-title">${cat.shortLabel} Tip</span>
-                  <p class="footer-desc">${coachTip}</p>
-                </div>
               </div>
             </div>
 

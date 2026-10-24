@@ -11,6 +11,7 @@ export const CATEGORIES = {
     id: 'kids',
     label: 'Kids (Age 3–6)',
     shortLabel: 'Kids 3–6',
+    pic: 'Desmond',
     emoji: '🎈',
     gameIds: ['goliath-slingshot', 'feed-goliath', 'footprint-stomp-toss', 'find-the-david', 'miracle-motion'],
     description: 'Games 1 to 5 • Fun, Gentle, Safe Obstacles & Miracle Motion',
@@ -22,6 +23,7 @@ export const CATEGORIES = {
     id: 'older',
     label: 'Older Kids (Age 7+)',
     shortLabel: 'Older 7+',
+    pic: 'Justina',
     emoji: '🚀',
     gameIds: ['reaction-ball-cup', 'david-goliath-sliding', 'brook-river-crossing', 'wind-of-elah', 'faith-and-balance'],
     description: 'Games 6 to 10 • Focus, Accuracy, Speed, Fan Herd & Faith Balance',
@@ -72,6 +74,7 @@ export const GAMES_CATALOG = [
       tip: 'Stand behind 8–10 ft line • Knock Goliath top cup for +50 bonus points • 3 timed quick throws!'
     },
     place: 'Church Sanctuary',
+    helper: 'Joshua',
     assetsNeeded: 'Table',
     referenceImage: '/images/goliath_slingshot_craft.png',
     referenceTitle: 'DIY Craft Photo',
@@ -102,18 +105,18 @@ export const GAMES_CATALOG = [
     rules: [
       {
         badge: 'Rule 1',
-        title: '3 Throws per Player',
-        text: 'Each player steps up to the line and takes 3 throws per turn using soft balls or slingshots.'
+        title: 'One Shot Each',
+        text: 'Line up and take turns! Each kid gets 1 slingshot shot to try to knock Goliath off the top.'
       },
       {
         badge: 'Rule 2',
-        title: 'Stay Behind the Line',
-        text: 'Throws must be released strictly from behind the marked rope or tape line.'
+        title: 'Shoot from the Line',
+        text: 'Stand behind the tape line, pull back the slingshot, and aim at Goliath. Helpers help the little ones!'
       },
       {
         badge: 'Rule 3',
-        title: 'Team Turn Rotation',
-        text: 'Teams alternate throwers. Teammates stay behind the station and cheer loud!'
+        title: 'Helper Resets Goliath',
+        text: 'The goal is to knock Goliath down! If he falls before every kid has had a turn, a helper quickly sets the cups and Goliath back up so the next kid can shoot.'
       }
     ]
   },
@@ -142,13 +145,15 @@ export const GAMES_CATALOG = [
       tip: 'Big open mouth target makes tossing fun and easy! Light crumpled paper balls are 100% safe for little hands.'
     },
     place: 'Church Sanctuary',
+    helper: 'Randall',
     assetsNeeded: 'Table',
     referenceImage: '/images/feed_goliath_craft.png',
     referenceTitle: 'DIY Craft Photo',
-    setupImage: '/images/feed_goliath_setup.png',
+    setupImage: '/images/feed_goliath_setup.svg',
     materials: [
       { name: 'Cardboard Box (or large sheet)', note: 'Sturdy base to hold Goliath’s head' },
       { name: 'Newspaper or A4 Paper', note: 'Crumpled sheets' },
+      { name: 'Basket', note: 'Holds the crumpled paper balls' },
     ],
     setupSteps: [
       {
@@ -168,8 +173,8 @@ export const GAMES_CATALOG = [
       },
       {
         step: 4,
-        title: 'Set on Table, Chair, or Wall',
-        desc: 'Place the box securely at chest height for campers against a wall or on a sturdy chair.'
+        title: 'Set on a Table',
+        desc: 'Place the box securely on a sturdy table. Kids throw from about 4 ft away.'
       },
       {
         step: 5,
@@ -180,28 +185,18 @@ export const GAMES_CATALOG = [
     rules: [
       {
         badge: 'Rule 1',
-        title: 'Take Turns as David',
-        text: 'Children step up one by one to take their turn as the brave hero David.'
+        title: 'Each Kid Takes a Turn',
+        text: 'Helpers, line the kids up! Children step up one by one to take their turn as the brave hero David.'
       },
       {
         badge: 'Rule 2',
-        title: 'Aim for Goliath’s Mouth',
-        text: 'Each child tries to toss their paper balls directly into Goliath’s wide open mouth.'
+        title: 'Grab & Throw the Paper',
+        text: 'Each kid grabs a crumpled A4 paper ball and throws it inside Goliath’s wide open mouth.'
       },
       {
         badge: 'Rule 3',
-        title: 'Stay Behind the Line',
-        text: 'Players must release all throws strictly from behind the marked throwing line.'
-      },
-      {
-        badge: 'Rule 4',
-        title: 'Collect & Pass Ammo',
-        text: 'After their turn, the player collects all paper balls and hands them to the next camper.'
-      },
-      {
-        badge: 'Rule 5',
-        title: 'Everyone Gets a Turn',
-        text: 'The game continues in rotation until every camper has had a chance to feed Goliath!'
+        title: 'Helpers Give a Chance',
+        text: 'If a ball misses, helpers give the kid another try or gently help them aim and throw until it goes into the mouth. Then the next kid steps up. Everyone gets to feed Goliath!'
       }
     ]
   },
@@ -234,6 +229,7 @@ export const GAMES_CATALOG = [
       tip: 'Space footprints 4–5 ft for giant leaps • Move basket 10–12 ft back • Time each runner with a stopwatch!'
     },
     place: 'Outside church waiting area',
+    helper: 'Sabrina',
     assetsNeeded: 'None',
     referenceImage: '/images/footprint_stomp_craft.png',
     referenceTitle: 'DIY Setup Photo',
@@ -268,28 +264,18 @@ export const GAMES_CATALOG = [
     rules: [
       {
         badge: 'Rule 1',
-        title: 'Hop & Stomp on Every Footprint',
-        text: 'Holding the soft ball, jump with both feet into each giant footprint along the path yelling “STOMP!”'
+        title: 'Hold the Ball & Follow the Footprints',
+        text: 'Each kid holds a ball and steps on the giant footprints one by one to move forward to Goliath’s basket.'
       },
       {
         badge: 'Rule 2',
-        title: 'Stop & Toss Ball into the Basket',
-        text: 'Land with two feet inside the final giant footprint, pause, aim, and toss the ball into Goliath’s basket!'
+        title: 'Toss It into the Basket',
+        text: 'At the end of the footprints, the kid aims and tosses the ball into the basket. Missed? Try again until it goes in!'
       },
       {
         badge: 'Rule 3',
-        title: 'Grab Ball, Run Back & Tag',
-        text: 'Retrieve the ball from the basket, dash down the return lane, and pass the ball to the next teammate!'
-      },
-      {
-        badge: 'Rule 4',
-        title: 'Chant & Cheer the Giant Stomp',
-        text: 'Waiting teammates and counselors clap and shout “STOMP! STOMP!” with every hop.'
-      },
-      {
-        badge: 'Rule 5',
-        title: 'Bonus Try Guarantee',
-        text: 'If the ball bounces out, campers get an instant second toss or take one step closer to sink the shot!'
+        title: 'Get the Ball & Pass It Back',
+        text: 'Once it’s in, the kid takes the ball out of the basket and passes it back to the next kid. Repeat until every kid has had a turn!'
       }
     ]
   },
@@ -322,6 +308,7 @@ export const GAMES_CATALOG = [
       tip: 'Expand to a 4×4 grid (16 cards) • 5-second peek timer • Fast memory relay challenge!'
     },
     place: 'Church Sanctuary',
+    helper: 'Oscar',
     assetsNeeded: 'Table or Low Carpet Rug',
     referenceImage: '/images/find_david_craft.png',
     referenceTitle: 'DIY Cards Craft Photo',
@@ -330,7 +317,7 @@ export const GAMES_CATALOG = [
     playersCount: 'Circle of campers (take turns)',
     spiritualTakeaway: '“The Lord does not look at the things people see. People look at the outward appearance, but the Lord looks at the heart.” (1 Samuel 16:7) — Jesse’s older sons were tall and strong warriors, but God chose young shepherd David because of his pure and faithful heart.',
     takeawayHighlight: 'The Lord looks at the heart, not outward appearance (1 Sam 16:7).',
-    leaderInstruction: '“Welcome campers to Find the David! The prophet Samuel went to Jesse looking for God’s chosen king. Jesse presented his tallest, strongest sons, but God said no. Today, you are Samuel! Each camper steps up, flips ONE card, and checks the face. If it is an older brother, turn it back. If it is David, keep it open! Can we remember where the brothers are and find both Davids?”',
+    leaderInstruction: '“Welcome campers to Find the David! The prophet Samuel went to Jesse looking for God’s chosen king. Jesse presented his tallest, strongest sons, but God said no. Today, you are Samuel! Each of you gets a turn to flip TWO cards. If it is Goliath, turn it back. If it is David, keep it open! Can we remember where the brothers are and find both Davids?”',
     materials: [
       { name: 'A4 Printed Character Sheets', note: 'David and older brother illustrations printed on standard A4 paper' },
       { name: '9 Matching David Cards', note: 'Young shepherd boy with harp or sling and a golden heart' },
@@ -355,34 +342,24 @@ export const GAMES_CATALOG = [
       {
         step: 4,
         title: 'Campers Circle & Samuel Turn',
-        desc: 'Have campers sit in a circle. Each child steps up in turn as Samuel to flip 1 card and search for David!'
+        desc: 'Have the kids sit in a circle around the cards. Each kid takes a turn to flip 2 cards and search for David!'
       }
     ],
     rules: [
       {
         badge: 'Rule 1',
-        title: 'Take Turns as Samuel',
-        text: 'Kids line up or sit in a circle. One child steps up per turn as Samuel looking for God’s chosen king.'
+        title: 'Sit in a Circle',
+        text: 'All the kids sit in a circle around the face-down cards. Each kid takes a turn, one at a time.'
       },
       {
         badge: 'Rule 2',
-        title: 'Flip Only ONE Card',
-        text: 'On their turn, the child flips over strictly 1 card to check the face.'
+        title: 'Flip 2 Cards',
+        text: 'On their turn, the kid flips over 2 cards to try to find a matching pair of Davids.'
       },
       {
         badge: 'Rule 3',
-        title: 'Decoy Brother Turns Back',
-        text: 'If it is NOT David: the child turns it back face-down in the exact same spot. Play moves immediately to the next child.'
-      },
-      {
-        badge: 'Rule 4',
-        title: 'David Stays Face-Up!',
-        text: 'If it IS David: the card stays face-up and open! The child gets cheers, and the turn passes to the next child.'
-      },
-      {
-        badge: 'Rule 5',
-        title: 'Find Both Davids to Win!',
-        text: 'Children continue taking turns, remembering where the wrong brothers are. When the 2nd David is revealed, the group celebrates the true king!'
+        title: 'David Stays, Goliath Goes Back',
+        text: 'Any David card that is found stays face-up. Any Goliath card is flipped back face-down. Then the turn goes to the next kid. Keep going until everyone has had a turn and all the matching Davids are found!'
       }
     ]
   },
@@ -390,7 +367,7 @@ export const GAMES_CATALOG = [
     id: 'reaction-ball-cup',
     catalogNumber: 6,
     title: 'Reaction Ball & Cup Game',
-    subtitle: 'Dual String Balance & Rolling Precision Challenge',
+    subtitle: 'Broom Rail Balance & Rolling Challenge',
     categories: ['older'], // Older Kids (Age 7+) ONLY
     badge: 'GAME 06 • REACTION & BALANCE',
     tabTitle: 'Balance & Roll',
@@ -408,65 +385,51 @@ export const GAMES_CATALOG = [
     },
     olderGuidance: {
       tag: '🚀 Exclusive for Older Kids (Age 7+)',
-      tip: 'Requires fine motor control and steady two-hand coordination! Challenge: guide ball smoothly into all 4 cups sequentially.'
+      tip: 'Teamwork between the two broom holders! Tilt slowly so the ball rolls smoothly into the basket.'
     },
     place: 'FAA Upstair Lounge',
+    helper: 'Aldora',
     assetsNeeded: 'None',
     referenceImage: '/images/reaction_ball_craft.png',
     referenceTitle: 'DIY Craft Photo',
-    setupImage: '/images/reaction_ball_setup.png',
+    setupImage: '/images/reaction_ball_setup.svg',
     materials: [
-      { name: '2 brooms', note: 'Guide rails for the ball' },
-      { name: 'FAA balls', note: 'Smooth rolling balls for the track' },
-      { name: '2 basket', note: 'Positioned in a row along the path' },
+      { name: '2 Brooms', note: 'Held side by side as the rails for the ball' },
+      { name: '2 Balls', note: 'Smooth rolling balls' },
+      { name: '2 Baskets', note: 'Placed in a row in front of the kids' },
     ],
     setupSteps: [
       {
         step: 1,
-        title: 'Tape the Track Line',
-        desc: 'Stick a straight strip of painter’s tape (6–10 ft) along the smooth floor.'
+        title: 'Place 2 Baskets in a Row',
+        desc: 'Put the 2 baskets on the floor in a row in front of the kids, one near and one further away.'
       },
       {
         step: 2,
-        title: 'Place Cups Along Track',
-        desc: 'Place 3 to 5 plastic bowls or cups spaced evenly along the center track line.'
+        title: 'Hold the Brooms as Rails',
+        desc: 'Two kids hold the brooms side by side over the baskets, handles close together, to make a track.'
       },
       {
         step: 3,
-        title: 'Anchor Strings at End',
-        desc: 'Fasten far ends of the two strings or loop them around a sturdy chair or feet.'
-      },
-      {
-        step: 4,
-        title: 'Place Ball at Starting End',
-        desc: 'Rest the ball across the two parallel strings at the player starting position.'
+        title: 'Place the Ball',
+        desc: 'Put a ball on the broom handles at the kids’ end, ready to roll.'
       }
     ],
     rules: [
       {
         badge: 'Rule 1',
-        title: 'Hold Strings at Start',
-        text: 'Players hold the two strings/brooms at the starting end.'
+        title: 'Make a Broom Track',
+        text: 'Two kids hold the brooms side by side, a little apart, so the ball can sit on the handles.'
       },
       {
         badge: 'Rule 2',
-        title: 'Guide Ball Forward',
-        text: 'Gently pull, lift, and spread strings to guide the ball forward along the track.'
+        title: 'Roll & Drop into Each Basket',
+        text: 'Tilt and move the brooms together to roll the ball forward, then open the brooms a little to drop it into a basket. Get one ball into each of the 2 baskets!'
       },
       {
         badge: 'Rule 3',
-        title: 'Land in Each Cup',
-        text: 'Try to control string tension so the ball drops cleanly into each cup.'
-      },
-      {
-        badge: 'Rule 4',
-        title: 'Reset on Fall Off',
-        text: 'If the ball rolls off the strings, place it back at the last cup reached.'
-      },
-      {
-        badge: 'Rule 5',
-        title: 'Reach the Final Cup',
-        text: 'Continue steering smoothly until the ball reaches and lands in the final cup!'
+        title: 'Fall Off? Try Again!',
+        text: 'If the ball falls on the floor, put it back on the brooms and try again. When both baskets have a ball, the next pair takes a turn!'
       }
     ]
   },
@@ -499,6 +462,7 @@ export const GAMES_CATALOG = [
       tip: 'Shoot from the far edge across the full table length • Aim to knock Goliath completely down or off the table!'
     },
     place: 'FAA Blue Room',
+    helper: 'Andrew',
     assetsNeeded: 'Table',
     referenceImage: '/images/sliding_game_craft.png',
     referenceTitle: 'DIY Tabletop Setup Photo',
@@ -533,28 +497,18 @@ export const GAMES_CATALOG = [
     rules: [
       {
         badge: 'Rule 1',
-        title: 'Step Up to the Table Edge',
-        text: 'Players take turns stepping up to the front edge of the table to aim David’s 5 stones.'
+        title: '5 Slides per Team',
+        text: 'Each team gets 5 slides with the bottle caps (David’s stones). Kids on the team take turns sliding.'
       },
       {
         badge: 'Rule 2',
-        title: 'Slide or Flick — No Throwing!',
-        text: 'Slide or flick the bottle cap flat along the tabletop surface towards Goliath across the distance. Never throw through the air!'
+        title: 'Slide the Caps',
+        text: 'Flick or slide the cap along the table toward Goliath at the other end. No throwing!'
       },
       {
         badge: 'Rule 3',
-        title: 'Aim to Shoot Down Goliath',
-        text: 'Aim across the table distance to strike Goliath directly and shoot him down or off the table!'
-      },
-      {
-        badge: 'Rule 4',
-        title: '5 Stones per Player',
-        text: 'Each player slides David’s 5 colored bottle caps one by one before retrieving ammo for the next teammate.'
-      },
-      {
-        badge: 'Rule 5',
-        title: 'Rotate Until Goliath Falls',
-        text: 'Teams cheer and rotate shooters until a brave shot knocks Goliath down in victory!'
+        title: 'Knock Goliath Down!',
+        text: 'Try to hit Goliath and knock him down. After 5 slides, the next team takes a turn.'
       }
     ]
   },
@@ -587,12 +541,13 @@ export const GAMES_CATALOG = [
       tip: 'Full 25–30 ft river • Strict floor touch penalty: foot in water washes board back! • Speed relay race against the clock!'
     },
     place: 'FAA Cafeteria',
+    helper: 'JingYan',
     assetsNeeded: 'None',
     referenceImage: '/images/brook_river_reference.png',
     referenceTitle: 'DIY Reference Photo',
     setupImage: '/images/brook_river_setup.png',
     materials: [
-      { name: '10 A4 Paper', note: '' },
+      { name: 'A4 Paper', note: '1 per kid + 2–3 extra for each group' },
       { name: 'Items for kids to hold', note: 'TBC' }
     ],
     setupSteps: [
@@ -620,18 +575,18 @@ export const GAMES_CATALOG = [
     rules: [
       {
         badge: 'Rule 1',
-        title: 'Hold an Item',
-        text: 'Assign few kids to hold an item'
+        title: 'Hold Your Items',
+        text: 'Each group holds on to certain items while crossing the river. Don’t drop them!'
       },
       {
         badge: 'Rule 2',
-        title: 'Pass Steps Forward',
-        text: 'Step on the A4 paper and pass'
+        title: 'Paper Stepping Stones',
+        text: 'Each group gets 1 piece of paper per kid, plus 2–3 extra. Step only on the paper and pass it forward to cross.'
       },
       {
         badge: 'Rule 3',
         title: 'All Across to Win',
-        text: 'All kids must bring all the item back to successfully cross the river'
+        text: 'The whole group and all the items must reach the other side to finish!'
       }
     ]
   },
@@ -664,6 +619,7 @@ export const GAMES_CATALOG = [
       tip: 'Full team participation! Designate 2 flank sweepers to prevent wall drift and 2 basket flippers for the final upward lift.'
     },
     place: 'FAA Pink Room',
+    helper: 'Bethanice Nini',
     assetsNeeded: 'Low basket',
     referenceImage: '/images/wind_of_elah_craft.png',
     referenceTitle: 'All-Hands Fan Photo',
@@ -703,23 +659,18 @@ export const GAMES_CATALOG = [
     rules: [
       {
         badge: 'Rule 1',
-        title: 'Air Only — Strictly No Hands!',
-        text: 'Players cannot touch paper stones with hands or fans. You must wave the cardboard to create wind currents!'
+        title: 'Fan with Your Plate',
+        text: 'Each kid gets a plastic plate. Wave it to make wind and blow the paper stones forward.'
       },
       {
         badge: 'Rule 2',
-        title: 'All-Hands Flank Sweep',
-        text: 'All teammates fan simultaneously; flank sweepers prevent stones drifting into walls while center sweepers drive forward.'
+        title: 'No Touching!',
+        text: 'Don’t touch the paper stones with your hands or your plate. Only wind can move them!'
       },
       {
         badge: 'Rule 3',
-        title: 'Flip Over the Basket Lip',
-        text: 'Work together at the finish line to create an upward air breeze that flips fluttering stones into the basket!'
-      },
-      {
-        badge: 'Rule 4',
-        title: '60-Second Team Clock',
-        text: 'The team that safely herds the most paper river stones into the basket before the timer expires wins!'
+        title: 'Blow Them into the Basket',
+        text: 'Work together to blow as many stones as you can into the basket before time runs out!'
       }
     ]
   },
@@ -748,6 +699,7 @@ export const GAMES_CATALOG = [
       tip: 'Counselor whispers or shows the picture card to the actor • If shy, counselor mimes alongside them! • Keep guessing fast & cheer every turn!'
     },
     place: 'Church Sanctuary / Carpet Area',
+    helper: 'Aaron',
     assetsNeeded: 'None',
     referenceImage: '/images/miracle_motion_craft.png',
     referenceTitle: 'DIY Prompt Cards Photo',
@@ -756,7 +708,7 @@ export const GAMES_CATALOG = [
     playersCount: 'Circle of campers (take turns)',
     spiritualTakeaway: '“Whatever you do, work at it with all your heart, as working for the Lord!” (Colossians 3:23) — David praised God not just with words, but with joyful whole-body worship, courage against lions and bears, and humble obedience.',
     takeawayHighlight: 'Joyful whole-body worship and courageous actions speak louder than words.',
-    leaderInstruction: '“Welcome campers to Miracle Motion! One brave camper steps to the front as our secret actor. I will show you a card — an animal, Bible hero, or camp expression. STRICTLY NO TALKING or sound effects! You have to act it out with your hands, face, and body. Teammates, raise your hands to guess! 1 correct guess gives 1 mark. Can your squad collect at least 5 marks to pass the Miracle test? Ready... ACT!”',
+    leaderInstruction: '“Welcome campers to Miracle Motion! One brave camper steps to the front as our secret actor. I will show you a card — an animal, Bible hero, or camp expression. STRICTLY NO TALKING or sound effects! You have to act it out with your hands, face, and body. Teammates, raise your hands to guess! 1 correct guess gives 1 point. Everyone gets a turn to act. How many points can your squad get? Ready... ACT!”',
     materials: [
       { name: 'Prompt Cards Set', note: 'Prepare A4 Paper or Manilla card' },
     ],
@@ -785,28 +737,18 @@ export const GAMES_CATALOG = [
     rules: [
       {
         badge: 'Rule 1',
-        title: 'Choose One Actor to the Front',
-        text: 'One child steps to the front stage to be the actor for the round.'
+        title: 'Choose One Person to the Front',
+        text: 'Pick one kid to come up to the front to be the actor.'
       },
       {
         badge: 'Rule 2',
-        title: 'Strictly Silent Acting — No Speaking!',
-        text: 'The actor is shown a secret prompt card and must act out the character, animal, or expression without making any words or sounds.'
+        title: 'Act It Out — No Speaking!',
+        text: 'The actor is given a character, an animal, or anything else, and acts it out without speaking.'
       },
       {
         badge: 'Rule 3',
-        title: 'Teammates Raise Hands to Guess',
-        text: 'Seated members raise their hands and take turns shouting their guesses. 1 correct guess awards 1 mark to the team!'
-      },
-      {
-        badge: 'Rule 4',
-        title: 'Rotate Actors Every Turn',
-        text: 'Once guessed correctly, choose the next camper to step up so everyone gets a turn to act.'
-      },
-      {
-        badge: 'Rule 5',
-        title: 'Collect 5 Marks to Pass!',
-        text: 'The team continues rotating actors until they achieve at least 5 correct guesses to complete the challenge!'
+        title: 'Get as Many Points as You Can!',
+        text: 'Everyone else guesses. 1 correct guess = 1 point. Every kid takes a turn being the actor. Score as many points as you can!'
       }
     ]
   },
@@ -835,6 +777,7 @@ export const GAMES_CATALOG = [
       tip: 'Bend knees slightly for a low center of gravity • Do not sprint until ball is dropped in bucket • Keep spare spoons on deck behind start line!'
     },
     place: 'FAA JLC Room',
+    helper: 'Yunika',
     assetsNeeded: 'Spoons, Balls, Target Basket & Floor Tape',
     referenceImage: '/images/faith_balance_craft.png',
     referenceTitle: 'DIY Supplies Photo',
@@ -874,28 +817,18 @@ export const GAMES_CATALOG = [
     rules: [
       {
         badge: 'Rule 1',
-        title: '1 Spoon per Team — No Touching Ball!',
-        text: 'The runner must scoop and balance the ball on the plastic spoon without using fingers or hands to hold it in place.'
+        title: 'Ball on the Spoon',
+        text: 'Put a ball on the spoon. No hands holding the ball!'
       },
       {
         badge: 'Rule 2',
-        title: 'Carry Ball into Target Basket',
-        text: 'Carefully walk or run down the lane and drop the ball cleanly into the target basket or bucket.'
+        title: 'Walk & Drop It In',
+        text: 'Walk carefully to the basket and drop the ball in. If it falls, pick it up with the spoon and keep going.'
       },
       {
         badge: 'Rule 3',
-        title: 'Ball Drop Reset',
-        text: 'If the ball falls off the spoon, freeze! Pick it up with the spoon from that spot before continuing forward.'
-      },
-      {
-        badge: 'Rule 4',
-        title: 'Sprint Back & Hand Off Spoon',
-        text: 'Once the ball is in the basket, sprint down the return lane and hand the spoon to the next queued teammate.'
-      },
-      {
-        badge: 'Rule 5',
-        title: '2-Minute Clock Challenge',
-        text: 'Repeat the relay in rotation until the 2-minute timer ends. The team with the most collected balls wins!'
+        title: 'Pass the Spoon',
+        text: 'Go back and give the spoon to the next kid. The team with the most balls in the basket when time is up wins!'
       }
     ]
   }

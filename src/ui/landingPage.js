@@ -174,13 +174,6 @@ export class LandingPage {
               </button>
             </div>
 
-            <!-- All Games Direct Access Pill -->
-            <button type="button" class="btn-all-games-pill" data-action="launch-all" title="Explore all 10 games">
-              <span class="all-games-star">✦</span>
-              <span>Explore All 10 Camp Games</span>
-              <span class="all-games-arrow">➔</span>
-            </button>
-
           </div>
 
         </main>
@@ -245,16 +238,6 @@ export class LandingPage {
       olderTrackBtn.addEventListener('click', () => {
         if (typeof this.onLaunchDeck === 'function') {
           this.onLaunchDeck('older', null);
-        }
-      });
-    }
-
-    // 3. All Games Direct Launch Button
-    const allTrackBtn = this.container.querySelector('[data-action="launch-all"]');
-    if (allTrackBtn) {
-      allTrackBtn.addEventListener('click', () => {
-        if (typeof this.onLaunchDeck === 'function') {
-          this.onLaunchDeck('all', null);
         }
       });
     }
