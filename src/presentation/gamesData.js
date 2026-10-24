@@ -333,8 +333,8 @@ export const GAMES_CATALOG = [
     leaderInstruction: '“Welcome campers to Find the David! The prophet Samuel went to Jesse looking for God’s chosen king. Jesse presented his tallest, strongest sons, but God said no. Today, you are Samuel! Each camper steps up, flips ONE card, and checks the face. If it is an older brother, turn it back. If it is David, keep it open! Can we remember where the brothers are and find both Davids?”',
     materials: [
       { name: 'A4 Printed Character Sheets', note: 'David and older brother illustrations printed on standard A4 paper' },
-      { name: '10 Matching David Cards', note: 'Young shepherd boy with harp or sling and a golden heart' },
-      { name: '20 Golliath Cards', note: '' },
+      { name: '9 Matching David Cards', note: 'Young shepherd boy with harp or sling and a golden heart' },
+      { name: '18 Golliath Cards', note: '' },
     ],
     setupSteps: [
       {
