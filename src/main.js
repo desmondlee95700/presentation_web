@@ -52,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const showLandingView = () => {
     switchView('landing', () => {
-      landingPage.updateResumeState();
       try {
         const url = new URL(window.location.href);
         url.searchParams.delete('slide');
@@ -102,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       appRoot.classList.remove('view-deck');
       appRoot.classList.add('view-landing');
-      landingPage.updateResumeState();
     }
   });
 

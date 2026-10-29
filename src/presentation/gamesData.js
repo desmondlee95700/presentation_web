@@ -79,6 +79,15 @@ export const GAMES_CATALOG = [
     referenceImage: '/images/goliath_slingshot_craft.png',
     referenceTitle: 'DIY Craft Photo',
     setupImage: '/images/balloon_slingshot_setup.png',
+    props: {
+      items: [
+        { name: 'Lion Headpiece', qty: 1, scenes: [0] },
+        { name: 'Oil Horn / Flask', qty: 1, scenes: [1] },
+        { name: 'Food & Food Container', qty: 1, scenes: [2] },
+        { name: 'Saul’s Crown', qty: 2, scenes: [3, 4] },
+      ],
+      rule: 'The whole team completely <strong>KOs Goliath</strong> to win <strong>1 pcs</strong> as a team.'
+    },
     materials: [
       { name: '10–12 Plastic Cups', note: '1 big cup for Giant Goliath & 9 smaller cups for 4-3-2-1 Pyramid' },
       { name: '1–2 Soft Balls', note: 'Crumbled paper balls' },
@@ -150,6 +159,13 @@ export const GAMES_CATALOG = [
     referenceImage: '/images/feed_goliath_craft.png',
     referenceTitle: 'DIY Craft Photo',
     setupImage: '/images/feed_goliath_setup.svg',
+    props: {
+      items: [
+        { name: 'Sheep Headpiece', qty: 4, scenes: [0, 1] },
+        { name: 'Soldier’s Armor', qty: 10, scenes: [2, 3, 4] },
+      ],
+      rule: 'Everyone has <strong>3 throws</strong>. Every <strong>2 feeds</strong> win <strong>1 Soldier’s Armor</strong> OR every <strong>3 feeds</strong> win <strong>1 Sheep Headpiece</strong>.'
+    },
     materials: [
       { name: 'Cardboard Box (or large sheet)', note: 'Sturdy base to hold Goliath’s head' },
       { name: 'Newspaper or A4 Paper', note: 'Crumpled sheets' },
@@ -234,6 +250,13 @@ export const GAMES_CATALOG = [
     referenceImage: '/images/footprint_stomp_craft.png',
     referenceTitle: 'DIY Setup Photo',
     setupImage: '/images/footprint_stomp_setup.png',
+    props: {
+      items: [
+        { name: 'Shepherd’s Staff', qty: 3, scenes: [0, 1, 2] },
+        { name: 'Sling / Catapult', qty: 2, scenes: [3, 4] },
+      ],
+      rule: 'Everyone tosses <strong>1 ball</strong> into the basket to win <strong>1 pcs</strong> as a team.'
+    },
     materials: [
       { name: '6 A4 paper Footprints', note: 'Draw giant footprints' },
       { name: '1 Laundry Basket or Hamper', note: 'Target basket with Goliath shield cutout on front' },
@@ -318,6 +341,13 @@ export const GAMES_CATALOG = [
     spiritualTakeaway: '“The Lord does not look at the things people see. People look at the outward appearance, but the Lord looks at the heart.” (1 Samuel 16:7) — Jesse’s older sons were tall and strong warriors, but God chose young shepherd David because of his pure and faithful heart.',
     takeawayHighlight: 'The Lord looks at the heart, not outward appearance (1 Sam 16:7).',
     leaderInstruction: '“Welcome campers to Find the David! The prophet Samuel went to Jesse looking for God’s chosen king. Jesse presented his tallest, strongest sons, but God said no. Today, you are Samuel! Each of you gets a turn to flip TWO cards. If it is Goliath, turn it back. If it is David, keep it open! Can we remember where the brothers are and find both Davids?”',
+    props: {
+      items: [
+        { name: 'Goliath’s Big Sword', qty: 3, scenes: [2, 3, 4] },
+        { name: 'Token', qty: null, scenes: [0, 1] },
+      ],
+      rule: 'Whole team finds <strong>all the Davids</strong> to win <strong>1 pcs</strong> as a team.'
+    },
     materials: [
       { name: 'A4 Printed Character Sheets', note: 'David and older brother illustrations printed on standard A4 paper' },
       { name: '9 Matching David Cards', note: 'Young shepherd boy with harp or sling and a golden heart' },
@@ -393,6 +423,13 @@ export const GAMES_CATALOG = [
     referenceImage: '/images/reaction_ball_craft.png',
     referenceTitle: 'DIY Craft Photo',
     setupImage: '/images/reaction_ball_setup.svg',
+    props: {
+      items: [
+        { name: 'Tree Costume', qty: '6+8', scenes: [0, 2] },
+        { name: 'Token', qty: null, scenes: [1, 3, 4] },
+      ],
+      rule: 'Every pair has <strong>2 ball chances</strong> to score. Every <strong>2 consecutive goals</strong> by the same pair win <strong>1 pcs</strong>.'
+    },
     materials: [
       { name: '2 Brooms', note: 'Held side by side as the rails for the ball' },
       { name: '2 Balls', note: 'Smooth rolling balls' },
@@ -424,12 +461,12 @@ export const GAMES_CATALOG = [
       {
         badge: 'Rule 2',
         title: 'Roll & Drop into Each Basket',
-        text: 'Tilt and move the brooms together to roll the ball forward, then open the brooms a little to drop it into a basket. Get one ball into each of the 2 baskets!'
+        text: 'Tilt and move the brooms together to roll the ball forward, then open the brooms a little to drop it into a basket.'
       },
       {
         badge: 'Rule 3',
-        title: 'Fall Off? Try Again!',
-        text: 'If the ball falls on the floor, put it back on the brooms and try again. When both baskets have a ball, the next pair takes a turn!'
+        title: '2 Ball Chances per Pair',
+        text: 'Each pair gets 2 ball chances. If the ball falls on the floor, that chance is used up. Score 2 goals in a row to win a prop! Then the next pair takes a turn.'
       }
     ]
   },
@@ -467,6 +504,13 @@ export const GAMES_CATALOG = [
     referenceImage: '/images/sliding_game_craft.png',
     referenceTitle: 'DIY Tabletop Setup Photo',
     setupImage: '/images/david_goliath_sliding_setup.png',
+    props: {
+      items: [
+        { name: 'Sheep Headpiece', qty: 7, scenes: [0, 1] },
+        { name: 'Soldier’s Armor', qty: 22, scenes: [2, 3, 4] },
+      ],
+      rule: 'Everyone has <strong>3 bottle cap chances</strong>. Every <strong>3 KOs</strong> win <strong>1 Soldier’s Armor</strong> OR every <strong>6 KOs</strong> win <strong>1 Sheep Headpiece</strong>.'
+    },
     materials: [
       { name: '5 Colored Bottle Caps', note: 'David’s 5 smooth stones (Red, Yellow, Green, Orange, Purple)' },
       { name: '1 Goliath Bottle Cap', note: 'Marked with “G” in center (target standing at far end)' },
@@ -497,8 +541,8 @@ export const GAMES_CATALOG = [
     rules: [
       {
         badge: 'Rule 1',
-        title: '5 Slides per Team',
-        text: 'Each team gets 5 slides with the bottle caps (David’s stones). Kids on the team take turns sliding.'
+        title: '3 Bottle Caps Each',
+        text: 'Every kid gets 3 bottle cap chances (David’s stones). Kids take turns sliding.'
       },
       {
         badge: 'Rule 2',
@@ -508,7 +552,7 @@ export const GAMES_CATALOG = [
       {
         badge: 'Rule 3',
         title: 'Knock Goliath Down!',
-        text: 'Try to hit Goliath and knock him down. After 5 slides, the next team takes a turn.'
+        text: 'Try to hit Goliath and knock him down. Every KO counts toward the team’s props! After 3 slides, the next kid takes a turn.'
       }
     ]
   },
@@ -546,6 +590,13 @@ export const GAMES_CATALOG = [
     referenceImage: '/images/brook_river_reference.png',
     referenceTitle: 'DIY Reference Photo',
     setupImage: '/images/brook_river_setup.png',
+    props: {
+      items: [
+        { name: 'Saul’s Royal Robe', qty: 2, scenes: [3, 4] },
+        { name: 'Token', qty: null, scenes: [0, 1, 2] },
+      ],
+      rule: 'Whole team <strong>crosses the river</strong> to win <strong>1 pcs</strong> as a team.'
+    },
     materials: [
       { name: 'A4 Paper', note: '1 per kid + 2–3 extra for each group' },
       { name: 'Items for kids to hold', note: 'TBC' }
@@ -629,6 +680,13 @@ export const GAMES_CATALOG = [
     spiritualTakeaway: '“Just as the invisible wind moves the stones, God’s Holy Spirit empowers us when we work together in one accord, lifting each other up to overcome giant obstacles.”',
     takeawayHighlight: 'Working together in unity overcomes any giant challenge.',
     leaderInstruction: '“Welcome to The Wind of Elah! For this challenge, your whole squad works together as David’s wind brigade. There are 20 paper river stones on the floor. NO HANDS and NO TOUCHING with your cardboard — you can ONLY fan the air to create wind currents! Left flank, right flank, push together and flip every stone into the low basketball basket. 60 seconds on the clock. Ready, fan, GO!”',
+    props: {
+      items: [
+        { name: 'Clothing Costumes', qty: 18, scenes: [0, 1, 2, 3, 4] },
+        { name: 'Extra Clothing', qty: null, scenes: [0, 1, 2, 3, 4] },
+      ],
+      rule: 'In <strong>1 minute</strong>, flip as many <strong>paper stones</strong> into the basket as you can. Every <strong>3 paper stones</strong> win <strong>1 pcs</strong>.'
+    },
     materials: [
       { name: '1 Low Basketball Basket', note: 'Set at low height in FAA Pink Room as the target goal' },
       { name: '8-10 plastic plate', note: 'each kid will take one' },
@@ -670,7 +728,7 @@ export const GAMES_CATALOG = [
       {
         badge: 'Rule 3',
         title: 'Blow Them into the Basket',
-        text: 'Work together to blow as many stones as you can into the basket before time runs out!'
+        text: 'You have 1 minute! Work together to blow as many stones as you can into the basket.'
       }
     ]
   },
@@ -709,6 +767,13 @@ export const GAMES_CATALOG = [
     spiritualTakeaway: '“Whatever you do, work at it with all your heart, as working for the Lord!” (Colossians 3:23) — David praised God not just with words, but with joyful whole-body worship, courage against lions and bears, and humble obedience.',
     takeawayHighlight: 'Joyful whole-body worship and courageous actions speak louder than words.',
     leaderInstruction: '“Welcome campers to Miracle Motion! One brave camper steps to the front as our secret actor. I will show you a card — an animal, Bible hero, or camp expression. STRICTLY NO TALKING or sound effects! You have to act it out with your hands, face, and body. Teammates, raise your hands to guess! 1 correct guess gives 1 point. Everyone gets a turn to act. How many points can your squad get? Ready... ACT!”',
+    props: {
+      items: [
+        { name: 'Goliath’s Armor', qty: 3, scenes: [2, 3, 4] },
+        { name: 'Token', qty: null, scenes: [0, 1] },
+      ],
+      rule: 'Whole team guesses <strong>5 correct answers</strong> to win <strong>1 pcs</strong> as a team.'
+    },
     materials: [
       { name: 'Prompt Cards Set', note: 'Prepare A4 Paper or Manilla card' },
     ],
@@ -787,6 +852,13 @@ export const GAMES_CATALOG = [
     spiritualTakeaway: '“We walk by faith, not by sight.” (2 Corinthians 5:7) & “Whoever can be trusted with very little can also be trusted with much.” (Luke 16:10) — Just like balancing a small ball on a spoon takes focus, patience, and composure, holding onto our faith requires steady trust in God even when rushing through life.',
     takeawayHighlight: 'Walking with steady faith and patience under pressure leads to victory.',
     leaderInstruction: '“Campers, welcome to Faith & Balance! Each team gets ONE plastic spoon. At the start line, you must scoop a ball onto your spoon. WITHOUT touching the ball with your hands, carefully navigate across the gym and deposit it into the Target Basket. Once it drops cleanly into the basket, sprint back and hand off the spoon to your next teammate. You have exactly 2 minutes on the clock — how many balls can your squad collect? Ready, balance, GO!”',
+    props: {
+      items: [
+        { name: '5 Small Stones Set', qty: 2, scenes: [3, 4] },
+        { name: 'Token', qty: null, scenes: [0, 1, 2] },
+      ],
+      rule: 'Whole team transfers <strong>1 paper ball per person</strong> into the bowl to win <strong>1 pcs</strong> as a team.'
+    },
     materials: [
       { name: 'Small Balls (10 pcs)', note: 'tightly crumpled paper balls (cheapest DIY option)' },
       { name: '40 - Sturdy Plastic Spoons', note: '1 spoon per active team (plus spares in case of breakage)' },

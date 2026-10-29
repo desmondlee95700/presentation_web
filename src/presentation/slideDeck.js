@@ -235,27 +235,56 @@ export class SlideDeck {
               </div>
             </div>
 
-            <!-- Pillar 3: 📦 Supplies & Coach Guidance -->
+            <!-- Pillar 3: 🏆 Props to Win + collapsible Supplies -->
             <div class="slide-pillar pillar-supplies">
               <div class="pillar-header">
                 <div class="header-badge-row">
-                  <span class="header-icon">📦</span>
-                  <span class="header-title supplies-title-color">What You Need</span>
+                  <span class="header-icon">🏆</span>
+                  <span class="header-title props-title-color">Props to Win</span>
                 </div>
-                <span class="header-counter-pill">${game.materials.length} Items</span>
+                ${game.props ? `<span class="header-counter-pill">${game.props.items.length} Props</span>` : ''}
               </div>
               <div class="pillar-supplies-body">
-                <ul class="slide-supplies-list">
-                  ${game.materials.slice(0, 6).map(m => `
-                    <li class="slide-supply-row">
-                      <span class="supply-check-bullet">✓</span>
-                      <div class="supply-names">
-                        <span class="supply-name-bold">${m.name}</span>
-                        ${m.note ? `<span class="supply-note-dim">${m.note}</span>` : ''}
-                      </div>
-                    </li>
-                  `).join('')}
-                </ul>
+                ${game.props ? `
+                  <div class="slide-props-section">
+                    <span class="props-scene-label">Scenes</span>
+                    <ul class="slide-props-list">
+                      ${game.props.items.map(p => `
+                        <li class="slide-prop-row">
+                          <span class="prop-name">${p.name}${p.qty != null ? ` <span class="prop-qty">×${p.qty}</span>` : ''}</span>
+                          <span class="prop-scenes" title="Scene numbers">
+                            ${p.scenes.map(sc => `<span class="prop-scene-chip">${sc}</span>`).join('')}
+                          </span>
+                        </li>
+                      `).join('')}
+                    </ul>
+                    <p class="props-rule">${game.props.rule}</p>
+                  </div>
+                ` : ''}
+
+                <details class="supplies-dropdown">
+                  <summary class="supplies-dropdown-toggle">
+                    <span class="header-badge-row">
+                      <span class="header-icon">📦</span>
+                      <span class="header-title supplies-title-color">What You Need</span>
+                    </span>
+                    <span class="supplies-dropdown-meta">
+                      <span class="header-counter-pill">${game.materials.length} Items</span>
+                      <span class="supplies-dropdown-chevron" aria-hidden="true">▾</span>
+                    </span>
+                  </summary>
+                  <ul class="slide-supplies-list">
+                    ${game.materials.slice(0, 6).map(m => `
+                      <li class="slide-supply-row">
+                        <span class="supply-check-bullet">✓</span>
+                        <div class="supply-names">
+                          <span class="supply-name-bold">${m.name}</span>
+                          ${m.note ? `<span class="supply-note-dim">${m.note}</span>` : ''}
+                        </div>
+                      </li>
+                    `).join('')}
+                  </ul>
+                </details>
               </div>
             </div>
 
@@ -371,7 +400,7 @@ export class SlideDeck {
     }
     if (game.id === 'david-goliath-sliding') {
       return {
-        caption: 'Slide or flick David’s 5 stones across the table distance to strike and shoot down Goliath!'
+        caption: 'Each kid slides 3 bottle caps across the table to knock down Goliath. More KOs win more props!'
       };
     }
     if (game.id === 'brook-river-crossing') {

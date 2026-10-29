@@ -799,6 +799,164 @@ html, body {
   line-height: 1.25;
 }
 
+/* Pillar 3: Props to Win */
+.pillar-supplies-body {
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.slide-props-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.props-scene-label {
+  align-self: flex-end;
+  margin-bottom: -2px;
+  padding-right: 9px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.props-title-color {
+  color: var(--theme-color, #ca8a04);
+}
+
+.slide-props-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+}
+
+.slide-prop-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 9px;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+}
+
+.prop-name {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.25;
+}
+
+.prop-qty {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.prop-scenes {
+  display: inline-flex;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.prop-scene-chip {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 3px;
+  box-sizing: border-box;
+  border-radius: 9999px;
+  background: var(--tab-bg, #f1f5f9);
+  color: var(--tab-color, #475569);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.props-rule {
+  margin: 0;
+  padding: 6px 9px;
+  border-radius: 8px;
+  background: var(--canvas-bg, #f8fafc);
+  border-left: 3px solid var(--theme-color, #ca8a04);
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: #475569;
+  line-height: 1.35;
+}
+
+.props-rule strong {
+  color: #1e293b;
+}
+
+/* Pillar 3: What You Need dropdown (collapsed by default) */
+.supplies-dropdown {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1.5px solid #f1f5f9;
+}
+
+.supplies-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 5px 9px;
+  border-radius: 9px;
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.supplies-dropdown-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.supplies-dropdown-toggle:hover {
+  background: #ffffff;
+  border-color: #bae6fd;
+}
+
+.supplies-dropdown-toggle:focus-visible {
+  outline: 2px solid #0284c7;
+  outline-offset: 2px;
+}
+
+.supplies-dropdown-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.supplies-dropdown-chevron {
+  font-size: 12px;
+  color: #64748b;
+  transition: transform 0.2s ease;
+}
+
+.supplies-dropdown[open] .supplies-dropdown-chevron {
+  transform: rotate(180deg);
+}
+
+.supplies-dropdown .slide-supplies-list {
+  margin-top: 6px;
+}
+
 /* Pillar 3: Venue & Equipment Section */
 .supplies-venue-section {
   background: #f8fafc;
@@ -3361,63 +3519,6 @@ html, body {
   margin-top: 4px;
 }
 
-.hero-lead {
-  font-family: var(--font-body);
-  font-size: clamp(14px, 1.3vw, 15.5px);
-  line-height: 1.6;
-  color: #4a433a;
-  max-width: 500px;
-  margin: 10px auto 0;
-}
-
-/* Resume Indicator */
-.hero-resume-indicator {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #fff7ed;
-  border: 1.5px solid #fdba74;
-  padding: 5px 14px;
-  border-radius: 9999px;
-  font-size: 12px;
-  color: #9a3412;
-  margin-top: 10px;
-}
-
-.resume-tag {
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 10.5px;
-  letter-spacing: 0.05em;
-  background: #ffedd5;
-  color: #c2410c;
-  padding: 2px 7px;
-  border-radius: 9999px;
-}
-
-.resume-title {
-  font-weight: 700;
-  color: #1e1b18;
-}
-
-.btn-resume-action {
-  background: #ea580c;
-  color: #ffffff;
-  border: none;
-  font-family: var(--font-heading);
-  font-size: 11.5px;
-  font-weight: 700;
-  padding: 3px 10px;
-  border-radius: 9999px;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.btn-resume-action:hover {
-  background: #c2410c;
-  transform: translateY(-1px);
-}
-
 /* Actions Hub */
 .hero-actions-container {
   display: flex;
@@ -3902,13 +4003,6 @@ html, body {
 
   .hero-headline-accent {
     margin-top: 2px;
-  }
-
-  .hero-lead {
-    font-size: 13px;
-    line-height: 1.45;
-    max-width: 290px;
-    margin: 6px auto 0;
   }
 
   .hero-actions-container {

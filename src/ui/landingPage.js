@@ -2,7 +2,6 @@ export class LandingPage {
   constructor({ slideDeck, onLaunchDeck }) {
     this.deck = slideDeck;
     this.onLaunchDeck = onLaunchDeck;
-    this.hasNavigated = false;
 
     this.container = document.getElementById('landing-page-view');
     this.render();
@@ -124,18 +123,6 @@ export class LandingPage {
             <span class="hero-headline-accent">Camp Games Deck</span>
           </h1>
 
-          <p class="hero-lead">
-            An interactive, full-screen visual guide for camp counselors & leaders.
-            Complete with step-by-step DIY knockdown crafts, 3-step rules, and live timers.
-          </p>
-
-          <!-- Resume Indicator (Shown when returning from a slide) -->
-          <div class="hero-resume-indicator" id="hero-resume-indicator" style="display: none;">
-            <span class="resume-tag">📍 PRESENTING</span>
-            <span class="resume-title" id="resume-slide-name">Game 01</span>
-            <button type="button" class="btn-resume-action" id="btn-resume-action">Resume Slide ➔</button>
-          </div>
-
           <!-- Primary Actions Hub -->
           <div class="hero-actions-container">
             
@@ -187,43 +174,10 @@ export class LandingPage {
 
       </div>
     `;
-
-    this.updateResumeCard();
-  }
-
-  updateResumeCard() {
-    const resumeEl = this.container.querySelector('#hero-resume-indicator');
-    const resumeTitle = this.container.querySelector('#resume-slide-name');
-    if (!resumeEl || !resumeTitle) return;
-
-    if (this.hasNavigated && this.deck && this.deck.activeGame) {
-      const game = this.deck.activeGame;
-      const slideNum = String(this.deck.currentSlideIndex + 1).padStart(2, '0');
-      resumeTitle.textContent = `Slide ${slideNum}: ${game.title}`;
-      resumeEl.style.display = 'inline-flex';
-    } else {
-      resumeEl.style.display = 'none';
-    }
-  }
-
-  updateResumeState() {
-    this.hasNavigated = true;
-    this.updateResumeCard();
   }
 
   initEvents() {
-    // 1. Resume Button
-    const resumeBtn = this.container.querySelector('#btn-resume-action');
-    if (resumeBtn) {
-      resumeBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (typeof this.onLaunchDeck === 'function') {
-          this.onLaunchDeck(this.deck.currentCategory, this.deck.activeGame?.id);
-        }
-      });
-    }
-
-    // 2. Age Track Quick Jump Buttons
+    // 1. Age Track Quick Jump Buttons
     const kidsTrackBtn = this.container.querySelector('[data-action="launch-kids"]');
     if (kidsTrackBtn) {
       kidsTrackBtn.addEventListener('click', () => {
@@ -242,7 +196,7 @@ export class LandingPage {
       });
     }
 
-    // 4. Clickable character mascots (playful wiggle on click)
+    // 2. Clickable character mascots (playful wiggle on click)
     const characters = this.container.querySelectorAll('.scatter-character');
     characters.forEach(char => {
       char.addEventListener('click', () => {
