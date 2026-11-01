@@ -28,13 +28,13 @@
 
 ## 🌟 Highlights & Features
 
-- **🎯 Age-Tailored Tracks**: Instantly filter and launch games tailored for **🎈 Kids (Age 3–6)** or **🚀 Older Kids (Age 7+)**, or browse all 10 activities.
+- **🎯 Age-Tailored Tracks**: Instantly filter and launch games tailored for **🎈 Kids (Age 3–6)** or **🚀 Older Kids (Age 7+)**.
 - **🎨 Warm Pastel Editorial Canvas**: Clean, spacious desk aesthetic (`#fbf8f1`) featuring bespoke signature pastel color themes for every single game.
 - **📸 3-Column Facilitator View**:
   1. **DIY Craft Card**: Real workshop craft photo with concise preparation details.
   2. **Gameplay Diagram**: Clear court layout diagram with straightforward 3-step rules.
   3. **Supplies & Coach Tips**: Complete materials checklist and counselor facilitation advice.
-- **⏱️ Built-in Facilitator Tools**: Integrated countdown timers, fullscreen toggle, quick game rules drawer, and progress tracking.
+- **⏱️ Built-in Facilitator Tools**: Slide catalog drawer, facilitator rules sheet, photo lightbox, and progress tracking.
 - **⚡ Zero Sound FX Distractions**: Built strictly with zero audio dependencies so counselors can lead games without distracting sound loops or unwanted noise.
 - **📱 Fully Responsive**: Optimized for large projector screens, iPads/tablets, and mobile counselor phones.
 
@@ -47,8 +47,8 @@
 
 | # | Game Title | Theme & Focus | Signature Pastel |
 |---|---|---|---|
-| **01** | **Goliath SlingShot** | Balloon-cup launcher target practice into giant box | Meadow Pistachio (`#f4f9ec`) |
-| **02** | **Feed Goliath Game** | Ball-toss feeding challenge into Goliath's mouth | Warm Peach (`#fef5f0`) |
+| **01** | **Goliath SlingShot** | Balloon-cup launcher target practice into giant box | Meadow Pistachio (`#f2f8e8`) |
+| **02** | **Feed Goliath Game** | Ball-toss feeding challenge into Goliath's mouth | Warm Peach (`#fff1ec`) |
 | **03** | **Goliath's Footprint Stomp & Toss** | Big-step footprint agility course & beanbag landing | Blossom Blush (`#fdf2f4`) |
 | **04** | **Find the David** | Memory card grid & anointing of God's chosen king | Royal Periwinkle (`#f4f6fe`) |
 | **05** | **Miracle Motion** | Bible charades & silent action guessing (5 marks to pass) | Sunny Buttercup (`#fdfce8`) |
@@ -58,9 +58,9 @@
 
 | # | Game Title | Theme & Focus | Signature Pastel |
 |---|---|---|---|
-| **06** | **Reaction Ball & Cup Game** | Fast reflexes, dual-string balance & cup drop | Powder Sky Blue (`#f0f6fc`) |
-| **07** | **David & Goliath Sliding Game** | Dual-string pulley steering & precision ring drop | Dreamy Lilac (`#f6f1fc`) |
-| **08** | **Brook of Elah River Crossing** | Stepping stone floor balance & river sprint | Lagoon Aqua (`#f0faf8`) |
+| **06** | **Reaction Ball & Cup Game** | Fast reflexes, dual-string balance & cup drop | Powder Sky Blue (`#eaf4fc`) |
+| **07** | **David & Goliath Sliding Game** | Dual-string pulley steering & precision ring drop | Dreamy Lilac (`#f2ecfc`) |
+| **08** | **Brook of Elah River Crossing** | Stepping stone floor balance & river sprint | Lagoon Aqua (`#eaf7f5`) |
 | **09** | **The Wind of Elah** | Handheld fan wind race herding paper stones | Papaya Breeze (`#fff7f0`) |
 | **10** | **Faith & Balance** | Spoon-and-ball balance navigation & 2-min basket relay | Emerald Mint (`#edfbf5`) |
 
@@ -79,12 +79,12 @@ All visual components adhere to our minimal editorial design rules:
 
 | Key | Action |
 |---|---|
-| `Space` / `→` / `N` | Advance to next slide |
-| `←` / `P` | Go back to previous slide |
+| `Space` / `→` / `↓` / `N` | Advance to next slide |
+| `←` / `↑` / `P` | Go back to previous slide |
+| `Home` / `End` | Jump to first / last slide |
 | `H` | Return to Launchpad / Home view |
-| `R` | Open Game Rules sheet modal |
-| `O` / `Esc` | Toggle Slide Drawer overview |
-| `F` | Toggle Fullscreen mode |
+| `R` | Toggle Game Rules sheet |
+| `Esc` | Close the top-most overlay (lightbox, rules, drawer) |
 
 ---
 
@@ -117,6 +117,9 @@ npm run build
 
 # Preview production build locally
 npm run preview
+
+# Check game data (fields, images, categories)
+npm run validate
 ```
 
 ---
@@ -126,26 +129,29 @@ npm run preview
 ```
 presentation_web/
 ├── public/
-│   ├── app-icon.png               # High-res presentation app icon
-│   ├── favicon.png                # Browser favicon
-│   ├── favicon-32x32.png          # 32x32 favicon
-│   ├── apple-touch-icon.png       # Apple touch icon
-│   └── images/                    # Game craft photos & diagrams
+│   ├── app-icon.png, favicon*.png, apple-touch-icon.png
+│   └── images/
+│       ├── games/<game-id>/       # craft.webp + setup.webp|svg per game
+│       └── mascots/               # Landing page characters
 ├── src/
-│   ├── presentation/
-│   │   ├── gamesData.js           # 9 Camp games content & metadata
-│   │   └── slideDeck.js           # Fullscreen slide rendering & controls
-│   ├── ui/
-│   │   ├── controlsDock.js        # Floating bottom dock & overview drawer
-│   │   └── landingPage.js         # Interactive launchpad & track filters
-│   ├── main.js                    # Application entry point & routing
-│   └── style.css                  # Design system styles & animations
-├── index.html                     # HTML5 shell with web icon links
-├── CONTRIBUTING.md                 # Contribution guidelines
-├── LICENSE                        # MIT License
+│   ├── main.js                    # Entry point: wires components together
+│   ├── app/                       # Router, overlays, keyboard, swipe
+│   ├── components/                # Slide deck, slide, dock, drawer, modals, landing
+│   ├── data/
+│   │   ├── site.js                # Camp label & theme
+│   │   ├── categories.js          # Age groups & their games
+│   │   └── games/                 # One file per game (+ index.js)
+│   ├── lib/dom.js                 # Small DOM helpers
+│   └── styles/                    # Per-component CSS, entry: index.css
+├── scripts/validate-games.js      # Catalog checks (npm run validate)
+├── index.html
+├── CONTRIBUTING.md
+├── LICENSE
 ├── package.json
 └── vite.config.js
 ```
+
+See **Adding a game** in [AGENTS.md](AGENTS.md).
 
 ---
 

@@ -1,0 +1,776 @@
+/* ==========================================================================
+   Horizontal Fullscreen Viewport & Slide Centering
+   ========================================================================== */
+.presentation-viewport {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+  transition: opacity 0.32s ease, transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slides-track {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  transition: transform var(--transition-smooth);
+  will-change: transform;
+}
+
+.slide-section {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px 54px 16px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.slide-content-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+/* ==========================================================================
+   The Slide Canvas (Matching Exactly Slide 01 in Reference Picture)
+   ========================================================================== */
+/* Outer Wrapper: Pill Header + Canvas stacked vertically */
+.slide-outer-wrapper {
+  width: min(96vw, 1260px);
+  height: calc(100vh - 68px);
+  height: calc(100dvh - 68px);
+  max-height: 860px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-sizing: border-box;
+}
+
+.game-slide-canvas {
+  flex: 1;
+  min-height: 0;
+  background: var(--canvas-bg, #fcf9f2);
+  border-radius: 24px;
+  border: 1.5px solid rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-slide);
+  padding: 10px 22px 14px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Unified Top Pill Header Bar (Now ABOVE the Canvas) */
+.slide-pill-header {
+  width: 100%;
+  height: 40px;
+  min-height: 40px;
+  background: var(--tab-bg, #ede3d2);
+  border-radius: 9999px;
+  padding: 3px 14px 3px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.pill-category-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pill-cat-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  border: 1.5px solid transparent;
+  background: transparent;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--tab-color, #4a433a);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.pill-cat-btn:hover {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.pill-cat-btn.active {
+  background: #ffffff;
+  color: #0f172a;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.pill-cat-btn.active[data-category="kids"] {
+  color: #c2410c;
+  border-color: #fdba74;
+}
+
+.pill-cat-btn.active[data-category="older"] {
+  color: #7e22ce;
+  border-color: #d8b4fe;
+}
+
+.cat-pill-emoji {
+  font-size: 12.5px;
+}
+
+.cat-pill-text {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+}
+
+.cat-pill-sub {
+  font-size: 10.5px;
+  opacity: 0.85;
+}
+
+.cat-pill-pic {
+  font-size: 10px;
+  font-weight: 600;
+  opacity: 0.75;
+  padding-left: 6px;
+  border-left: 1px solid currentColor;
+}
+
+.pill-center-num {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--tab-color, #524a40);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pill-num-curr {
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.pill-num-slash {
+  opacity: 0.4;
+}
+
+.pill-num-total {
+  opacity: 0.7;
+}
+
+.pill-right-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pill-camp-label {
+  font-family: var(--font-heading);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--tab-color, #6e6459);
+  opacity: 0.85;
+}
+
+.pill-btn-deck {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font-family: var(--font-heading);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.pill-btn-deck:hover {
+  background: #ffffff;
+  color: #0f172a;
+  transform: translateY(-1px);
+}
+
+/* Slide Center Title Block */
+.slide-center-title-block {
+  text-align: center;
+  margin: 1px 0 6px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.slide-star-icon {
+  color: #f59e0b;
+  font-size: 16px;
+  line-height: 1;
+  margin-bottom: 1px;
+}
+
+.slide-title-text {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 800;
+  color: #1e1b18;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.slide-subtitle-text {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #64748b;
+  margin-top: 1px;
+}
+
+/* Station Venue & Assets Badges (Title Block) */
+.slide-station-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.station-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 11px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 11.5px;
+  color: #334155;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.station-meta-pill .v-icon {
+  font-size: 12px;
+}
+
+.station-meta-pill .v-key {
+  color: #64748b;
+  font-weight: 600;
+}
+
+.station-meta-pill .v-val {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.station-meta-pill.helper-pill {
+  border-color: var(--theme-color, #cbd5e1);
+}
+
+.station-meta-pill.place-pill {
+  border-color: #cbd5e1;
+}
+
+.station-meta-pill.assets-pill {
+  border-color: #cbd5e1;
+}
+
+/* ==========================================================================
+   3 Clean Horizontal Presentation Pillars (Unified, Full-Height Cards)
+   ========================================================================== */
+.slide-three-columns {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 0.9fr;
+  gap: 14px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: stretch;
+  flex: 1;
+  min-height: 0;
+}
+
+.slide-pillar {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1.5px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.035);
+  display: flex;
+  flex-direction: column;
+  padding: 10px 12px 10px 12px;
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.slide-pillar:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+/* Pillar Header */
+.pillar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 30px;
+  padding-bottom: 6px;
+  border-bottom: 1.5px solid #f1f5f9;
+  flex-shrink: 0;
+}
+
+.header-badge-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.header-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.header-title {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.rules-title-color {
+  color: #ea580c;
+}
+
+.supplies-title-color {
+  color: #0284c7;
+}
+
+.header-counter-pill {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  background: #f1f5f9;
+  color: #475569;
+  padding: 2px 7px;
+  border-radius: 9999px;
+}
+
+/* Pillar 1: Visual Showcase */
+.pillar-img-toggle {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  width: 100%;
+  justify-content: center;
+}
+
+.img-toggle-tab {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: #f8fafc;
+  color: #64748b;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.img-toggle-tab:hover {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+.img-toggle-tab.active {
+  background: #ffedd5;
+  color: #c2410c;
+  border-color: #fdba74;
+  font-weight: 800;
+  box-shadow: 0 1px 3px rgba(194, 65, 12, 0.15);
+}
+
+.pillar-single-tag {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.pillar-visual-frame {
+  flex: 1;
+  min-height: 0;
+  margin: 6px 0;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e2e8f0;
+}
+
+.pillar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 14px;
+  transition: transform 0.25s ease;
+}
+
+.pillar-visual-frame:hover .pillar-img {
+  transform: scale(1.025);
+}
+
+.pillar-zoom-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 700;
+  color: #1e293b;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 2.5px 7px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+}
+
+/* Pillar 2: Rules Body */
+.pillar-rules-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 7px;
+  margin: 8px 0 10px 0;
+  overflow-y: auto;
+  padding-right: 2px;
+  scrollbar-width: thin;
+}
+
+.pillar-rules-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.pillar-rules-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pillar-rules-body::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 9999px;
+}
+
+.slide-rule-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 10px;
+  background: #f8fafc;
+  border-radius: 10px;
+  border: 1px solid #f1f5f9;
+  text-align: left;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.slide-rule-card:hover {
+  background: #ffffff;
+  border-color: #fdba74;
+}
+
+.slide-rule-num {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 800;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffedd5;
+  color: #c2410c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.slide-rule-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.slide-rule-heading {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.25;
+}
+
+.slide-rule-detail {
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  color: #475569;
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* Pillar 3: Supplies Body */
+.pillar-supplies-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 10px 0 12px 0;
+}
+
+.slide-supplies-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+}
+
+.slide-supply-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 5.5px 9px;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+  text-align: left;
+}
+
+.supply-check-bullet {
+  color: #16a34a;
+  font-weight: 800;
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.supply-names {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.supply-name-bold {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.25;
+}
+
+.supply-note-dim {
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  color: #64748b;
+  line-height: 1.25;
+}
+
+/* Pillar 3: Props to Win */
+.pillar-supplies-body {
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.slide-props-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.props-scene-label {
+  align-self: flex-end;
+  margin-bottom: -2px;
+  padding-right: 9px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.props-title-color {
+  color: var(--theme-color, #ca8a04);
+}
+
+.slide-props-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+}
+
+.slide-prop-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 9px;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+}
+
+.prop-name {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.25;
+}
+
+.prop-qty {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.prop-scenes {
+  display: inline-flex;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.prop-scene-chip {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 3px;
+  box-sizing: border-box;
+  border-radius: 9999px;
+  background: var(--tab-bg, #f1f5f9);
+  color: var(--tab-color, #475569);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.props-rule {
+  margin: 0;
+  padding: 6px 9px;
+  border-radius: 8px;
+  background: var(--canvas-bg, #f8fafc);
+  border-left: 3px solid var(--theme-color, #ca8a04);
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: #475569;
+  line-height: 1.35;
+}
+
+.props-rule strong {
+  color: #1e293b;
+}
+
+/* Pillar 3: What You Need dropdown (collapsed by default) */
+.supplies-dropdown {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1.5px solid #f1f5f9;
+}
+
+.supplies-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 5px 9px;
+  border-radius: 9px;
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.supplies-dropdown-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.supplies-dropdown-toggle:hover {
+  background: #ffffff;
+  border-color: #bae6fd;
+}
+
+.supplies-dropdown-toggle:focus-visible {
+  outline: 2px solid #0284c7;
+  outline-offset: 2px;
+}
+
+.supplies-dropdown-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.supplies-dropdown-chevron {
+  font-size: 12px;
+  color: #64748b;
+  transition: transform 0.2s ease;
+}
+
+.supplies-dropdown[open] .supplies-dropdown-chevron {
+  transform: rotate(180deg);
+}
+
+.supplies-dropdown .slide-supplies-list {
+  margin-top: 6px;
+}
+
+/* Pillar 3: Venue & Equipment Section */
+
+/* Unified Pillar Footers */
+

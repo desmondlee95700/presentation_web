@@ -1,0 +1,725 @@
+/* Compact Viewport Height Adaptation (Laptops & Small Displays) */
+@media (max-height: 760px) and (min-width: 901px) {
+  .slide-section {
+    padding: 6px 12px 48px 12px;
+  }
+  .slide-outer-wrapper {
+    height: calc(100vh - 56px);
+    height: calc(100dvh - 56px);
+    gap: 4px;
+  }
+  .game-slide-canvas {
+    padding: 8px 18px 10px 18px;
+    gap: 3px;
+  }
+  .slide-center-title-block {
+    margin: 0 0 3px 0;
+  }
+  .slide-title-text {
+    font-size: 22px;
+  }
+  .slide-subtitle-text {
+    font-size: 11.5px;
+  }
+  .slide-three-columns {
+    gap: 10px;
+  }
+  .slide-pillar {
+    padding: 8px 10px;
+  }
+  .pillar-header {
+    height: 25px;
+    padding-bottom: 2px;
+  }
+  .slide-rule-card {
+    padding: 4.5px 7px;
+    gap: 6px;
+  }
+  .slide-supply-row {
+    padding: 3.5px 6px;
+    gap: 5px;
+  }
+}
+
+/* ==========================================================================
+   Responsive Breakpoints for Mobile & Tablet Devices
+   ========================================================================== */
+@media (max-width: 900px) {
+  /* Allow presentation viewport to pass through touch interactions */
+  .presentation-viewport {
+    pointer-events: auto;
+  }
+
+  /* Make each slide vertically scrollable while maintaining horizontal slide transitions */
+  .slide-section {
+    height: 100vh;
+    height: 100dvh;
+    width: 100vw;
+    display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+    pointer-events: auto;
+    padding: 10px 12px calc(96px + env(safe-area-inset-bottom, 12px)) 12px;
+    box-sizing: border-box;
+    overscroll-behavior-y: contain;
+  }
+
+  .slide-content-wrapper {
+    min-height: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0;
+  }
+
+  .slide-outer-wrapper {
+    width: 100%;
+    max-width: 580px;
+    height: auto;
+    min-height: auto;
+    max-height: none;
+    gap: 8px;
+    margin: 0 auto;
+  }
+
+  /* Compact Top Pill Header Bar (Sticky on Mobile) */
+  .slide-pill-header {
+    height: 38px;
+    min-height: 38px;
+    padding: 3px 8px;
+    gap: 4px;
+    border-radius: 9999px;
+    position: sticky;
+    top: 0;
+    z-index: 25;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  }
+
+  .pill-category-group {
+    gap: 3px;
+  }
+
+  .pill-cat-btn {
+    padding: 3px 7px;
+    font-size: 11px;
+    gap: 3px;
+  }
+
+  .cat-pill-emoji {
+    font-size: 12px;
+  }
+
+  .cat-pill-sub {
+    display: none;
+  }
+
+  .pill-cat-btn {
+    white-space: nowrap;
+  }
+
+  /* Only the active age group shows its PIC on phones */
+  .pill-cat-btn:not(.active) .cat-pill-pic {
+    display: none;
+  }
+
+  .cat-pill-pic {
+    font-size: 9.5px;
+    padding-left: 5px;
+  }
+
+  .pill-center-num {
+    font-size: 11.5px;
+    padding: 0 4px;
+  }
+
+  .pill-right-group {
+    gap: 4px;
+  }
+
+  .pill-camp-label {
+    display: none;
+  }
+
+  .pill-btn-deck {
+    padding: 3px 8px;
+    font-size: 11px;
+    gap: 3px;
+  }
+
+  /* Slide Canvas Card */
+  .game-slide-canvas {
+    flex: none;
+    height: auto;
+    max-height: none;
+    padding: 14px 12px 18px 12px;
+    border-radius: 20px;
+    overflow: visible;
+    gap: 10px;
+  }
+
+  /* Slide Title Block */
+  .slide-center-title-block {
+    margin: 0 0 4px 0;
+  }
+
+  .slide-star-icon {
+    font-size: 15px;
+    margin-bottom: 1px;
+  }
+
+  .slide-title-text {
+    font-size: 21px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .slide-subtitle-text {
+    font-size: 12px;
+    line-height: 1.35;
+    margin-top: 2px;
+  }
+
+  /* Helper / Place / Assets pills wrap instead of overflowing */
+  .slide-station-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  .station-meta-pill {
+    white-space: nowrap;
+    font-size: 11px;
+    padding: 3px 9px;
+  }
+
+  /* Single Column Stacked Presentation Pillars */
+  .slide-three-columns {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .slide-pillar {
+    height: auto;
+    min-height: auto;
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    overflow: visible;
+  }
+
+  .pillar-header {
+    height: 28px;
+    padding-bottom: 5px;
+  }
+
+  .header-title {
+    font-size: 12.5px;
+  }
+
+  /* Pillar 1: Visual frame */
+  .pillar-visual-frame {
+    height: 220px;
+    min-height: 200px;
+    margin: 8px 0;
+    flex: none;
+  }
+
+  .pillar-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  /* Pillar 2: Rules */
+  .pillar-rules-body {
+    flex: none;
+    height: auto;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 8px 0;
+  }
+
+  .slide-rule-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 9px;
+  }
+
+  .slide-rule-num {
+    font-size: 11px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .slide-rule-heading {
+    font-size: 12.5px;
+  }
+
+  .slide-rule-detail {
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  /* Pillar 3: Supplies */
+  .pillar-supplies-body {
+    flex: none;
+    height: auto;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 8px 0;
+  }
+
+  .slide-supplies-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .slide-supply-row {
+    padding: 6px 8px;
+    gap: 6px;
+  }
+
+  .supply-name-bold {
+    font-size: 11.5px;
+  }
+
+  .supply-note-dim {
+    font-size: 10px;
+  }
+
+  /* Unified Footers (Never float, natural flow after content) */
+
+  /* Floating Bottom Navigation Dock */
+  .dock-container {
+    bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .dock-inner-pill {
+    padding: 3px 5px;
+    gap: 6px;
+  }
+
+  .btn-dock-nav {
+    height: 35px;
+    padding: 0 11px;
+    font-size: 12px;
+    gap: 4px;
+  }
+
+  /* Modals on Mobile (Unified Smooth Touch Sheet) */
+  .rules-modal {
+    padding: 12px 10px calc(12px + env(safe-area-inset-bottom, 0px)) 10px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rules-modal-backdrop {
+    background: rgba(15, 23, 42, 0.78);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .rules-modal-container {
+    width: 100%;
+    max-width: 560px;
+    max-height: calc(100dvh - 24px - env(safe-area-inset-bottom, 0px));
+    height: auto;
+    border-radius: 24px;
+    border: 2px solid rgba(255, 255, 255, 0.95);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Sticky Top Header */
+  .rules-modal-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    padding: 14px 16px 12px 16px;
+    background: #ffffff;
+    background: linear-gradient(180deg, var(--modal-canvas, #f8fafc) 0%, #ffffff 100%);
+    border-bottom: 1.5px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    gap: 10px;
+  }
+
+  .rules-modal-header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .rules-modal-badge-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .rules-modal-cat-pill {
+    font-size: 10px;
+    font-weight: 800;
+    padding: 3px 8px;
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+  }
+
+  .rules-modal-num-pill {
+    font-size: 10px;
+    font-weight: 800;
+    padding: 3px 8px;
+    white-space: nowrap;
+    max-width: 170px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .rules-modal-esc-hint {
+    display: none;
+  }
+
+  .btn-close-rules-modal {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    touch-action: manipulation;
+  }
+
+  .btn-close-rules-modal:active {
+    transform: scale(0.92);
+  }
+
+  .rules-modal-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .rules-modal-star-wrap {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+
+  .rules-modal-star {
+    font-size: 18px;
+  }
+
+  .rules-modal-title {
+    font-size: 17px;
+    line-height: 1.25;
+    word-break: break-word;
+  }
+
+  .rules-modal-subtitle {
+    font-size: 11.5px;
+    line-height: 1.35;
+    color: #64748b;
+  }
+
+  /* Body Flows Naturally Without Nested Scroll Glitches */
+  .rules-modal-body {
+    padding: 14px 16px;
+    max-height: none;
+    overflow: visible;
+    flex: none;
+    gap: 10px;
+    background: #fafaf9;
+  }
+
+  .rules-modal-section-header {
+    margin-bottom: 2px;
+  }
+
+  .rules-modal-section-title {
+    font-size: 11px;
+    gap: 5px;
+  }
+
+  .rules-modal-count-pill {
+    font-size: 10px;
+    padding: 1px 6px;
+  }
+
+  .rules-modal-grid {
+    gap: 8px;
+  }
+
+  .rules-modal-card {
+    padding: 11px 13px;
+    gap: 10px;
+    border-radius: 14px;
+  }
+
+  .rules-modal-step-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+
+  .rules-modal-step-badge .step-num {
+    font-size: 13.5px;
+  }
+
+  .rules-modal-step-badge .step-label {
+    font-size: 7.5px;
+  }
+
+  .rules-modal-card-header {
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .rules-modal-rule-title {
+    font-size: 13.5px;
+    line-height: 1.3;
+  }
+
+  .rules-modal-custom-badge {
+    font-size: 9.5px;
+    padding: 1px 6px;
+  }
+
+  .rules-modal-rule-text {
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  /* Facilitator Footer Flows Directly After Rules */
+  .rules-modal-footer {
+    padding: 14px 16px calc(18px + env(safe-area-inset-bottom, 0px)) 16px;
+    gap: 10px;
+    background: #ffffff;
+    border-top: 1.5px solid #eef2f6;
+    flex: none;
+  }
+
+  .rules-footer-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .rules-footer-card {
+    padding: 10px 12px;
+    border-radius: 12px;
+    gap: 4px;
+  }
+
+  .footer-card-header {
+    gap: 5px;
+  }
+
+  .footer-card-icon {
+    font-size: 13px;
+  }
+
+  .footer-card-title {
+    font-size: 10.5px;
+  }
+
+  .footer-card-desc {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .rules-footer-meta-bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .rules-meta-pill {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
+  .rules-meta-pill.camp-pill {
+    margin-left: 0;
+  }
+
+  .rules-footer-callout {
+    padding: 9px 12px;
+    font-size: 11.5px;
+    border-radius: 10px;
+  }
+
+  .rules-footer-callout .callout-quote,
+  .rules-footer-callout .callout-body {
+    font-size: 11.5px;
+    line-height: 1.4;
+  }
+
+  /* Slide Deck Catalog Drawer on Mobile */
+  .drawer-panel {
+    max-width: 100%;
+    width: 100vw;
+    height: 100%;
+    height: 100dvh;
+    border-left: none;
+    border-radius: 0;
+  }
+
+  .drawer-header {
+    padding: 16px 16px 12px 16px;
+  }
+
+  .drawer-header h3 {
+    font-size: 20px;
+  }
+
+  .btn-drawer-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .drawer-category-bar {
+    padding: 0 16px 14px 16px;
+    gap: 12px;
+  }
+
+  .drawer-pill-btn {
+    height: 38px;
+    padding: 0 10px;
+  }
+
+  .d-pill-label {
+    font-size: 14px;
+  }
+
+  .drawer-body-scroll {
+    padding: 12px 14px calc(24px + env(safe-area-inset-bottom, 12px)) 14px;
+    gap: 12px;
+  }
+
+  .drawer-visual-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 0 0 20px 0;
+  }
+
+  .drawer-slide-card {
+    border-radius: 16px;
+  }
+
+  .drawer-card-thumb {
+    height: 160px;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+  }
+
+  .drawer-thumb-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .drawer-card-info {
+    padding: 8px 4px 4px;
+    gap: 6px;
+  }
+
+  .drawer-card-title {
+    font-size: 13.5px;
+  }
+
+  /* Lightbox Modal */
+  .lightbox-img {
+    max-width: 95vw;
+    max-height: 80vh;
+  }
+}
+
+/* Extra Narrow Phones (e.g. iPhone SE, 360px width) */
+@media (max-width: 380px) {
+  .slide-section {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .pill-cat-btn {
+    padding: 3px 5px;
+    font-size: 10px;
+    gap: 2px;
+  }
+
+  .cat-pill-emoji {
+    font-size: 11px;
+  }
+
+  .pill-btn-deck {
+    padding: 2px 6px;
+    font-size: 10.5px;
+  }
+
+  .btn-dock-nav {
+    padding: 0 8px;
+    font-size: 11px;
+  }
+
+  /* Rules Modal on Extra Narrow Phones */
+  .rules-modal-header {
+    padding: 11px 12px 10px 12px;
+  }
+
+  .rules-modal-title {
+    font-size: 15px;
+  }
+
+  .rules-modal-star-wrap {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+
+  .rules-modal-star {
+    font-size: 15px;
+  }
+
+  .rules-modal-body {
+    padding: 10px 12px;
+  }
+
+  .rules-modal-card {
+    padding: 9px 10px;
+    gap: 8px;
+  }
+
+  .rules-modal-footer {
+    padding: 10px 12px 14px 12px;
+  }
+}
+

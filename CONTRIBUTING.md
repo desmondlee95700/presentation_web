@@ -7,7 +7,7 @@ Thank you for your interest in contributing to the Kids Camp Presentation Deck! 
 ## 🎨 Design Guidelines
 
 All contributions must follow our editorial design system:
-1. **Warm Pastel Palette**: Every activity slide uses its signature pastel canvas (`#f4f9ec`, `#fef5f0`, `#fdfbf0`, `#fdf2f4`, etc.).
+1. **Warm Pastel Palette**: Every activity slide uses its signature pastel canvas (defined per game in `src/data/games/<id>.js`).
 2. **Zero Audio Dependencies**: No sound effects or background music.
 3. **Clean 3-Column Editorial Grid**:
    - Column 1: DIY Craft reference photo + concise materials caption.
@@ -43,4 +43,4 @@ All contributions must follow our editorial design system:
 - [ ] Code follows existing project structure and styling conventions.
 - [ ] No audio assets or external heavy widget libraries added.
 - [ ] Responsive layout verified on both desktop and mobile viewports.
-- [ ] Production build (`npm run build`) succeeds without warnings or errors.
+- [ ] `npm run validate` passes and the production build (`npm run build`) succeeds without warnings or errors.
