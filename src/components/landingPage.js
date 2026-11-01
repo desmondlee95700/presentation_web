@@ -1,4 +1,4 @@
-import { CATEGORY_LIST } from '../data/categories.js';
+import { CATEGORY_LIST, getGamesByCategory } from '../data/categories.js';
 import { GAMES } from '../data/games/index.js';
 import { SITE } from '../data/site.js';
 import { delegate } from '../lib/dom.js';
@@ -113,18 +113,12 @@ export class LandingPage {
             </div>
           </div>
 
-          <h1 class="hero-headline">
-            David & Goliath
-            <span class="hero-headline-accent">Camp Games Deck</span>
-          </h1>
+          <span class="hero-star" aria-hidden="true">✦</span>
+          <h1 class="hero-headline">David &amp; Goliath<br>Camp Games</h1>
+          <p class="hero-subtitle">Pick an age group to open its game deck.</p>
 
-          <!-- Primary Actions Hub -->
-          <div class="hero-actions-container">
-            
-            <div class="hero-track-row">
-              ${CATEGORY_LIST.map(renderTrackButton).join('')}
-            </div>
-
+          <div class="hero-track-row">
+            ${CATEGORY_LIST.map(renderTrackCard).join('')}
           </div>
 
         </main>
@@ -149,22 +143,22 @@ export class LandingPage {
   }
 }
 
-function renderTrackButton(cat) {
+function renderTrackCard(cat) {
+  const games = getGamesByCategory(cat.id);
   return `
-              <button type="button" class="track-btn track-btn-${cat.id}" data-launch="${cat.id}" title="Start with ${cat.label.replace(/ \(/, ' Track (')}">
-                <div class="track-emoji-wrap">
-                  <span class="track-emoji">${cat.emoji}</span>
-                </div>
-                <div class="track-details">
-                  <div class="track-title-row">
-                    <span class="track-name">${cat.trackName}</span>
-                    <span class="track-age-pill age-${cat.id}">${cat.agePill}</span>
-                  </div>
-                  <span class="track-meta">${cat.gameIds.length} Games • ${cat.trackTagline}</span>
-                </div>
-                <div class="track-action-badge">
-                  <span class="track-arrow">➔</span>
-                </div>
-              </button>
+            <button type="button" class="track-card track-card-${cat.id}" data-launch="${cat.id}"
+                    aria-label="Open the ${cat.drawerName} deck: ages ${cat.ages}, ${games.length} games">
+              <span class="track-card-head">
+                <span class="track-card-name">${cat.drawerName}</span>
+                <span class="track-card-age">Ages ${cat.ages}</span>
+              </span>
+              <span class="track-card-games">
+                ${games.map(game => `<img src="${game.images.craft}" alt="" title="${game.title}" decoding="async" />`).join('')}
+              </span>
+              <span class="track-card-foot">
+                <span class="track-card-meta">${games.length} games · ${cat.trackTagline}</span>
+                <span class="track-card-go">Start <span aria-hidden="true">→</span></span>
+              </span>
+            </button>
   `;
 }
