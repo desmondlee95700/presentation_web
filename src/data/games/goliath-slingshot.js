@@ -32,7 +32,7 @@ export default {
       { name: 'Food & Food Container', qty: 1, scenes: [2] },
       { name: 'Saul’s Crown', qty: 2, scenes: [3, 4] },
     ],
-    rule: 'The whole team completely <strong>KOs Goliath</strong> to win <strong>1 pcs</strong> as a team.',
+    rule: 'The whole team completely <strong>KOs Goliath</strong> to win <strong>1 prop</strong> as a team.',
   },
   materials: [
     { name: '10–12 Plastic Cups', note: '1 big cup for Giant Goliath & 9 smaller cups for 4-3-2-1 Pyramid' },

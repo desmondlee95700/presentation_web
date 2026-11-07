@@ -30,7 +30,7 @@ export default {
       { name: 'Saul’s Royal Robe', qty: 2, scenes: [3, 4] },
       { name: 'Token', qty: null, scenes: [0, 1, 2] },
     ],
-    rule: 'Whole team <strong>crosses the river</strong> to win <strong>1 pcs</strong> as a team.',
+    rule: 'Whole team <strong>crosses the river</strong> to win <strong>1 prop</strong> as a team.',
   },
   materials: [
     { name: 'A4 Paper', note: '1 per kid + 2–3 extra for each group' },

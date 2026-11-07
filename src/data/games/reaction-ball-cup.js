@@ -26,7 +26,7 @@ export default {
       { name: 'Tree Costume', qty: '6+8', scenes: [0, 2] },
       { name: 'Token', qty: null, scenes: [1, 3, 4] },
     ],
-    rule: 'Every pair has <strong>2 ball chances</strong> to score. Every <strong>2 consecutive goals</strong> by the same pair win <strong>1 pcs</strong>.',
+    rule: 'Every pair has <strong>2 ball chances</strong> to score. Every <strong>2 consecutive goals</strong> by the same pair win <strong>1 prop</strong>.',
   },
   materials: [
     { name: '2 Brooms', note: 'Held side by side as the rails for the ball' },

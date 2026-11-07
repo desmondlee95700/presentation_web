@@ -29,7 +29,7 @@ export default {
       { name: 'Clothing Costumes', qty: 18, scenes: [0, 1, 2, 3, 4] },
       { name: 'Extra Clothing', qty: null, scenes: [0, 1, 2, 3, 4] },
     ],
-    rule: 'In <strong>1 minute</strong>, flip as many <strong>paper stones</strong> into the basket as you can. Every <strong>3 paper stones</strong> win <strong>1 pcs</strong>.',
+    rule: 'In <strong>1 minute</strong>, flip as many <strong>paper stones</strong> into the basket as you can. Every <strong>3 paper stones</strong> win <strong>1 prop</strong>.',
   },
   materials: [
     { name: '1 Low Basketball Basket', note: 'Set at low height in FAA Pink Room as the target goal' },

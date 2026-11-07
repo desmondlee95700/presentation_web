@@ -29,7 +29,7 @@ export default {
       { name: 'Goliath’s Big Sword', qty: 3, scenes: [2, 3, 4] },
       { name: 'Token', qty: null, scenes: [0, 1] },
     ],
-    rule: 'Whole team finds <strong>all the Davids</strong> to win <strong>1 pcs</strong> as a team.',
+    rule: 'Whole team finds <strong>all the Davids</strong> to win <strong>1 prop</strong> as a team.',
   },
   materials: [
     {

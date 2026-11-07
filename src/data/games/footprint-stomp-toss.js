@@ -30,7 +30,7 @@ export default {
       { name: 'Shepherd’s Staff', qty: 3, scenes: [0, 1, 2] },
       { name: 'Sling / Catapult', qty: 2, scenes: [3, 4] },
     ],
-    rule: 'Everyone tosses <strong>1 ball</strong> into the basket to win <strong>1 pcs</strong> as a team.',
+    rule: 'Everyone tosses <strong>1 ball</strong> into the basket to win <strong>1 prop</strong> as a team.',
   },
   materials: [
     { name: '6 A4 paper Footprints', note: 'Draw giant footprints' },

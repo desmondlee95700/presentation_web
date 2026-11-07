@@ -31,7 +31,7 @@ export default {
       { name: '5 Small Stones Set', qty: 2, scenes: [3, 4] },
       { name: 'Token', qty: null, scenes: [0, 1, 2] },
     ],
-    rule: 'Whole team transfers <strong>1 paper ball per person</strong> into the bowl to win <strong>1 pcs</strong> as a team.',
+    rule: 'Whole team transfers <strong>1 paper ball per person</strong> into the bowl to win <strong>1 prop</strong> as a team.',
   },
   materials: [
     { name: 'Small Balls (10 pcs)', note: 'tightly crumpled paper balls (cheapest DIY option)' },

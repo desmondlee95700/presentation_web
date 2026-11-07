@@ -1,11 +1,14 @@
+import { getCategory } from '../data/categories.js';
 import { SITE } from '../data/site.js';
 import { pad2 } from '../lib/dom.js';
 import { renderSlideCategoryTabs } from './categoryTabs.js';
 
 const MAX_MATERIALS = 6;
 
+const count = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
+
 /** Full markup for one game slide (header pill + canvas with three pillars). */
-export function renderSlide(game, { index, total, categoryId, eagerImage }) {
+export function renderSlide(game, { index, total, categoryId, eagerImage, expandSupplies = false }) {
   const pal = game.palette;
   return `
       <div class="slide-outer-wrapper" style="
@@ -24,7 +27,7 @@ export function renderSlide(game, { index, total, categoryId, eagerImage }) {
           <div class="slide-three-columns">
             ${renderVisualPillar(game, eagerImage)}
             ${renderRulesPillar(game)}
-            ${renderPropsPillar(game)}
+            ${renderPropsPillar(game, expandSupplies)}
           </div>
         </div>
       </div>
@@ -32,16 +35,21 @@ export function renderSlide(game, { index, total, categoryId, eagerImage }) {
 }
 
 function renderHeader({ index, total, categoryId }) {
+  const { pic } = getCategory(categoryId);
   return `
+      <div class="slide-header-bar">
         <header class="slide-pill-header">
           <div class="pill-category-group" role="tablist" aria-label="Select Age Group">
             ${renderSlideCategoryTabs(categoryId)}
           </div>
 
-          <div class="pill-center-num">
-            <span class="pill-num-curr">${pad2(index + 1)}</span>
-            <span class="pill-num-slash">/</span>
-            <span class="pill-num-total">${pad2(total)}</span>
+          <div class="pill-center">
+            <div class="pill-center-num">
+              <span class="pill-num-curr">${pad2(index + 1)}</span>
+              <span class="pill-num-slash">/</span>
+              <span class="pill-num-total">${pad2(total)}</span>
+            </div>
+            <span class="pill-center-pic">PIC · <strong>${pic}</strong></span>
           </div>
 
           <div class="pill-right-group">
@@ -52,6 +60,7 @@ function renderHeader({ index, total, categoryId }) {
             </button>
           </div>
         </header>
+      </div>
   `;
 }
 
@@ -103,7 +112,13 @@ function renderVisualPillar(game, eagerImage) {
               </div>
               <div class="pillar-visual-frame" data-craft-src="${craft}" data-setup-src="${setup || ''}" role="button" tabindex="0" title="Click to enlarge photo">
                 <img src="${craft}" alt="${game.title} craft setup" class="pillar-img" loading="${eagerImage ? 'eager' : 'lazy'}" />
-                <span class="pillar-zoom-badge">🔍 Click to Enlarge</span>
+                <span class="pillar-zoom-badge">
+                  <span class="zoom-label-click">🔍 Click to Enlarge</span>
+                  <span class="zoom-label-tap">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                    Tap to enlarge
+                  </span>
+                </span>
               </div>
             </div>
   `;
@@ -117,7 +132,7 @@ function renderRulesPillar(game) {
                   <span class="header-icon">🎯</span>
                   <span class="header-title rules-title-color">How to Play</span>
                 </div>
-                <span class="header-counter-pill">${game.rules.length} Rules</span>
+                <span class="header-counter-pill">${count(game.rules.length, 'Rule')}</span>
               </div>
               <div class="pillar-rules-body">
                 ${game.rules.map((rule, i) => `
@@ -138,7 +153,7 @@ function renderProps(props) {
   if (!props) return '';
   return `
                   <div class="slide-props-section">
-                    <span class="props-scene-label">Scenes</span>
+                    <span class="props-scene-label"><span class="props-scene-label-short">Scenes</span><span class="props-scene-label-long">Used in scene</span></span>
                     <ul class="slide-props-list">
                       ${props.items.map(p => `
                         <li class="slide-prop-row">
@@ -154,7 +169,8 @@ function renderProps(props) {
   `;
 }
 
-function renderPropsPillar(game) {
+function renderPropsPillar(game, expandSupplies) {
+  const materials = game.materials.slice(0, MAX_MATERIALS);
   return `
             <div class="slide-pillar pillar-supplies">
               <div class="pillar-header">
@@ -162,24 +178,25 @@ function renderPropsPillar(game) {
                   <span class="header-icon">🏆</span>
                   <span class="header-title props-title-color">Props to Win</span>
                 </div>
-                ${game.props ? `<span class="header-counter-pill">${game.props.items.length} Props</span>` : ''}
+                ${game.props ? `<span class="header-counter-pill">${count(game.props.items.length, 'Prop')}</span>` : ''}
               </div>
               <div class="pillar-supplies-body">
                 ${renderProps(game.props)}
 
-                <details class="supplies-dropdown">
+                <details class="supplies-dropdown"${expandSupplies ? ' open' : ''}>
                   <summary class="supplies-dropdown-toggle">
                     <span class="header-badge-row">
                       <span class="header-icon">📦</span>
                       <span class="header-title supplies-title-color">What You Need</span>
                     </span>
                     <span class="supplies-dropdown-meta">
-                      <span class="header-counter-pill">${game.materials.length} Items</span>
+                      <span class="header-counter-pill">${count(materials.length, 'Item')}</span>
+                      <span class="supplies-dropdown-action" aria-hidden="true"></span>
                       <span class="supplies-dropdown-chevron" aria-hidden="true">▾</span>
                     </span>
                   </summary>
                   <ul class="slide-supplies-list">
-                    ${game.materials.slice(0, MAX_MATERIALS).map(m => `
+                    ${materials.map(m => `
                       <li class="slide-supply-row">
                         <span class="supply-check-bullet">✓</span>
                         <div class="supply-names">

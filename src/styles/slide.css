@@ -774,3 +774,23 @@
 
 /* Unified Pillar Footers */
 
+
+/* Header wrapper and phone-only pieces: layout-neutral on desktop/projector */
+.slide-header-bar,
+.pill-center {
+  display: contents;
+}
+
+.pill-center-pic {
+  display: none;
+}
+
+/* Phone-only labels (shown in responsive.css) */
+.props-scene-label-long,
+.supplies-dropdown-action {
+  display: none;
+}
+
+.zoom-label-tap {
+  display: none;
+}

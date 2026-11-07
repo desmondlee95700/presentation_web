@@ -61,7 +61,9 @@
     -webkit-overflow-scrolling: touch;
     touch-action: pan-y;
     pointer-events: auto;
-    padding: 10px 12px calc(96px + env(safe-area-inset-bottom, 12px)) 12px;
+    --slide-pad-y: 10px;
+    --slide-pad-x: 12px;
+    padding: var(--slide-pad-y) var(--slide-pad-x) calc(96px + env(safe-area-inset-bottom, 12px)) var(--slide-pad-x);
     box-sizing: border-box;
     overscroll-behavior-y: contain;
   }
@@ -87,71 +89,147 @@
     margin: 0 auto;
   }
 
-  /* Compact Top Pill Header Bar (Sticky on Mobile) */
-  .slide-pill-header {
-    height: 38px;
-    min-height: 38px;
-    padding: 3px 8px;
-    gap: 4px;
-    border-radius: 9999px;
+  /* ---- Phone Header Bar ----------------------------------------------
+     Full-width sticky bar (fades into the page) holding a white pill:
+     [ Kids | Older ]    01 / 05 · PIC    [ Deck ]
+     Offsets come from the slide padding so the bar always covers it.   */
+  .slide-header-bar {
+    display: block;
     position: sticky;
-    top: 0;
+    top: calc(-1 * var(--slide-pad-y));
     z-index: 25;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    margin: calc(-1 * var(--slide-pad-y)) calc(-1 * var(--slide-pad-x)) 0;
+    padding: var(--slide-pad-y) var(--slide-pad-x) 14px;
+    background: linear-gradient(180deg, var(--bg-app) 0%, var(--bg-app) 72%, transparent 100%);
+    pointer-events: none;       /* the faded strip must not swallow taps */
   }
 
+  .slide-pill-header {
+    pointer-events: auto;
+    height: 52px;
+    min-height: 52px;
+    padding: 5px;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    box-shadow:
+      0 1px 2px rgba(15, 23, 42, 0.05),
+      0 10px 24px -14px rgba(15, 23, 42, 0.35);
+  }
+
+  /* Age group: segmented control tinted with the game's tab colour */
   .pill-category-group {
-    gap: 3px;
+    flex-shrink: 0;
+    gap: 2px;
+    padding: 3px;
+    border-radius: 9999px;
+    background: var(--tab-bg, #ede3d2);
   }
 
   .pill-cat-btn {
-    padding: 3px 7px;
-    font-size: 11px;
-    gap: 3px;
+    height: 36px;
+    padding: 0 12px;
+    gap: 5px;
+    border: none;
+    font-size: 13.5px;
+    font-weight: 700;
+    white-space: nowrap;
+    color: var(--tab-color, #4a433a);
+    opacity: 0.72;
+  }
+
+  .pill-cat-btn:hover {
+    background: transparent;
+  }
+
+  .pill-cat-btn.active {
+    opacity: 1;
+    background: #ffffff;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08), 0 3px 8px -2px rgba(15, 23, 42, 0.12);
+  }
+
+  .pill-cat-btn.active[data-category="kids"],
+  .pill-cat-btn.active[data-category="older"] {
+    border-color: transparent;
   }
 
   .cat-pill-emoji {
-    font-size: 12px;
+    font-size: 14px;
   }
 
-  .cat-pill-sub {
-    display: none;
-  }
-
-  .pill-cat-btn {
-    white-space: nowrap;
-  }
-
-  /* Only the active age group shows its PIC on phones */
-  .pill-cat-btn:not(.active) .cat-pill-pic {
-    display: none;
-  }
-
-  .cat-pill-pic {
-    font-size: 9.5px;
-    padding-left: 5px;
-  }
-
-  .pill-center-num {
-    font-size: 11.5px;
-    padding: 0 4px;
-  }
-
-  .pill-right-group {
-    gap: 4px;
-  }
-
+  .cat-pill-sub,
+  .cat-pill-pic,
   .pill-camp-label {
     display: none;
   }
 
-  .pill-btn-deck {
-    padding: 3px 8px;
-    font-size: 11px;
-    gap: 3px;
+  /* Centre: slide counter with the person in charge underneath */
+  .pill-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    flex: 1;
+    line-height: 1.1;
   }
 
-  /* Slide Canvas Card */
+  .pill-center-num {
+    font-size: 14px;
+    gap: 3px;
+    padding: 0;
+  }
+
+  .pill-center-pic {
+    display: block;
+    max-width: 100%;
+    margin-top: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: var(--font-heading);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--tab-color, #6e6459);
+    opacity: 0.8;
+  }
+
+  .pill-center-pic strong {
+    font-weight: 800;
+  }
+
+  /* Deck: solid dark button, the one obvious "open the list" action */
+  .pill-right-group {
+    flex-shrink: 0;
+    gap: 0;
+  }
+
+  .pill-btn-deck {
+    height: 40px;
+    padding: 0 15px 0 13px;
+    gap: 6px;
+    border: none;
+    background: #1e293b;
+    color: #ffffff;
+    font-size: 13.5px;
+    box-shadow: 0 4px 10px -4px rgba(15, 23, 42, 0.5);
+  }
+
+  .pill-btn-deck:hover,
+  .pill-btn-deck:active {
+    background: #0f172a;
+    color: #ffffff;
+    transform: none;
+  }
+
+  .pill-btn-deck svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* ---- Slide Canvas Card --------------------------------------------- */
   .game-slide-canvas {
     flex: none;
     height: auto;
@@ -162,7 +240,7 @@
     gap: 10px;
   }
 
-  /* Slide Title Block */
+  /* ---- Title Block --------------------------------------------------- */
   .slide-center-title-block {
     margin: 0 0 4px 0;
   }
@@ -173,33 +251,78 @@
   }
 
   .slide-title-text {
-    font-size: 21px;
+    font-size: 24px;
     line-height: 1.2;
     letter-spacing: -0.01em;
   }
 
   .slide-subtitle-text {
-    font-size: 12px;
+    font-size: 13.5px;
     line-height: 1.35;
     margin-top: 2px;
   }
 
-  /* Helper / Place / Assets pills wrap instead of overflowing */
+  /* Helper / Place / Assets: one quiet info box instead of button-like pills */
   .slide-station-meta {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 6px;
-    margin-top: 6px;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    margin-top: 12px;
+    padding: 2px 14px;
+    gap: 0;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    text-align: left;
   }
 
-  .station-meta-pill {
-    white-space: nowrap;
-    font-size: 11px;
-    padding: 3px 9px;
+  .station-meta-pill,
+  .station-meta-pill.helper-pill,
+  .station-meta-pill.place-pill,
+  .station-meta-pill.assets-pill {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 10px 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    white-space: normal;
+    font-size: 14px;
   }
 
-  /* Single Column Stacked Presentation Pillars */
+  .slide-station-meta .station-meta-pill + .station-meta-pill {
+    border-top: 1px solid rgba(15, 23, 42, 0.07);
+  }
+
+  .station-meta-pill .v-icon {
+    width: 18px;
+    flex-shrink: 0;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .station-meta-pill .v-key {
+    width: 112px;
+    flex-shrink: 0;
+    font-size: inherit;
+    font-weight: 600;
+    color: #64748b;
+  }
+
+  .station-meta-pill .v-val {
+    min-width: 0;
+    font-size: inherit;
+    color: #0f172a;
+  }
+
+  .station-meta-pill.helper-pill .v-val {
+    color: var(--tab-color, #0f172a);
+  }
+
+  /* ---- Single Column Stacked Pillars --------------------------------- */
   .slide-three-columns {
     flex: none;
     display: flex;
@@ -223,59 +346,193 @@
     padding-bottom: 5px;
   }
 
+  /* One accent per slide: section titles use the game's own ink colour */
   .header-title {
-    font-size: 12.5px;
+    font-size: 14.5px;
   }
 
-  /* Pillar 1: Visual frame */
+  .rules-title-color,
+  .props-title-color,
+  .supplies-title-color {
+    color: var(--tab-color, #334155);
+  }
+
+  /* Counters in the heading font, not monospace */
+  .header-counter-pill {
+    font-family: var(--font-heading);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0;
+    padding: 3px 10px;
+    background: var(--canvas-bg, #f1f5f9);
+    color: var(--tab-color, #475569);
+  }
+
+  /* ---- Pillar 1: Photo (no white box, never cropped) ----------------- */
+  .slide-pillar.pillar-visual {
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .pillar-visual .pillar-header {
+    height: auto;
+    padding: 0;
+    border-bottom: none;
+    justify-content: center;
+  }
+
+  /* Craft Photo / Setup Diagram: segmented control in the game's colours */
+  .pillar-img-toggle {
+    width: auto;
+    gap: 2px;
+    padding: 3px;
+    border-radius: 9999px;
+    background: var(--tab-bg, #f1f5f9);
+  }
+
+  .img-toggle-tab,
+  .img-toggle-tab:hover {
+    border: none;
+    background: transparent;
+    color: var(--tab-color, #64748b);
+  }
+
+  .img-toggle-tab {
+    min-height: 34px;
+    padding: 0 14px;
+    font-size: 12.5px;
+    opacity: 0.72;
+  }
+
+  .img-toggle-tab.active {
+    opacity: 1;
+    background: #ffffff;
+    color: var(--tab-color, #0f172a);
+    border: none;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08), 0 3px 8px -2px rgba(15, 23, 42, 0.12);
+  }
+
+  .pillar-single-tag {
+    font-size: 12.5px;
+    color: var(--tab-color, #64748b);
+  }
+
+  /* Whole photo at its own shape, with the enlarge hint as a caption below
+     it (so it never covers text printed on a setup diagram) */
   .pillar-visual-frame {
-    height: 220px;
-    min-height: 200px;
-    margin: 8px 0;
     flex: none;
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    min-height: 0;
+    margin: 10px 0 0;
+    border: none;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 8px 22px -12px rgba(15, 23, 42, 0.3);
   }
 
   .pillar-img {
-    height: 100%;
     width: 100%;
-    object-fit: cover;
+    height: auto;
+    max-height: 72vh;
+    max-height: 72dvh;
+    object-fit: contain;
+    border-radius: 0;
   }
 
-  /* Pillar 2: Rules */
+  .pillar-visual-frame:hover .pillar-img {
+    transform: none;
+  }
+
+  .pillar-zoom-badge {
+    position: static;
+    display: flex;
+    justify-content: center;
+    padding: 9px 12px;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    font-size: 12.5px;
+    color: var(--tab-color, #0f172a);
+  }
+
+  .zoom-label-click {
+    display: none;
+  }
+
+  .zoom-label-tap {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ---- Pillar 2: How to Play (plain rows split by hairlines) --------- */
   .pillar-rules-body {
     flex: none;
     height: auto;
     min-height: auto;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin: 8px 0;
+    gap: 0;
+    margin: 4px 0 0;
+  }
+
+  .slide-rule-card,
+  .slide-rule-card:hover {
+    background: transparent;
+    border: none;
+    border-radius: 0;
   }
 
   .slide-rule-card {
     display: flex;
     align-items: flex-start;
-    gap: 8px;
-    padding: 8px 10px;
-    border-radius: 9px;
+    gap: 12px;
+    padding: 14px 2px;
+    border-top: 1px solid rgba(15, 23, 42, 0.07);
+  }
+
+  .slide-rule-card:first-child {
+    border-top: none;
+    padding-top: 8px;
+  }
+
+  .slide-rule-card:last-child {
+    padding-bottom: 4px;
   }
 
   .slide-rule-num {
-    font-size: 11px;
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    margin-top: -2px;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    background: var(--tab-bg, #ffedd5);
+    color: var(--tab-color, #c2410c);
+  }
+
+  .slide-rule-info {
+    gap: 4px;
   }
 
   .slide-rule-heading {
-    font-size: 12.5px;
+    font-size: 15.5px;
   }
 
   .slide-rule-detail {
-    font-size: 11px;
-    line-height: 1.35;
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: #475569;
   }
 
-  /* Pillar 3: Supplies */
+  /* ---- Pillar 3: Props to Win + What You Need ------------------------ */
   .pillar-supplies-body {
     flex: none;
     height: auto;
@@ -286,25 +543,170 @@
     margin: 8px 0;
   }
 
+  .slide-props-section {
+    gap: 0;
+  }
+
+  .props-scene-label {
+    margin: 0 0 2px;
+    padding-right: 2px;
+    font-family: var(--font-heading);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+
+  .props-scene-label-short {
+    display: none;
+  }
+
+  .props-scene-label-long {
+    display: inline;
+  }
+
+  .slide-props-list {
+    gap: 0;
+  }
+
+  .slide-prop-row {
+    padding: 11px 2px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    border-top: 1px solid rgba(15, 23, 42, 0.07);
+  }
+
+  .slide-prop-row:first-child {
+    border-top: none;
+  }
+
+  .prop-name {
+    font-size: 14px;
+  }
+
+  .prop-qty {
+    font-size: 12px;
+  }
+
+  .prop-scenes {
+    gap: 5px;
+  }
+
+  .prop-scene-chip {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    min-width: 26px;
+    height: 26px;
+    padding: 0 6px;
+    background: var(--tab-bg, #f1f5f9);
+    color: var(--tab-color, #475569);
+  }
+
+  .props-rule {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border-left-color: var(--tab-color, #ca8a04);
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  /* What You Need: an obvious Show / Hide row */
+  .supplies-dropdown {
+    margin-top: 16px;
+    padding-top: 12px;
+  }
+
+  .supplies-dropdown-toggle {
+    min-height: 44px;
+    padding: 0 6px 0 12px;
+    border-radius: 12px;
+    background: var(--canvas-bg, #f8fafc);
+    border: 1px solid rgba(15, 23, 42, 0.06);
+  }
+
+  .supplies-dropdown-toggle .header-counter-pill {
+    background: #ffffff;
+  }
+
+  .supplies-dropdown-action {
+    display: inline;
+    font-family: var(--font-heading);
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--tab-color, #475569);
+  }
+
+  .supplies-dropdown-action::before {
+    content: 'Show';
+  }
+
+  .supplies-dropdown[open] .supplies-dropdown-action::before {
+    content: 'Hide';
+  }
+
+  .supplies-dropdown-chevron {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #ffffff;
+    font-size: 0;               /* hide the ▾ glyph; draw a crisp chevron instead */
+    color: var(--tab-color, #475569);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.1);
+  }
+
+  .supplies-dropdown-chevron::after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-right: 2.2px solid currentColor;
+    border-bottom: 2.2px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+  }
+
   .slide-supplies-list {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 0;
     margin: 0;
     padding: 0;
   }
 
+  .supplies-dropdown .slide-supplies-list {
+    margin-top: 4px;
+  }
+
   .slide-supply-row {
-    padding: 6px 8px;
-    gap: 6px;
+    padding: 11px 4px;
+    gap: 10px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    border-top: 1px solid rgba(15, 23, 42, 0.07);
+  }
+
+  .slide-supply-row:first-child {
+    border-top: none;
+  }
+
+  .supply-check-bullet {
+    font-size: 14px;
+    color: var(--tab-color, #16a34a);
+  }
+
+  .supply-names {
+    gap: 2px;
   }
 
   .supply-name-bold {
-    font-size: 11.5px;
+    font-size: 14px;
   }
 
   .supply-note-dim {
-    font-size: 10px;
+    font-size: 12.5px;
+    line-height: 1.4;
   }
 
   /* Unified Footers (Never float, natural flow after content) */
@@ -320,10 +722,14 @@
   }
 
   .btn-dock-nav {
-    height: 35px;
+    height: 40px;
     padding: 0 11px;
     font-size: 12px;
     gap: 4px;
+  }
+
+  .btn-dock-home {
+    height: 40px;
   }
 
   /* Modals on Mobile (Unified Smooth Touch Sheet) */
@@ -663,26 +1069,39 @@
   }
 }
 
+/* Landscape phones: the sticky bar would eat too much of a ~375px-tall screen,
+   so let it scroll away with the slide */
+@media (max-width: 900px) and (max-height: 500px) {
+  .slide-header-bar {
+    position: relative;
+    top: auto;
+    padding-bottom: 6px;
+  }
+}
+
 /* Extra Narrow Phones (e.g. iPhone SE, 360px width) */
 @media (max-width: 380px) {
   .slide-section {
-    padding-left: 8px;
-    padding-right: 8px;
+    --slide-pad-x: 8px;
+  }
+
+  .slide-pill-header {
+    gap: 4px;
   }
 
   .pill-cat-btn {
-    padding: 3px 5px;
-    font-size: 10px;
-    gap: 2px;
+    padding: 0 9px;
+    font-size: 12.5px;
+    gap: 4px;
   }
 
   .cat-pill-emoji {
-    font-size: 11px;
+    font-size: 13px;
   }
 
   .pill-btn-deck {
-    padding: 2px 6px;
-    font-size: 10.5px;
+    padding: 0 12px 0 11px;
+    font-size: 12.5px;
   }
 
   .btn-dock-nav {
