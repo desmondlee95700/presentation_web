@@ -8,7 +8,7 @@ const MAX_MATERIALS = 6;
 const count = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
 
 /** Full markup for one game slide (header pill + canvas with three pillars). */
-export function renderSlide(game, { index, total, categoryId, eagerImage, expandSupplies = false }) {
+export function renderSlide(game, { index, total, categoryId, eagerImage }) {
   const pal = game.palette;
   return `
       <div class="slide-outer-wrapper" style="
@@ -27,7 +27,7 @@ export function renderSlide(game, { index, total, categoryId, eagerImage, expand
           <div class="slide-three-columns">
             ${renderVisualPillar(game, eagerImage)}
             ${renderRulesPillar(game)}
-            ${renderPropsPillar(game, expandSupplies)}
+            ${renderPropsPillar(game)}
           </div>
         </div>
       </div>
@@ -169,7 +169,7 @@ function renderProps(props) {
   `;
 }
 
-function renderPropsPillar(game, expandSupplies) {
+function renderPropsPillar(game) {
   const materials = game.materials.slice(0, MAX_MATERIALS);
   return `
             <div class="slide-pillar pillar-supplies">
@@ -183,7 +183,7 @@ function renderPropsPillar(game, expandSupplies) {
               <div class="pillar-supplies-body">
                 ${renderProps(game.props)}
 
-                <details class="supplies-dropdown"${expandSupplies ? ' open' : ''}>
+                <details class="supplies-dropdown">
                   <summary class="supplies-dropdown-toggle">
                     <span class="header-badge-row">
                       <span class="header-icon">📦</span>

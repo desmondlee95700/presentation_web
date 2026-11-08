@@ -14,12 +14,6 @@ export class SlideDeck {
     this.onOpenDrawer = onOpenDrawer;
     this.onEnlargeImage = onEnlargeImage;
 
-    // Phones use the deck as a reference sheet, so supplies start expanded there.
-    this.phoneQuery = window.matchMedia('(max-width: 900px)');
-    this.phoneQuery.addEventListener('change', (e) => {
-      this.track.querySelectorAll('details.supplies-dropdown').forEach(d => { d.open = e.matches; });
-    });
-
     this.categoryId = resolveCategoryId(categoryId);
     this.games = getGamesByCategory(this.categoryId);
     this.index = this.isValidIndex(slideIndex) ? slideIndex : 0;
@@ -87,7 +81,6 @@ export class SlideDeck {
               total,
               categoryId: this.categoryId,
               eagerImage: Math.abs(idx - this.index) <= 1,
-              expandSupplies: this.phoneQuery.matches,
             })}
           </div>
         </section>
